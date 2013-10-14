@@ -1,0 +1,11 @@
+auto: true
+
+markdown: rdiscount
+pygments: true
+paginate: 8
+permalink: /:title
+
+title: 独行为僧
+url: http://omitol.com
+feed: /atom.xml
+author_info: <a href="http://omitol.com/">独行为僧</a>
