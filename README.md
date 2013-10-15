@@ -1,10 +1,10 @@
 HackerOO7's Blog
 ====================
 
-HackerOO7's Blog http://omitol.com
+HackerOO7's Blog http://blog.omitol.com
 
-omitol.com域名暂时未绑定过来，可以用 hackeroo7.github.com 访问
+绑定了一个子域名，可以使用[blog.omitol.com](http://blog.omitol.com)访问
 
-使用了BeiYuu的模板，再次表示感谢。
+使用了BeiYuu的模板，在此表示感谢。
 
 
