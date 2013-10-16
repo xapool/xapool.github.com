@@ -8,7 +8,7 @@ description: 遇到了太多的麻烦，整个重来了好几遍
 ##将wordpress的数据迁移到jekyll
 官方文档:
 
-    [http://jekyllrb.com/docs/migrations/](http://jekyllrb.com/docs/migrations/)
+[http://jekyllrb.com/docs/migrations/](http://jekyllrb.com/docs/migrations/)
 
 安装过程中出错，因为ruby版本太低，要更新版本到1.9.2，因为先前的工作并没有更新ruby的版本，导致遇到了很多麻烦，所以重新来了一遍。更新ruby的方法，已经放到了第一篇文章中去了。
 
@@ -22,7 +22,7 @@ description: 遇到了太多的麻烦，整个重来了好几遍
 
 这里使用别人修改好了的脚本，官方脚本对中文支持不友好：
 
-    [https://gist.github.com/chitsaou/1394128](https://gist.github.com/chitsaou/1394128)
+[https://gist.github.com/chitsaou/1394128](https://gist.github.com/chitsaou/1394128)
 
 将备份的wordpress.xml放到项目的根目录，把脚本放到新建的utils目录中，然后运行：
 
