@@ -49,6 +49,7 @@ description: 虽然被坑了，看习惯了塑料外壳的个子老大的路由�
         dd if=rom.bin of=uboot.bin bs=1k count=128
         cat uboot.bin bin/ar71xx/openwrt-ar71xx-generic-tw150v1-squashfs-sysupgrade.bin >recovery.bin
 
+上面的链接404，暂时的解决方法是跳过wget，手动下载官方的一个[recovery.bin](http://bbs.hiwifi.com/thread-7710-1-1.html)，重命名为rom.bin然后执行下面的命令提取uboot.bin。
 ### 刷机
 * 去这里下载[官方开源版本固件](http://bbs.hiwifi.com/thread-7710-1-1.html)，解压
 * 将上一步生成的recovery.bin替换目录中recovery.bin
@@ -62,3 +63,4 @@ description: 虽然被坑了，看习惯了塑料外壳的个子老大的路由�
 * [极路由的正确玩法](http://chaopeng.me/blog/2013/10/28/hiwifi.html)
 * [OpenWrt安装goagent实例教程](http://www.openwrt.org.cn/bbs/forum.php?mod=viewthread&tid=14193)
 * [Openwrt架设DNS转发器，解决污染问题 ](http://blog.csdn.net/conupefox/article/details/8557253)
+* [openwrt-hiwifi](https://code.google.com/p/openwrt-hiwifi/)
