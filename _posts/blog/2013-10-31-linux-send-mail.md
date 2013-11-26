@@ -42,6 +42,24 @@ description: 因为服务器上android项目的一个编译脚本，要检测编
     mail -s "服务器编译错误，请查看日志文件" x2280854@gmail.com < combined.txt
 
 经测试，发送到gmail邮箱，邮件正文和附件是可以正确识别的。而发送到163的公司邮箱，无法正确识别，而是把整个combined.txt当作了正文。
+
+##11.26更新
+### 遇到的一个错误
+最近一段时间服务器上的邮件，一直无法成功发送到我的邮箱，今天抽空看了一下。
+
+    /usr/lib/sendmail -bp
+
+错误日志：
+> 47DA518ADCE6      397 Tue Nov 26 14:40:39  shenduos@Raphael-DeepinLinux
+> (Host or domain name not found. Name service error for name=gmail.com type=MX: Host not found, try again)
+>                                          x2280854@gmail.com
+
+最后的问题在：
+
+    /var/spool/postfix/etc/resolv.conf
+
+编辑`/var/spool/postfix/etc/resolv.conf`，文件内容应该和`/etc/resolv.conf`中一样。
+
 ## 参考
 * [Linux mail命令使用 ](http://blog.csdn.net/c395565746c/article/details/6011731)
 * [linux下mail命令使用(转)](http://sunxiaqw.blog.163.com/blog/static/99065438201010182277261/)
