@@ -12,13 +12,13 @@ description: 此乃openwrt-x86编译时的笔记，很乱、不够系统，但�
 * Intel N2230无线网卡
 
 ##Convert OpenWrt raw image
-1. 'gunzip openwrt.img.gz' 
-2. 'VBoxManage convertfromraw --format VDI openwrt.img openwrt.vdi'  
+1. `gunzip openwrt.img.gz` 
+2. `VBoxManage convertfromraw --format VDI openwrt.img openwrt.vdi`
 
 ##Compile
-    make menuconfig 
-    
+    make menuconfig
     make kernel_menuconfig
+
 ##x86编译注意事项
 * 大内存支持
 * 多核心，多线程支持
@@ -29,12 +29,6 @@ description: 此乃openwrt-x86编译时的笔记，很乱、不够系统，但�
 * 加入一个文本编辑器，例如vim或者nano，因为日常使用中需要用文本编辑器修改各种配置文件；
 * 加入所有关于无线网卡的驱动，模块，各种支持程序，
 * 一些其他常见应用--蓝牙、加密、PGP、SSL、SSH、VPN、USB支持、3G上网卡、  
----
-layout:     post
-title:      OpenWrt-x86笔记
-category: blog
-description: 此乃是openwrt-x86编译时的笔记，很乱、不够系统，但以后完善
----
 
 ##真机使用注意事项
 * 在bios中对ide、sata的修改  
@@ -57,13 +51,14 @@ description: 此乃是openwrt-x86编译时的笔记，很乱、不够系统，�
     make packages/xxx/compile
     make packages/xxx/install
 ```
-###未完成的工作
+
+##未完成的工作
 * 配置wifi热点的自动开启
 * 音频、视频的支持
 * 电源键的支持
 * U盘的自动挂载
 * 3g/4g上网卡的支持
-* 
+* 对sata的支持
 
 * [编译过程和后期的一些配置参考](http://lotors.me/2014/08/16/opcompilepro/)
 
@@ -71,12 +66,15 @@ description: 此乃是openwrt-x86编译时的笔记，很乱、不够系统，�
 ###如果有目标硬件
 `make FULL_BUILD=ture brcm47xx`  
 `make brcm47xx` 是rebuild
+
 ###自由定制
 `make custom`,上述命令会自动调用`make menuconfig`配置菜单，但是第二次执行时就会跳过配置界面，所以要`make FULL_BUILD=true custom`
+
 ##首次配置的方法
 设备成功启动后，连接到该AP上，telnet到`192.168.1.1`,输入`passwd`，设置密码后，才能使用ssh登陆，然后配置网络即可。如果设备启动失败，只有连接显示器查看原因了。 
 
 ---------------------------------------------------
+
 ##一些软件的安装
 ###安装luci
 ```
@@ -164,12 +162,14 @@ Processor type and features  --->
 ```
 
 若使用U盘测试，还需配置  
+
 ```
 Target Images  ---> 
     (/dev/sda2) Root partition on target device (NEW) #修改/dev/sda2为/dev/sdb2
 ```
 
 ------------------------------------------------------------------------------
+
 ##对freeswitch的集成
 目前的两种方法  
 
@@ -184,7 +184,7 @@ Target Images  --->
 
 patches目录和files目录都是可选的，pactches目录通常包括bug修复和对可执行文件体积的优化，files目录通常包括配置文件。  
 
-##Makefile文件
+###Makefile文件
 * PKG_NAME -软件包的名字, 在 menuconfig 和 ipkg 显示
 * PKG_VERSION -软件包的版本，主干分支的版本正是我们要下载的
 * PKG_RELEASE -这个 makefile 的版本
@@ -195,6 +195,6 @@ patches目录和files目录都是可选的，pactches目录通常包括bug修复
 * PKG_CAT -解压软件包的方法 (zcat, bzcat, unzip)
 * PKG_BUILD_DEPENDS -需要预先构建的软件包，但只是在构建本软件包时，而不是运行的的语法和下面的DEPENDS一样。
 
-##参考
+###参考
 * [创建软件包](http://wiki.openwrt.org/zh-cn/doc/devel/packages)
 * [configure FreeSWITCH to run on their OpenWrt](http://wiki.freeswitch.org/wiki/OpenWrt)
