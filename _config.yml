@@ -1,11 +1,33 @@
-auto: true
+# Dependencies
+markdown:         kramdown
+kramdown:
+  input:          GFM
+gems:
+                  - jekyll-sitemap
 
-markdown: rdiscount
-pygments: true
-paginate: 8
-permalink: /:title
+# Permalinks
+permalink:        /:year/:month/:day/:title
 
-title: 独行为僧
-url: http://blog.omitol.com
-feed: /atom.xml
-author_info: <a href="http://blog.omitol.com/">独行为僧</a>
+# Setup
+title:            独行为僧
+description:      '<a href="http://weibo.com/xing23" target="_blank">@loopax</a>'
+baseurl:          /
+url:              http://blog.omitol.com
+domain:           blog.omitol.com
+email:            x2280854@gmail.com
+twitter_username: loopax
+github_username:  HackerOO7
+timezone:         America/New_York
+subscribe:        http://blog.omitol.com
+exclude:          [ README.md, newpost.rb, CNAME ]
+
+author:
+  url:            http://weibo.com/xing23
+
+paginate:         5
+
+github:
+  repo:           https://github.com/hackeroo7/hackeroo7.github.com
+
+disqus_shortname: hackeroo7
+google_analytics_id: UA-66656521-1
