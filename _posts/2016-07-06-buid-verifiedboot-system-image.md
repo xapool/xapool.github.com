@@ -1,52 +1,52 @@
 ---
 layout:     post
-title:      Éú³ÉÓÃÓÚverifiedbootµÄsystem image
+title:      ç”Ÿæˆç”¨äºverifiedbootçš„system image
 category:
     - Android
 tags:
     - verifiedboot
 ---
 
-## GetVerityTreeSizeºÍGetVerityMetadataSize
+## GetVerityTreeSizeå’ŒGetVerityMetadataSize
 
 `build_verity_tree -s 2046820352`
 
 `build_verity_metadata.py -s 2046820352`
 
-¸ÃÁ½¸ö·½·¨ÔÚÔ´ÂëµÄ`./tools/releasetools/build_image.py`ÖĞ.
+è¯¥ä¸¤ä¸ªæ–¹æ³•åœ¨æºç çš„`./tools/releasetools/build_image.py`ä¸­.
 
-²ÎÊıÊÇÕæÊµsystem·ÖÇøµÄ´óĞ¡
+å‚æ•°æ˜¯çœŸå®systemåˆ†åŒºçš„å¤§å°
 
-## Éú³ÉÔ¤Áô¿Õ¼äµÄsystem.simg
+## ç”Ÿæˆé¢„ç•™ç©ºé—´çš„system.simg
 
-ÒªÖØĞÂ´ò°üsystem.simg¸øverity_treeºÍverity_metadataÔ¤Áô³ö¿Õ¼ä£¬`-l`Ö¸¶¨µÄ´óĞ¡ÎªÕæÊµsystem¿Õ¼äµÄ´óĞ¡¼õÈ¥ÉÏÒ»²½·Ö±ğµÃµ½µÄ´óĞ¡
+è¦é‡æ–°æ‰“åŒ…system.simgç»™verity_treeå’Œverity_metadataé¢„ç•™å‡ºç©ºé—´ï¼Œ`-l`æŒ‡å®šçš„å¤§å°ä¸ºçœŸå®systemç©ºé—´çš„å¤§å°å‡å»ä¸Šä¸€æ­¥åˆ†åˆ«å¾—åˆ°çš„å¤§å°
 
-## Éú³Éroot_hash¼´verity_tree
+## ç”Ÿæˆroot_hashå³verity_tree
 
 `build_verity_tree -A aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7 system.simg verity.img`
 
-ÆäÖĞ`aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7`ÊÇsalt£¬`system.simg`ĞèÒªÊÇsparse image£¬Éú³Éverity.img.
+å…¶ä¸­`aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7`æ˜¯saltï¼Œ`system.simg`éœ€è¦æ˜¯sparse imageï¼Œç”Ÿæˆverity.img.
 
-ÃüÁîÊä³öÀı×Ó
+å‘½ä»¤è¾“å‡ºä¾‹å­
 
 `3a82cfc74206a6a8b467fb699022d86ea36dee48b04fc8b40585d2cad941f463 aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7`
 
-µÚÒ»¸ö¾ÍÊÇºóÃæÒªÓÃµ½µÄroot_hashÖµ.
+ç¬¬ä¸€ä¸ªå°±æ˜¯åé¢è¦ç”¨åˆ°çš„root_hashå€¼.
 
-## Éú³Éverity_metadata
+## ç”Ÿæˆverity_metadata
 
 `build_verity_metadata.py 2030665728 verity_metadata.img 3a82cfc74206a6a8b467fb699022d86ea36dee48b04fc8b40585d2cad941f463 aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7 /dev/block/platform/msm_sdcc.1/by-name/system verity_signer verity.pk8`
 
-ÆäÖĞµÚÒ»¸ö²ÎÊıÊÇÔ¤ÁôÁË¿Õ¼äºóµÄsystem´óĞ¡£¬ºóÃæµÄ·Ö±ğÊÇroot_hash, salt,system·ÖÇøÔÚÊÖ»úÀïµÄ·ÖÇø£¬signer_path,Ë½Ô¿. ×îºóÉú³Éverity_metadata.img£¬32768¸ö×Ö½Ú32kbÊÇ¹Ì¶¨Öµ¡£
+å…¶ä¸­ç¬¬ä¸€ä¸ªå‚æ•°æ˜¯é¢„ç•™äº†ç©ºé—´åçš„systemå¤§å°ï¼Œåé¢çš„åˆ†åˆ«æ˜¯root_hash, salt,systemåˆ†åŒºåœ¨æ‰‹æœºé‡Œçš„åˆ†åŒºï¼Œsigner_path,ç§é’¥. æœ€åç”Ÿæˆverity_metadata.imgï¼Œ32768ä¸ªå­—èŠ‚32kbæ˜¯å›ºå®šå€¼ã€‚
 
-## Éú³É×îÖÕµÄimage
+## ç”Ÿæˆæœ€ç»ˆçš„image
 
 `append2simg system.simg verity_metadata.img`
 
 `append2simg system.simg verity.img`
 
-·Ö±ğÊÇÇ°Á½²½ÖĞÉú³ÉµÄÎÄ¼ş.
+åˆ†åˆ«æ˜¯å‰ä¸¤æ­¥ä¸­ç”Ÿæˆçš„æ–‡ä»¶.
 
-## ²Î¿¼
+## å‚è€ƒ
 
 * [Android secrue boot](http://blog.andrsec.com/android/2015/04/10/android-boot-verity.html)
