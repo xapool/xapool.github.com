@@ -7,6 +7,8 @@ tags:
     - LVM
 ---
 
+电脑是双系统，从windows下压缩出了部分空间，来扩展ubuntu的home分区
+
 ## 创建lvm
 `sudo apt-get install lvm2` 
 

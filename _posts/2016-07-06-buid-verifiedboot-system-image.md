@@ -7,6 +7,8 @@ tags:
     - verifiedboot
 ---
 
+android从6.0开始启用了verifiedboot，来保证系统的完整性
+
 ## GetVerityTreeSize和GetVerityMetadataSize
 
 `build_verity_tree -s 2046820352`
