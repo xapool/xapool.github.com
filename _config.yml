@@ -4,7 +4,7 @@ kramdown:
   input:          GFM
 gems:
                   - jekyll-sitemap
-
+                  - jekyll-paginate
 # Permalinks
 permalink:        /:year/:month/:day/:title
 
@@ -17,7 +17,7 @@ domain:           blog.omitol.com
 email:            x2280854@gmail.com
 twitter_username: loopax
 github_username:  HackerOO7
-timezone:         America/New_York
+timezone:         Asia/Shanghai
 subscribe:        http://blog.omitol.com
 exclude:          [ README.md, newpost.rb, CNAME ]
 
