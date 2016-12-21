@@ -7,7 +7,9 @@ tags:
     - root
 ---
 
-## 华为EMUI5.0 获取 root 方法
+华为EMUI5.0 root 方法和分析  
+
+### 华为EMUI5.0 获取 root 方法  
 
 华为EMUI5.0 目前 root 方法是刷TWRP，然后使用 TWRP 刷入 Chainfire 的 SuperSU 或者 phh 的 Superuser。你需要支持 Nougat 版本的 TWRP，但是在刷入 Chainfire 的 SuperSU 过程中会直接导致设备重启，因为 SuperSU 的工作原理是在采用 systemless 时无论在刷入还是开机过程中都需要 mount 一个 loop 设备 su.img，猜测是华为的 kernel 做了限制，当 mount 一个 loop 设备时设备会直接重启最后进入到 erecovery.  
 
@@ -17,13 +19,13 @@ tags:
 
 至于最终到底是不是华为 kernel的限制，还是需要等华为开源时，才能最终解决.
 
-## FRD-AL00 root 所需文件
+## FRD-AL00 root 所需文件  
 
 自己测试的机器是荣耀8 FRD-AL00 版本，需要到的文件：  
 
 * [frd-twrp](https://mega.nz/#!XR91RJrL!zKgVWf8WvBGlP3n0Aip59tT1Z3l8C2Lh6smsijw3wQQ)
 * [SuperSU](https://mega.nz/#!2Y8CgIDa!RvUXD1dJKYA0xBPHRfzVy0wj_CZXPw-bMdZJLpypHUY)
-* [phh's Superuser](https://mega.nz/#!PYshWCZZ!SwrpezliztIFKooEY5Np7zT2m7yWmp6QtjlTExntakU)
+* [phh Superuser](https://mega.nz/#!PYshWCZZ!SwrpezliztIFKooEY5Np7zT2m7yWmp6QtjlTExntakU)
 
-该 recovery 应该也同样适用于华为P9,或者其他的 hi3650 机器.
+该 recovery 应该也同样适用于华为P9,或者其他的 hi3650 机器.  
 
