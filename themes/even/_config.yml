@@ -11,7 +11,7 @@ favicon: /favicon.ico
 # Set feed link (false | default | your feed link)
 # false: disable
 # default: use `atom.xml`, generator for `hexo-generator-feed`
-rss: false
+rss: default
 
 # ===========================================
 # Menu Settings
@@ -32,6 +32,7 @@ theme:
   color: Default
   toc: false
   fancybox: true
+  search: true
 
 copyright:
   enable: false

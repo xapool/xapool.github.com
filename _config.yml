@@ -87,3 +87,13 @@ sitemap:
     path: sitemap.xml
     tag: false
     category: false
+
+# Search
+search:
+  path: search.xml
+  field: post
+
+# Feed
+feed:
+  type: atom
+  path: atom.xml
