@@ -1,0 +1,95 @@
+# ===========================================
+# Site Information Settings
+# ===========================================
+
+# Site creation time
+since: 2017
+
+# Custom your favicon.ico in `site/source`
+favicon: /favicon.ico
+
+# Set feed link (false | default | your feed link)
+# false: disable
+# default: use `atom.xml`, generator for `hexo-generator-feed`
+rss: false
+
+# ===========================================
+# Menu Settings
+# ===========================================
+menu:
+  Home: /
+  Archives: /archives/
+  # Tags: /tags
+  # Categories: /categories
+  About: /about
+
+# ===========================================
+# Theme Settings
+# ===========================================
+# theme styling
+# color: Default | Mint Green | Cobalt Blue | Hot Pink | Dark Violet
+theme:
+  color: Default
+  toc: false
+  fancybox: true
+
+copyright:
+  enable: false
+  # https://creativecommons.org/
+  license: '<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>'
+
+reward:
+  enable: false
+  qrCode:
+    wechat:
+    alipay:
+
+# ===========================================
+# Social links Settings
+# ===========================================
+social:
+  email: x2280854@gmail.com
+  stack-overflow:
+  twitter:
+  facebook:
+  linkedin:
+  google:
+  github:
+  weibo:
+  zhihu:
+  douban:
+  pocket:
+  tumblr:
+  instagram:
+
+# ===========================================
+# Third Party Services Settings
+# ===========================================
+
+# LeanCloud
+leancloud:
+  app_id: gXwRvq5rao8C9736hKjCTyIS-gzGzoHsz
+  app_key: YjDHuFMD6UgX4SgpBymQBOsl
+
+# Baidu Analytics
+baidu_analytics:
+# Baidu Verification
+baidu_verification:
+
+# Google Analytics
+google_analytics: UA-66656521-1
+# Google Verification
+google_verification:
+
+# Disqus
+disqus_shortname: hackeroo7
+
+#Changyan
+changyan:
+  appid:
+  appkey:
+
+# ===========================================
+# Version
+# ===========================================
+version: 2.6.0

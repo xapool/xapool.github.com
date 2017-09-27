@@ -1,0 +1,18 @@
+{
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 5,
+    "ecmaFeatures": {
+      "impliedStrict": true
+    }
+  },
+  "globals": {
+    "$": true,
+    "Even": true,
+    "themeConfig": true,
+    "Slideout": true
+  },
+  "extends": "eslint:recommended"
+}
