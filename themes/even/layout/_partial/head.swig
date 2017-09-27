@@ -1,3 +1,4 @@
+<meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww" />
 {# Website mata #}
 {% include "./_head/meta.swig" %}
 

@@ -25,7 +25,8 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: [README.md]
+
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -80,3 +81,9 @@ deploy:
   type: git
   repository: git@github.com:HackerOO7/hackeroo7.github.com.git
   branch: master
+
+# Sitemap
+sitemap:
+    path: sitemap.xml
+    tag: false
+    category: false
