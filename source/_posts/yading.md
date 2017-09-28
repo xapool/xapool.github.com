@@ -5,6 +5,6 @@ categories:
     - 相冊
 ---
 
-![yading](http://i.imgur.com/jtmdfPZ.jpg)
+![仙乃日神山](http://i.imgur.com/jtmdfPZ.jpg)
 
-> 稻城亚丁仙乃日神山
+> 稻城亚丁仙乃日神山，摄于2015年夏318之行
