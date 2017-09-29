@@ -87,6 +87,7 @@ sitemap:
     path: sitemap.xml
     tag: false
     category: false
+    limit: 20
 
 # Search
 search:
