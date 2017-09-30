@@ -6,6 +6,10 @@ Personal [Blog](http://blog.omitol.com) and [Wiki](http://wiki.omitol.com)
 How TO
 ------------------
 
+### 安装环境
+
+若新环境中没有安装 Node.js、Hexo、Git 的话需要首先安装
+
 - 安装 Node.js
 ```shell
 $ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
@@ -14,8 +18,11 @@ $ nvm install stable
 
 - 安装 Hexo
 ```shell
+$ npm install hexo --no-optional
 $ npm install hexo-cli -g
 ```
+
+### 克隆并安装依赖
 
 - Clone 项目
 ```shell
@@ -26,16 +33,11 @@ $ git checkout src
 
 - 安装依赖
 ```shell
-# 更换为 tabobao 的源，使用 cnpm 安装依赖，避免先前出现的编译错误
+# 使用 tabobao 的镜像 cnpm，避免在我的 MAC 上编译依赖 hexo-renderer-scss 时出错
 $ npm install -g cnpm --registry=https://registry.npm.taobao.org
 $ npm config set registry https://registry.npm.taobao.org
-$ hexo init
+# 安装依赖
 $ cnpm install
-$ cnpm install hexo-renderer-scss --save
-$ cnpm install hexo-deployer-git --save
-$ cnpm install hexo-generator-seo-friendly-sitemap --save
-$ cnpm install hexo-generator-search --save
-$ cnpm install hexo-generator-feed --save
 ```
 
 - 写文章
