@@ -77,8 +77,8 @@ checksparse.py         //sparse system/cache/userdata image
 
 #### win(未验证）
 
-[How to generate the 8660_msimage.mbn](kernel-develop.blogspot.com/2012/05/how-to-generate-8660msimagembn.html) 
-[ How to build eMMC flash programmer MPRG7x30.hex and 7x30_msimage.mbn](kernel-develop.blogspot.com/2012/04/how-to-build-emmc-flash-programmer.html)
+[How to generate the 8660_msimage.mbn](http://kernel-develop.blogspot.com/2012/05/how-to-generate-8660msimagembn.html) 
+[ How to build eMMC flash programmer MPRG7x30.hex and 7x30_msimage.mbn](http://kernel-develop.blogspot.com/2012/04/how-to-build-emmc-flash-programmer.html)
 
 `emmcswdownload.exe -f 8660_msimage.mbn -x partition_boot.xml -s 16G` 
 
@@ -86,7 +86,7 @@ checksparse.py         //sparse system/cache/userdata image
 
 #### linux
 
-[How to generate the 7x30_msimage.mbn ](kernel-develop.blogspot.com/2012/05/how-to-generate-7x30msimagembn.html) 
+[How to generate the 7x30_msimage.mbn ](http://kernel-develop.blogspot.com/2012/05/how-to-generate-7x30msimagembn.html) 
 
 `python msp.py -r rawprogram0.xml -d 2048`  
 生成 2048Kb,rawprogram0.xml 和其它一些文件如分区 mbr gpt 等是由上面所提到的ptool.py生成.这个 rawprogram0.xml只需要包含生成msimage的必须项即可，可以手动直接修改，也可以修改 artition.xml,添加更多的启动分区命名成上面提到的 partition_boot.xml,然后再生成rawprogram0.xml. 

@@ -2,12 +2,12 @@
 title: Android 安全引导机制分析和绕过测试
 date: 2017-09-30 12:44:31
 categories:
-    -- Android
+    - Android
 tags:
-    -- Secure Boot
+    - Secure Boot
 ---
 
-上半年为了学位写了一篇论文，今天把它转成了 markdown 格式，便于分享。全文在我的 [Wiki里](https://github.com/HackerOO7/hackeroo7.github.com/wiki/Bypass-QCOM-Secure-Boot#%E9%AB%98%E9%80%9A%E4%B8%8B%E8%BD%BD%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90)，算是全文吧，去除了很多论文必须的废话。并把其中的干货拿出来放到这里。 
+上半年为了学位写了一篇论文，今天把它转成了 markdown 格式，便于分享。全文在我的 [Wiki里](https://github.com/HackerOO7/hackeroo7.github.com/wiki/Bypass-QCOM-Secure-Boot)，算是全文吧，去除了很多论文必须的废话。并把其中的干货拿出来放到这里。 
 
 文章对高通的安全引导机制进行了简单分析，并在小米一款机器上综合漏洞成功绕过了其安全引导机制,达到自由修改系统分区的目的。
 
