@@ -1,6 +1,6 @@
 ---
 title: 采用 LVM 扩展 Home 分区
-date: 2016-07-05
+date: 2016-07-05 10:52:41
 tags:
     - LVM
 categories:

@@ -1,6 +1,6 @@
 ---
 title: 生成用于 verifiedboot 的 system image
-date: 2016-07-05
+date: 2016-07-05 15:53:41
 tags:
     - verifiedboot
 categories:

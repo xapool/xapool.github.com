@@ -1,6 +1,6 @@
 ---
 title: Ubuntu 12.04 安装搜狗拼音输入法
-date: 2014-05-19
+date: 2014-05-19 15:53:41
 tags:
     - 输入法
 categories:

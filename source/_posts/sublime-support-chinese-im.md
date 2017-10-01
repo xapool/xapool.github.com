@@ -1,6 +1,6 @@
 ---
 title: Sublime_text 支持中文输入
-date: 2014-05-19
+date: 2014-05-19 10:53:41
 tags:
     - Sublime text
 categories:
