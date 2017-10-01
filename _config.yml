@@ -6,9 +6,9 @@
 title: Sunyata
 subtitle:
 description: 独行为僧
-author: loopax
+author: Wayde
 language: en
-timezone: 
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -48,7 +48,7 @@ markdown:
     collisionSuffix: 'v'
     permalink: true
     permalinkClass: header-anchor
-    permalinkSymbol: ¶
+    permalinkSymbol: '¶ '
 
 # Writing
 new_post_name: :title.md # File name of new posts
