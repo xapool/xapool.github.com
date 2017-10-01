@@ -17,7 +17,7 @@
     "hexo-generator-seo-friendly-sitemap": "^0.0.21",
     "hexo-generator-tag": "^0.2.0",
     "hexo-renderer-ejs": "^0.3.0",
-    "hexo-renderer-marked": "^0.3.0",
+    "hexo-renderer-markdown-it": "^3.4.1",
     "hexo-renderer-scss": "^1.0.3",
     "hexo-renderer-stylus": "^0.3.1",
     "hexo-server": "^0.2.0"
