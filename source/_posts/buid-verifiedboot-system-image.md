@@ -17,7 +17,7 @@ Android 从 6.0 开始启用了 Verifiedboot，来保证系统的完整性
 
 该两个方法在源码的 `./tools/releasetools/build_image.py` 中.
 
-参数是真实system分区的大小
+参数是真实 system 分区的大小
 
 ## 生成预留空间的 system.simg
 
@@ -54,3 +54,4 @@ Android 从 6.0 开始启用了 Verifiedboot，来保证系统的完整性
 ## 参考
 
 * [Android secrue boot](http://blog.andrsec.com/android/2015/04/10/android-boot-verity.html)
+
