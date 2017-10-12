@@ -7,7 +7,7 @@ categories:
     - Openwrt
 ---
 
-此乃openwrt-x86编译时的笔记，很乱、不够系统，但以后完善
+此乃 OpenWrt-x86 编译时的笔记，很乱、不够系统，但以后完善
 
 ## 目标硬件
 * Intel NUC D34010WYK
@@ -15,40 +15,40 @@ categories:
 * 60g SSD
 * Intel N2230无线网卡
 
+## x86 编译注意事项
+* 大内存支持
+* 多核心，多线程支持
+* sata drive 支持
+* 网卡、wifi 驱动的集成
+* 对 usb，例如鼠标、键盘的支持
+* 编译所有文件系统支持，包括 ext2/ext3/ext4，还有 NTFS，甚至是 LVM；
+* 加入一个文本编辑器，例如 vim 或者 nano，因为日常使用中需要用文本编辑器修改各种配置文件；
+* 加入所有关于无线网卡的驱动，模块，各种支持程序，
+* 一些其他常见应用--蓝牙、加密、PGP、SSL、SSH、VPN、USB支持、3G上网卡
+
+<!--more-->
+
 ## Convert OpenWrt raw image
 1. `gunzip openwrt.img.gz` 
 2. `VBoxManage convertfromraw --format VDI openwrt.img openwrt.vdi`
-
-<!--more-->
 
 ## Compile
     make menuconfig
     make kernel_menuconfig
 
-## x86编译注意事项
-* 大内存支持
-* 多核心，多线程支持
-* sata drive支持
-* 网卡、wifi驱动的集成
-* 对usb，例如鼠标、键盘的支持
-* 编译所有文件系统支持，包括ext2/ext3/ext4，还有NTFS，甚至是LVM；
-* 加入一个文本编辑器，例如vim或者nano，因为日常使用中需要用文本编辑器修改各种配置文件；
-* 加入所有关于无线网卡的驱动，模块，各种支持程序，
-* 一些其他常见应用--蓝牙、加密、PGP、SSL、SSH、VPN、USB支持、3G上网卡、  
-
 ## 真机使用注意事项
-* 在bios中对ide、sata的修改  
+* 在 bios 中对 ide、sata 的修改  
 
 ## 编译流程
 
 ### 流程
 1. `./scripts/feeds update -a`
 2. `./scripts/feeds install -a`
-3. 检查编译环境，若可进行编译则生成默认配置`make defconfig`
-4. `make menuconfig`若有需求，则可以`make kernel_menuconfig`
-5. `make -j32 V=99`，编译过程中会联网下载一些package  
+3. 检查编译环境，若可进行编译则生成默认配置 `make defconfig`
+4. `make menuconfig` 若有需求，则可以 `make kernel_menuconfig`
+5. `make -j32 V=99`，编译过程中会联网下载一些 package  
 
-编译完成的文件，在bin/x86目录下，可以烧写到U盘中测试。 
+编译完成的文件，在 bin/x86 目录下，可以烧写到U盘中测试。 
 
 * [how to build](http://wiki.openwrt.org/doc/howto/build)
 
@@ -60,32 +60,32 @@ categories:
 ```
 
 ## 未完成的工作
-* 配置wifi热点的自动开启
+* 配置 wifi 热点的自动开启
 * 音频、视频的支持
 * 电源键的支持
 * U盘的自动挂载
-* 3g/4g上网卡的支持
-* 对sata的支持
+* 3g/4g 上网卡的支持
+* 对 sata 的支持
 
 * [编译过程和后期的一些配置参考](http://lotors.me/2014/08/16/opcompilepro/)
 
-## Gargoyle的编译
+## Gargoyle 的编译
 
 ### 如果有目标硬件
 `make FULL_BUILD=ture brcm47xx`  
 `make brcm47xx` 是rebuild
 
 ### 自由定制
-`make custom`,上述命令会自动调用`make menuconfig`配置菜单，但是第二次执行时就会跳过配置界面，所以要`make FULL_BUILD=true custom`
+`make custom`，上述命令会自动调用 `make menuconfig`配置菜单，但是第二次执行时就会跳过配置界面，所以要` make FULL_BUILD=true custom`
 
 ## 首次配置的方法
-设备成功启动后，连接到该AP上，telnet到`192.168.1.1`,输入`passwd`，设置密码后，才能使用ssh登陆，然后配置网络即可。如果设备启动失败，只有连接显示器查看原因了。 
+设备成功启动后，连接到该 AP 上，telnet 到 `192.168.1.1`,输入 `passwd`，设置密码后，才能使用 ssh 登陆，然后配置网络即可。如果设备启动失败，只有连接显示器查看原因了。 
 
 ---------------------------------------------------
 
 ## 一些软件的安装
 
-### 安装luci
+### 安装 luci
 ```
 opkg update
 opkg intsall luci
@@ -174,24 +174,24 @@ Processor type and features  --->
 
 ```
 Target Images  ---> 
-    (/dev/sda2) Root partition on target device (NEW) #修改/dev/sda2为/dev/sdb2
+    (/dev/sda2) Root partition on target device (NEW) #修改 /dev/sda2 为 /dev/sdb2
 ```
 
 ------------------------------------------------------------------------------
 
-## 对freeswitch的集成
+## 对 freeswitch 的集成
 目前的两种方法  
 
-1. 直接把freeswitch的源码目录放到openwrt的package目录中，
-2. 做为一个单独的git项目，使用该package时修改 `feeds.conf`添加订阅，然后在`make menuconfig `时选择freeswitch模块。  
+1. 直接把 freeswitch 的源码目录放到 openwrt 的 package 目录中，
+2. 做为一个单独的 git 项目，使用该 package 时修改 `feeds.conf` 添加订阅，然后在 `make menuconfig ` 时选择 freeswitch 模块。  
 
-无论这两种方法，都需要在freeswith中增加  
+无论这两种方法，都需要在 freeswith 中增加  
 
 * package/Makefile [必备]
 * package/patches/ [可选]
 * package/files/ [可选]  
 
-patches目录和files目录都是可选的，pactches目录通常包括bug修复和对可执行文件体积的优化，files目录通常包括配置文件。  
+patches 目录和files 目录都是可选的，patches 目录通常包括 bug 修复和对可执行文件体积的优化，files 目录通常包括配置文件。  
 
 ### Makefile文件
 * PKG_NAME -软件包的名字, 在 menuconfig 和 ipkg 显示
@@ -202,7 +202,7 @@ patches目录和files目录都是可选的，pactches目录通常包括bug修复
 * PKG_SOURCE_URL -下载这个软件包的链接
 * PKG_MD5SUM -软件包的 MD5 值
 * PKG_CAT -解压软件包的方法 (zcat, bzcat, unzip)
-* PKG_BUILD_DEPENDS -需要预先构建的软件包，但只是在构建本软件包时，而不是运行的的语法和下面的DEPENDS一样。
+* PKG_BUILD_DEPENDS -需要预先构建的软件包，但只是在构建本软件包时，而不是运行的的语法和下面的 DEPENDS 一样。
 
 ### 参考
 * [创建软件包](http://wiki.openwrt.org/zh-cn/doc/devel/packages)
