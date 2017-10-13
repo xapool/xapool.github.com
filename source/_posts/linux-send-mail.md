@@ -5,10 +5,10 @@ categories:
     - Ubuntu
 ---
 
-因为服务器上android项目的一个编译脚本，要检测编译的状况。要增加一个发送email的功能，可以以前没有用过，就研究一下。 
+因为服务器上 android 项目的一个编译脚本，要检测编译的状况。要增加一个发送 email 的功能，可以以前没有用过，就研究一下。 
 
 ## 安装
-安装mailutils
+安装 mailutils
 
 
     sudo apt-get install mailutils
@@ -24,7 +24,7 @@ categories:
 ### 一般的发送方式
     mail address@address.com
 
- 编辑抄送对象，邮件主题，邮件正文后，按Ctrl-D结束。
+ 编辑抄送对象，邮件主题，邮件正文后，按 Ctrl-D 结束。
 
 ### 快速发送方式
     echo “邮件正文” | mail -s "邮件主题" address@address.com
@@ -47,9 +47,9 @@ categories:
     cat info.txt attachment.txt > combined.txt
     mail -s "服务器编译错误，请查看日志文件" x2280854@gmail.com < combined.txt
 
-经测试，发送到gmail邮箱，邮件正文和附件是可以正确识别的。而发送到163的公司邮箱，无法正确识别，而是把整个combined.txt当作了正文。
+经测试，发送到 gmail 邮箱，邮件正文和附件是可以正确识别的。而发送到 163 的公司邮箱，无法正确识别，而是把整个 combined.txt 当作了正文。
 
-## 11.26更新
+## 11.26 更新
 
 ### 遇到的一个错误
 最近一段时间服务器上的邮件，一直无法成功发送到我的邮箱，今天抽空看了一下。
@@ -65,7 +65,7 @@ categories:
 
     /var/spool/postfix/etc/resolv.conf
 
-编辑`/var/spool/postfix/etc/resolv.conf`，文件内容应该和`/etc/resolv.conf`中一样。
+编辑 `/var/spool/postfix/etc/resolv.conf`，文件内容应该和 `/etc/resolv.conf` 中一样。
 
 ## 参考
 * [Linux mail命令使用 ](http://blog.csdn.net/c395565746c/article/details/6011731)
