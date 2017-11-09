@@ -29,4 +29,6 @@ Ctrl + b，然后 d，就会从当前会话中分离，回到原先终端。在�
 ## Mac 上和 iTerm2 的集成
 如果本地机器使用的是 iTerm2，在 SSH 远程连接中使用 `tmux -CC` 命令，一个新的 tmux 会话就会被创建，并会开启一个新的窗口，而且 iTerm2 会接管 tmux 的功能，如分屏，就无需使用 tmux 的命令来进行了，可直接在这个新的窗口中使用 iTerm2 的快捷键，还有如历史查找等快捷键，也没必要对远程机器进行单独配置这些了。关闭某个面板时，选择 Hide，就可以使用 `tmux -CC attach` 命令来 attach 了。这个依然是使用场景1。
 
+在 iTerm2 的 `Preferences > general` 中有一项 `tmux Integration`，可以对集成的 tmux 进行一些设置，如打开新窗口做为本地 tab，执行 `tmux -CC attach` 后，隐藏本窗口等。
+
 使用 mosh 替代 ssh，mosh 会自动断开重连，需要在两端都安装。不过若使用 mosh 的连接，使用 `-CC` 参数无反应。
