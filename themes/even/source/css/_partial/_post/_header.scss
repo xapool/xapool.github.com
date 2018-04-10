@@ -30,6 +30,14 @@
       a {
         color: inherit;
 
+        & + a {
+          &::before {
+            content: '/';
+            margin-right: 3px;
+            color: $post-meta-font-color !important;
+          }
+        }
+
         &:hover {
           color: $theme-color;
         }
@@ -40,6 +48,7 @@
       display: inline-block;
       font-size: 14px;
       color: $post-meta-font-color;
+      visibility: hidden;
 
       &::before {
         content: '·';
