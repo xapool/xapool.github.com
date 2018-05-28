@@ -18,13 +18,18 @@
 {# Canonical, good for google search engine #}
 <link rel="canonical" href="{{ config.url }}/{{ page.canonical_path.replace('index.html', '') }}"/>
 
-{# Theme styling #}
-<link rel="stylesheet" type="text/css" href="{{ url_for('css/style.css') }}?v={{ theme.version }}" />
-
 {# Fancybox styling #}
 {% if theme.theme.fancybox %}
   <link rel="stylesheet" type="text/css" href="{{ url_for('lib/fancybox/jquery.fancybox.css') }}" />
 {% endif %}
+
+{# Nprogress styling #}
+{% if theme.theme.pjax %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('lib/nprogress/nprogress.min.css') }}" />
+{% endif %}
+
+{# Theme styling #}
+<link rel="stylesheet" type="text/css" href="{{ url_for('css/style.css') }}?v={{ theme.version }}" />
 
 {# Analytics and push #}
 {% if not env.debug %}
@@ -35,3 +40,6 @@
 {# LeanCloud Counter #}
 {% include "../_script/counter.swig"%}
 
+<script>
+  window.config = {{ JSON.stringify(theme) }};
+</script>
