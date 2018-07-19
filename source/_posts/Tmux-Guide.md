@@ -31,4 +31,4 @@ Ctrl + b，然后 d，就会从当前会话中分离，回到原先终端。在�
 
 在 iTerm2 的 `Preferences > general` 中有一项 `tmux Integration`，可以对集成的 tmux 进行一些设置，如打开新窗口做为本地 tab，执行 `tmux -CC attach` 后，隐藏本窗口等。
 
-使用 mosh 替代 ssh，mosh 会自动断开重连，需要在两端都安装。不过若使用 mosh 的连接，使用 `-CC` 参数无反应。
+使用 mosh 替代 ssh，mosh 会自动断开重连，需要在两端都安装。不过若使用 mosh 的连接，并不能使用 `-CC` 参数，参见该 [issue](https://github.com/mobile-shell/mosh/issues/640)。
