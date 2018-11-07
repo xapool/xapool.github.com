@@ -19,12 +19,12 @@
 <link rel="canonical" href="{{ config.url }}/{{ page.canonical_path.replace('index.html', '') }}"/>
 
 {# Fancybox styling #}
-{% if theme.theme.fancybox %}
+{% if theme.fancybox %}
   <link rel="stylesheet" type="text/css" href="{{ url_for('lib/fancybox/jquery.fancybox.css') }}" />
 {% endif %}
 
 {# Nprogress styling #}
-{% if theme.theme.pjax %}
+{% if theme.pjax %}
   <link rel="stylesheet" type="text/css" href="{{ url_for('lib/nprogress/nprogress.min.css') }}" />
 {% endif %}
 
@@ -40,6 +40,7 @@
 {# LeanCloud Counter #}
 {% include "../_script/counter.swig"%}
 
+{% set themeConfig = { leancloud: theme.leancloud, toc: theme.toc, fancybox: theme.fancybox, pjax: theme.pjax} %}
 <script>
-  window.config = {{ JSON.stringify(theme) }};
+  window.config = {{ JSON.stringify(themeConfig) }};
 </script>
