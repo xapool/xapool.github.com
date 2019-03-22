@@ -39,6 +39,9 @@ fancybox: true
 
 pjax: true
 
+# LaTeX support (via MathJax)
+latex: false
+
 copyright:
   enable: false
   # https://creativecommons.org/
@@ -60,8 +63,8 @@ social:
   facebook:
   linkedin:
   google:
-  github: http://github.com/hackeroo7
-  weibo: http://weibo.com/xing23
+  github: http://github.com/xapool
+  weibo:
   zhihu:
   douban:
   pocket:
@@ -101,4 +104,4 @@ livere_datauid:
 # ===========================================
 # Version
 # ===========================================
-version: 2.10.1
+version: 2.11.0
