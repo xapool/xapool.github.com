@@ -33,12 +33,15 @@ $ git checkout src
 
 - 安装依赖
 ```shell
-# 使用 tabobao 的镜像 cnpm，避免在我的 MAC 上编译依赖 hexo-renderer-scss 时出错
-$ npm install -g cnpm --registry=https://registry.npm.taobao.org
-$ npm config set registry https://registry.npm.taobao.org
 # 安装依赖
-$ cnpm install
+$ npm install
 ```
+~~# 使用 tabobao 的镜像 cnpm，避免在我的 MAC 上编译依赖 hexo-renderer-scss 时出错误~~  
+~~$ npm install -g cnpm --registry=https://registry.npm.taobao.org~~  
+~~$ npm config set registry https://registry.npm.taobao.org~~  
+~~# 安装依赖~~  
+~~$ cnpm install~~  
+
 
 - 写文章
 ```shell
