@@ -1,4 +1,4 @@
-HackerOO7's Blog
+Personal Blog
 ------------------
 
 Personal [Blog](http://blog.omitol.com) and [Wiki](http://wiki.omitol.com)
@@ -26,7 +26,7 @@ $ npm install hexo-cli -g
 
 - Clone 项目
 ```shell
-$ git clone git@github.com:HackerOO7/hackeroo7.github.com.git
+$ git clone git@github.com:xapool/xapool.github.com.git
 # 进入目录，切换到 src 分支
 $ git checkout src
 ```
