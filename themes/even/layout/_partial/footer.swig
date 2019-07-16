@@ -18,7 +18,7 @@
       {{ theme.since }} - {{ current }}
     {%- else -%}
       {{ current }}
-    {%- endif -%}
+    {%- endif -%} 
 
     <span class="heart">
       <i class="iconfont icon-heart"></i>
