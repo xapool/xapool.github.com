@@ -12,14 +12,14 @@ How TO
 
 - 安装 Node.js
 ```shell
-$ wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
-$ nvm install stable
+$ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+$ nvm install node
 ```
 
 - 安装 Hexo
 ```shell
-$ npm install hexo --no-optional
-$ npm install hexo-cli -g
+~~$ npm install hexo --no-optional~~
+$ npm install hexo-cli -g # 会自动安装 hexo
 ```
 
 ### 克隆并安装依赖
