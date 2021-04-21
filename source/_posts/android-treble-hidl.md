@@ -7,7 +7,7 @@ tags:
     - HAL
 ---
 
-在 Android 8.0 时，Treble Project 重新设计了 Android 操作系统框架，以便让制造商能够以更低的成本，更轻松、更快速地将设备更新到新版 Android。在这种新架构中，采用 HIDL（HAL 接口定义语言，发音为 "hide-l"）来指定 framework 和 HAL 层之间的接口，从而可以实现无需重新编译 HAL，便能升级系统。
+在 Android 8.0 时，Treble Project 重新设计了 Android 操作系统框架，以便让制造商能够以更低的成本，更轻松、更快速地将设备更新到新版 Android。在这种新架构中，采用 HIDL（HAL 接口定义语言，发音为 "hide-l"）来指定 framework 和 HAL 层之间的接口，从而可以实现无需重新编译 HAL，只烧写 [GSI](https://source.android.com/setup/build/gsi) 便能升级系统。
 
 <!--more-->
 
