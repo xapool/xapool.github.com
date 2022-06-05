@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>Wine：因找不到 tlb 文件所导致的栈溢出</title>
+      <title>Wine：一个有问题的程序集所引起的栈溢出</title>
       <link href="2022/05/22/wine-wpf-tlb-debug/"/>
       <url>2022/05/22/wine-wpf-tlb-debug/</url>
       
