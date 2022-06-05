@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="使用 github 搭建静态博客"><meta name="keywords" content="Jekyll, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2013/10/14/my-first-post/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>使用 github 搭建静态博客 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">使用 github 搭建静态博客
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2013-10-14
+        </span><span class="post-category">
+            <a href="/categories/Tips/">Tips</a>
+            </span>
+        <span class="post-visits" data-url="/2013/10/14/my-first-post/" data-title="使用 github 搭建静态博客">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-jekyll"><span class="toc-text">¶ 安装 Jekyll</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更新-ruby-版本"><span class="toc-text">¶ 更新 Ruby 版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#新方法"><span class="toc-text">¶ 新方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-jekyll-v2"><span class="toc-text">¶ 安装 jekyll</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建项目"><span class="toc-text">¶ 创建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#clone-一个模板"><span class="toc-text">¶ clone 一个模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地查看效果"><span class="toc-text">¶ 本地查看效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始自己的修改吧"><span class="toc-text">¶ 开始自己的修改吧</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>这是首次使用 githubpages 的第一篇博文，也是一篇教程</p>
+<h2 id="安装-jekyll"><a class="header-anchor" href="#安装-jekyll">¶ </a>安装 Jekyll</h2>
+<h3 id="更新-ruby-版本"><a class="header-anchor" href="#更新-ruby-版本">¶ </a>更新 Ruby 版本</h3>
+<p>已弃用，请查看新方法</p>
+<a id="more"></a>
+<p>此环境需要 ruby 的版本 &gt;=1.9.2，<code>ruby -v</code>查看 ruby 的版本，如果版本低于 1.9.2，得更新 ruby</p>
+<pre><code>curl -L https://get.rvm.io | bash -s stable --ruby
+</code></pre>
+<p>编辑 <code>~/.bashrc</code>，将 <code>~/.bash_profile</code> 中的文本复制到 <code>.bashrc</code> 末尾，然后更新环境变量：</p>
+<pre><code>source ~/.bashrc
+</code></pre>
+<p>然后安装 1.9.2：</p>
+<pre><code>rvm install 1.9.2
+</code></pre>
+<p>此时 <code>ruby -v</code> 查看版本 ruby 的版本默认为最新的，设置为默认的 1.9.2：</p>
+<pre><code>rvm --default 1.9.2
+</code></pre>
+<p>也可以暂时调整使用其它版本如：</p>
+<pre><code>rvm use 1.9.3
+</code></pre>
+<p>如果版本不对，请按照上诉步骤更新环境变量。</p>
+<h4 id="新方法"><a class="header-anchor" href="#新方法">¶ </a>新方法</h4>
+<p>以上方法虽然可以允许自定义但是很麻烦，使用的是 ubuntu13.04，源中有 ruby1.9.3 版本，直接安装，弃用以上方法。</p>
+<pre><code>sudo apt-get install ruby1.9.3
+</code></pre>
+<h3 id="安装-jekyll-v2"><a class="header-anchor" href="#安装-jekyll-v2">¶ </a>安装 jekyll</h3>
+<p>为了在本地可以测试，直观的看到修改后的展示效果，需要安装 jekyll</p>
+<pre><code>sudo apt-get install rubygems
+</code></pre>
+<p>然后使用 gem 命令安装以下包：</p>
+<pre><code>sudo gem install jekyll
+sudo gem install rdiscount
+</code></pre>
+<p>国外的 gem 源，也许比较慢，可以更改 gem 的源（未测试）</p>
+<pre><code>sudo gem sources --remove http://rubygems.org/
+sudo gem sources -a http://ruby.taobao.org/ 
+</code></pre>
+<h2 id="创建项目"><a class="header-anchor" href="#创建项目">¶ </a>创建项目</h2>
+<p>在你的 github 上创建一个项目 <a href="http://username.github.com" target="_blank" rel="noopener">username.github.com</a>， username 为你在 github 上的用户名，创建时可以初始化一个 readme.m d和 jekyll 的<br>
+.gitignore 文件</p>
+<p>将你的项目 git clone 到本地</p>
+<h2 id="clone-一个模板"><a class="header-anchor" href="#clone-一个模板">¶ </a>clone 一个模板</h2>
+<p>这里有很多 jekyll 的模板:</p>
+<pre><code>https://github.com/mojombo/jekyll/wiki/sites
+</code></pre>
+<p>clone 一个 Octopress 的模板:(有问题，木有搞定，换一个模板）</p>
+<pre><code>git clone https://github.com/xuhdev/homepage.git
+</code></pre>
+<p>使用</p>
+<pre><code>https://github.com/beiyuu/beiyuu.github.com.git
+</code></pre>
+<p>这个模板</p>
+<p>然后删除其中的 .git 文件，copy 到你的项目目录</p>
+<h2 id="本地查看效果"><a class="header-anchor" href="#本地查看效果">¶ </a>本地查看效果</h2>
+<p>在你的项目目录下执行:</p>
+<pre><code>jekyll serve
+</code></pre>
+<p>如果没有什么错误发生的话，就可以在浏览器中浏览</p>
+<pre><code>localhost:4000
+</code></pre>
+<h2 id="开始自己的修改吧"><a class="header-anchor" href="#开始自己的修改吧">¶ </a>开始自己的修改吧</h2>
+<p>测试没有问题的话，就可以开始自己的修改了。删除原来的文章，增加自己的文章，修改域名，博客标题， icon 等。本地测试一下没有问题的话，就可以 push 了。</p>
+<p>下面就是开始努力的学习 markdown 语法了，这个东西对我最头痛排版的问题，简直是太爽 了，有种相见恨晚的赶脚。</p>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Jekyll/">Jekyll</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2013/10/16/migrate-wp-jekyll/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">将 WordPress 的数据迁移到 Jekyll</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2013/09/30/mt6589-add-new-project/">
+        <span class="next-text nav-default">mt6589 增加新的项目</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2013/10/14/my-first-post/';
+        this.page.identifier = '2013/10/14/my-first-post/';
+        this.page.title = '使用 github 搭建静态博客';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

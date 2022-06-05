@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>http://blog.omitol.com</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2022/05/20/wine-and-made-in-china/</loc>
+        <lastmod>2022-06-05T04:53:55.604Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2022/05/22/wine-wpf-tlb-debug/</loc>
+        <lastmod>2022-06-05T04:42:59.148Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2022/05/21/wine-indesign-export-crash-debug/</loc>
+        <lastmod>2022-06-05T04:41:07.643Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2017/09/30/JVM-CP/</loc>
+        <lastmod>2021-05-28T14:31:09.203Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2018/11/09/android-treble-hidl/</loc>
+        <lastmod>2019-07-23T01:36:59.990Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2017/11/03/Tmux-Guide/</loc>
+        <lastmod>2019-05-21T06:35:39.631Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2015/07/11/yading/</loc>
+        <lastmod>2019-03-22T06:36:22.191Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2016/07/05/use-lvm-spread-home-partition/</loc>
+        <lastmod>2019-03-22T06:36:22.190Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/06/24/ubuntu13-04-build-local-server-lamp/</loc>
+        <lastmod>2019-03-22T06:36:22.190Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/10/17/sublime-text2-edit-markdown/</loc>
+        <lastmod>2019-03-22T06:36:22.189Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2014/05/19/ubuntu12.04-install-sogoupinyin/</loc>
+        <lastmod>2019-03-22T06:36:22.189Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/11/22/set-sublimetext-to-default-editor/</loc>
+        <lastmod>2019-03-22T06:36:22.188Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2014/05/19/sublime-support-chinese-im/</loc>
+        <lastmod>2019-03-22T06:36:22.188Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2015/03/09/openwrt-x86-note/</loc>
+        <lastmod>2019-03-22T06:36:22.187Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/08/12/recover-deleted-branches-lost-commit/</loc>
+        <lastmod>2019-03-22T06:36:22.187Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/11/12/openwrt-for-hiwifi/</loc>
+        <lastmod>2019-03-22T06:36:22.186Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2017/04/18/oneplus3-as-wifi-repeater/</loc>
+        <lastmod>2019-03-22T06:36:22.186Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/10/14/my-first-post/</loc>
+        <lastmod>2019-03-22T06:36:22.185Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2017/09/28/migrate-to-hexo-md/</loc>
+        <lastmod>2019-03-22T06:36:22.184Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/10/16/migrate-wp-jekyll/</loc>
+        <lastmod>2019-03-22T06:36:22.184Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2016/12/21/huawei-EMUI50-rootway/</loc>
+        <lastmod>2019-03-22T06:36:22.183Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2014/04/22/jekins_CI_build_rom/</loc>
+        <lastmod>2019-03-22T06:36:22.183Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/10/31/linux-send-mail/</loc>
+        <lastmod>2019-03-22T06:36:22.183Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2016/07/05/buid-verifiedboot-system-image/</loc>
+        <lastmod>2019-03-22T06:36:22.182Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/10/22/git-stash/</loc>
+        <lastmod>2019-03-22T06:36:22.182Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2017/09/29/Shamballa-hike-photo/</loc>
+        <lastmod>2019-03-22T06:36:22.181Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2015/09/01/about-qcom-edl-dload-study/</loc>
+        <lastmod>2019-03-22T06:36:22.181Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2017/10/15/JVM-Polymorphism/</loc>
+        <lastmod>2019-03-22T06:36:22.180Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2017/09/30/Bypass-QCOM-Secure-Boot/</loc>
+        <lastmod>2019-03-22T06:36:22.180Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/05/30/ubunt13-04-gcc-downgrade/</loc>
+        <lastmod>2019-03-22T06:35:30.400Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/08/29/mt6589-disable-navigation-bar/</loc>
+        <lastmod>2019-03-22T06:35:30.392Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://blog.omitol.com/2013/09/30/mt6589-add-new-project/</loc>
+        <lastmod>2019-03-22T06:35:30.391Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="使用一加3做 WIFI 中继器"><meta name="keywords" content="Openwrt-x86, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2017/04/18/oneplus3-as-wifi-repeater/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>使用一加3做 WIFI 中继器 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">使用一加3做 WIFI 中继器
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-04-18
+        </span><span class="post-category">
+            <a href="/categories/Android/">Android</a>
+            </span>
+        <span class="post-visits" data-url="/2017/04/18/oneplus3-as-wifi-repeater/" data-title="使用一加3做 WIFI 中继器">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用一加3做-wifi-中继器脚本配置"><span class="toc-text">¶ 使用一加3做 wifi 中继器脚本配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">¶ 参考</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>隔壁学校的 wifi 网络不错，但是因为离得远，信号差，只能在窗户边能连得上。买了一个 360 wifi 中继器，但速度掉的厉害，而用手机直接连接网速倒是正常，就想着把手机作为 wifi 中继器。记得自己的第一台 android 手机，中兴 v880 当时是支持 wifi 中继的，一边连着 wifi，一边扩展 wifi 信号，后来才知道那算是中兴特有的。找了一圈，并没有找到这样的 APP，fqrouter2 倒是有这个功能，但是作者已经停止维护，在我手机上直接启动失败。参考 fqrouter2 的文章和脚本终于让 oneplus3 STA+AP 一起工作了。</p>
+<h2 id="使用一加3做-wifi-中继器脚本配置"><a class="header-anchor" href="#使用一加3做-wifi-中继器脚本配置">¶ </a>使用一加3做 wifi 中继器脚本配置</h2>
+<ul>
+<li>ONEPLUS A3000</li>
+<li>系统 cm-13.0, Android 6.0.1</li>
+<li>root 权限</li>
+<li>iw iwlist wpa_cli 等二进制文件</li>
+</ul>
+<a id="more"></a>
+<p>一加3 采用的是<a href="https://www.qualcomm.com/products/vive/chipsets" target="_blank" rel="noopener">QCA6164A</a> wifi 芯片，支持 802.11ac，最高有 434M 带宽。</p>
+<p>系统本身自带的便携式 WLAN 热点功能，只能分享移动数据的网络，不能够做为一个 wifi repeater，开启时自动关闭 wifi 连接和 wpa_supplicant进程，并开启 hostapd 进程来提供 AP。 但系统支持 <a href="https://developer.android.com/training/connect-devices-wirelessly/wifi-direct.html" target="_blank" rel="noopener">WIFI Direct</a> 功能，也就是说设备在连接着 wifi 的时，可以开启一个热点，其它设备可以通过这个热点加入到 P2P group 中。但是 WIFI Direct 不支持手动设置密码，连接外网等。</p>
+<p>查看网卡设备信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/data/local/tmp # iw phy</span><br><span class="line">Wiphy phy3</span><br><span class="line">    max # scan SSIDs: 10</span><br><span class="line">    max scan IEs length: 500 bytes</span><br><span class="line">    max # sched scan SSIDs: 0</span><br><span class="line">    max # match sets: 0</span><br><span class="line">    Retry short limit: 7</span><br><span class="line">    Retry long limit: 4</span><br><span class="line">    Coverage class: 0 (up to 0m)</span><br><span class="line">    Device supports roaming.</span><br><span class="line">    Device supports T-DLS.</span><br><span class="line">    Supported Ciphers:</span><br><span class="line">        * WEP40 (00-0f-ac:1)</span><br><span class="line">        * WEP104 (00-0f-ac:5)</span><br><span class="line">        * TKIP (00-0f-ac:2)</span><br><span class="line">        * 00-40-96:254</span><br><span class="line">        * 00-40-96:255</span><br><span class="line">        * CCMP-128 (00-0f-ac:4)</span><br><span class="line">        * WPI-SMS4 (00-14-72:1)</span><br><span class="line">        * CMAC (00-0f-ac:6)</span><br><span class="line">    Available Antennas: TX 0 RX 0</span><br><span class="line">    Supported interface modes:</span><br><span class="line">         * IBSS</span><br><span class="line">         * managed</span><br><span class="line">         * AP</span><br><span class="line">         * P2P-client</span><br><span class="line">         * P2P-GO</span><br><span class="line">    Band 1:</span><br><span class="line">        Capabilities: 0x9072</span><br><span class="line">            HT20/HT40</span><br><span class="line">            Static SM Power Save</span><br><span class="line">            RX Greenfield</span><br><span class="line">            RX HT20 SGI</span><br><span class="line">            RX HT40 SGI</span><br><span class="line">            No RX STBC</span><br><span class="line">            Max AMSDU length: 3839 bytes</span><br><span class="line">            DSSS/CCK HT40</span><br><span class="line">            L-SIG TXOP protection</span><br><span class="line">        Maximum RX AMPDU length 65535 bytes (exponent: 0x003)</span><br><span class="line">        Minimum RX AMPDU time spacing: 16 usec (0x07)</span><br><span class="line">        HT Max RX data rate: 72 Mbps</span><br><span class="line">        HT TX/RX MCS rate indexes supported: 0-7</span><br><span class="line">        Bitrates (non-HT):</span><br><span class="line">            * 1.0 Mbps</span><br><span class="line">            * 2.0 Mbps</span><br><span class="line">            * 5.5 Mbps</span><br><span class="line">            * 11.0 Mbps</span><br><span class="line">            * 6.0 Mbps</span><br><span class="line">            * 9.0 Mbps</span><br><span class="line">            * 12.0 Mbps</span><br><span class="line">            * 18.0 Mbps</span><br><span class="line">            * 24.0 Mbps</span><br><span class="line">            * 36.0 Mbps</span><br><span class="line">            * 48.0 Mbps</span><br><span class="line">            * 54.0 Mbps</span><br><span class="line">        Frequencies:</span><br><span class="line">            * 2412 MHz [1] (20.0 dBm)</span><br><span class="line">            * 2417 MHz [2] (20.0 dBm)</span><br><span class="line">            * 2422 MHz [3] (20.0 dBm)</span><br><span class="line">            * 2427 MHz [4] (20.0 dBm)</span><br><span class="line">            * 2432 MHz [5] (20.0 dBm)</span><br><span class="line">            * 2437 MHz [6] (20.0 dBm)</span><br><span class="line">            * 2442 MHz [7] (20.0 dBm)</span><br><span class="line">            * 2447 MHz [8] (20.0 dBm)</span><br><span class="line">            * 2452 MHz [9] (20.0 dBm)</span><br><span class="line">            * 2457 MHz [10] (20.0 dBm)</span><br><span class="line">            * 2462 MHz [11] (20.0 dBm)</span><br><span class="line">            * 2467 MHz [12] (20.0 dBm)</span><br><span class="line">            * 2472 MHz [13] (20.0 dBm)</span><br><span class="line">            * 2484 MHz [14] (disabled)</span><br><span class="line">    Band 2:</span><br><span class="line">        Capabilities: 0x9072</span><br><span class="line">            HT20/HT40</span><br><span class="line">            Static SM Power Save</span><br><span class="line">            RX Greenfield</span><br><span class="line">            RX HT20 SGI</span><br><span class="line">            RX HT40 SGI</span><br><span class="line">            No RX STBC</span><br><span class="line">            Max AMSDU length: 3839 bytes</span><br><span class="line">            DSSS/CCK HT40</span><br><span class="line">            L-SIG TXOP protection</span><br><span class="line">        Maximum RX AMPDU length 65535 bytes (exponent: 0x003)</span><br><span class="line">        Minimum RX AMPDU time spacing: 16 usec (0x07)</span><br><span class="line">        HT Max RX data rate: 72 Mbps</span><br><span class="line">        HT TX/RX MCS rate indexes supported: 0-7</span><br><span class="line">        VHT Capabilities (0x000003b2):</span><br><span class="line">            Max MPDU length: 11454</span><br><span class="line">            Supported Channel Width: neither 160 nor 80+80</span><br><span class="line">            RX LDPC</span><br><span class="line">            short GI (80 MHz)</span><br><span class="line">            TX STBC</span><br><span class="line">        VHT RX MCS set:</span><br><span class="line">            1 streams: MCS 0-7</span><br><span class="line">            2 streams: MCS 0-7</span><br><span class="line">            3 streams: MCS 0-7</span><br><span class="line">            4 streams: MCS 0-7</span><br><span class="line">            5 streams: MCS 0-7</span><br><span class="line">            6 streams: MCS 0-7</span><br><span class="line">            7 streams: MCS 0-7</span><br><span class="line">            8 streams: MCS 0-7</span><br><span class="line">        VHT RX highest supported: 0 Mbps</span><br><span class="line">        VHT TX MCS set:</span><br><span class="line">            1 streams: MCS 0-7</span><br><span class="line">            2 streams: MCS 0-7</span><br><span class="line">            3 streams: MCS 0-7</span><br><span class="line">            4 streams: MCS 0-7</span><br><span class="line">            5 streams: MCS 0-7</span><br><span class="line">            6 streams: MCS 0-7</span><br><span class="line">            7 streams: MCS 0-7</span><br><span class="line">            8 streams: MCS 0-7</span><br><span class="line">        VHT TX highest supported: 0 Mbps</span><br><span class="line">        Bitrates (non-HT):</span><br><span class="line">            * 6.0 Mbps</span><br><span class="line">            * 9.0 Mbps</span><br><span class="line">            * 12.0 Mbps</span><br><span class="line">            * 18.0 Mbps</span><br><span class="line">            * 24.0 Mbps</span><br><span class="line">            * 36.0 Mbps</span><br><span class="line">            * 48.0 Mbps</span><br><span class="line">            * 54.0 Mbps</span><br><span class="line">        Frequencies:</span><br><span class="line">            * 4920 MHz [184] (disabled)</span><br><span class="line">            * 4940 MHz [188] (disabled)</span><br><span class="line">            * 4960 MHz [192] (disabled)</span><br><span class="line">            * 4980 MHz [196] (disabled)</span><br><span class="line">            * 5040 MHz [8] (disabled)</span><br><span class="line">            * 5060 MHz [12] (disabled)</span><br><span class="line">            * 5080 MHz [16] (disabled)</span><br><span class="line">            * 5180 MHz [36] (23.0 dBm)</span><br><span class="line">            * 5200 MHz [40] (23.0 dBm)</span><br><span class="line">            * 5220 MHz [44] (23.0 dBm)</span><br><span class="line">            * 5240 MHz [48] (23.0 dBm)</span><br><span class="line">            * 5260 MHz [52] (23.0 dBm) (radar detection)</span><br><span class="line">            * 5280 MHz [56] (23.0 dBm) (radar detection)</span><br><span class="line">            * 5300 MHz [60] (23.0 dBm) (radar detection)</span><br><span class="line">            * 5320 MHz [64] (23.0 dBm) (radar detection)</span><br><span class="line">            * 5500 MHz [100] (disabled)</span><br><span class="line">            * 5520 MHz [104] (disabled)</span><br><span class="line">            * 5540 MHz [108] (disabled)</span><br><span class="line">            * 5560 MHz [112] (disabled)</span><br><span class="line">            * 5580 MHz [116] (disabled)</span><br><span class="line">            * 5600 MHz [120] (disabled)</span><br><span class="line">            * 5620 MHz [124] (disabled)</span><br><span class="line">            * 5640 MHz [128] (disabled)</span><br><span class="line">            * 5660 MHz [132] (disabled)</span><br><span class="line">            * 5680 MHz [136] (disabled)</span><br><span class="line">            * 5700 MHz [140] (disabled)</span><br><span class="line">            * 5720 MHz [144] (disabled)</span><br><span class="line">            * 5745 MHz [149] (30.0 dBm)</span><br><span class="line">            * 5765 MHz [153] (30.0 dBm)</span><br><span class="line">            * 5785 MHz [157] (30.0 dBm)</span><br><span class="line">            * 5805 MHz [161] (30.0 dBm)</span><br><span class="line">            * 5825 MHz [165] (30.0 dBm)</span><br><span class="line">            * 5852 MHz [170] (disabled)</span><br><span class="line">            * 5855 MHz [171] (disabled)</span><br><span class="line">            * 5860 MHz [172] (disabled)</span><br><span class="line">            * 5865 MHz [173] (disabled)</span><br><span class="line">            * 5870 MHz [174] (disabled)</span><br><span class="line">            * 5875 MHz [175] (disabled)</span><br><span class="line">            * 5880 MHz [176] (disabled)</span><br><span class="line">            * 5885 MHz [177] (disabled)</span><br><span class="line">            * 5890 MHz [178] (disabled)</span><br><span class="line">            * 5895 MHz [179] (disabled)</span><br><span class="line">            * 5900 MHz [180] (disabled)</span><br><span class="line">            * 5905 MHz [181] (disabled)</span><br><span class="line">            * 5910 MHz [182] (disabled)</span><br><span class="line">            * 5915 MHz [183] (disabled)</span><br><span class="line">            * 5920 MHz [184] (disabled)</span><br><span class="line">    Supported commands:</span><br><span class="line">         * new_interface</span><br><span class="line">         * set_interface</span><br><span class="line">         * new_key</span><br><span class="line">         * start_ap</span><br><span class="line">         * new_station</span><br><span class="line">         * set_bss</span><br><span class="line">         * join_ibss</span><br><span class="line">         * set_pmksa</span><br><span class="line">         * del_pmksa</span><br><span class="line">         * flush_pmksa</span><br><span class="line">         * remain_on_channel</span><br><span class="line">         * frame</span><br><span class="line">         * frame_wait_cancel</span><br><span class="line">         * set_channel</span><br><span class="line">         * tdls_mgmt</span><br><span class="line">         * tdls_oper</span><br><span class="line">         * testmode</span><br><span class="line">         * channel_switch</span><br><span class="line">         * connect</span><br><span class="line">         * disconnect</span><br><span class="line">    Supported TX frame types:</span><br><span class="line">         * IBSS: 0x00 0x10 0x20 0x30 0x40 0x50 0x60 0x70 0x80 0x90 0xa0 0xb0 0xc0 0xd0 0xe0 0xf0</span><br><span class="line">         * managed: 0x00 0x10 0x20 0x30 0x40 0x50 0x60 0x70 0x80 0x90 0xa0 0xb0 0xc0 0xd0 0xe0 0xf0</span><br><span class="line">         * AP: 0x00 0x10 0x20 0x30 0x40 0x50 0x60 0x70 0x80 0x90 0xa0 0xb0 0xc0 0xd0 0xe0 0xf0</span><br><span class="line">         * P2P-client: 0x00 0x10 0x20 0x30 0x40 0x50 0x60 0x70 0x80 0x90 0xa0 0xb0 0xc0 0xd0 0xe0 0xf0</span><br><span class="line">         * P2P-GO: 0x00 0x10 0x20 0x30 0x40 0x50 0x60 0x70 0x80 0x90 0xa0 0xb0 0xc0 0xd0 0xe0 0xf0</span><br><span class="line">    Supported RX frame types:</span><br><span class="line">         * IBSS: 0x00 0x20 0x40 0xa0 0xb0 0xc0 0xd0</span><br><span class="line">         * managed: 0x40 0xd0</span><br><span class="line">         * AP: 0x00 0x20 0x40 0xa0 0xb0 0xc0 0xd0</span><br><span class="line">         * P2P-client: 0x40 0xd0</span><br><span class="line">         * P2P-GO: 0x00 0x20 0x40 0xa0 0xb0 0xc0 0xd0</span><br><span class="line">    WoWLAN support:</span><br><span class="line">         * wake up on anything (device continues operating normally)</span><br><span class="line">         * wake up on disconnect</span><br><span class="line">         * wake up on magic packet</span><br><span class="line">         * wake up on pattern match, up to 4 patterns of 6-64 bytes,</span><br><span class="line">           maximum packet offset 0 bytes</span><br><span class="line">         * can do GTK rekeying</span><br><span class="line">         * wake up on GTK rekey failure</span><br><span class="line">         * wake up on EAP identity request</span><br><span class="line">         * wake up on 4-way handshake</span><br><span class="line">         * wake up on rfkill release</span><br><span class="line">    software interface modes (can always be added):</span><br><span class="line">    valid interface combinations:</span><br><span class="line">         * #&#123; managed &#125; &lt;= 3,</span><br><span class="line">           total &lt;= 3, #channels &lt;= 2</span><br><span class="line">         * #&#123; managed &#125; &lt;= 1, #&#123; IBSS &#125; &lt;= 1,</span><br><span class="line">           total &lt;= 2, #channels &lt;= 1</span><br><span class="line">         * #&#123; AP &#125; &lt;= 2,</span><br><span class="line">           total &lt;= 2, #channels &lt;= 2</span><br><span class="line">         * #&#123; P2P-client &#125; &lt;= 1, #&#123; P2P-GO &#125; &lt;= 1,</span><br><span class="line">           total &lt;= 2, #channels &lt;= 2</span><br><span class="line">         * #&#123; managed &#125; &lt;= 2, #&#123; AP &#125; &lt;= 1,</span><br><span class="line">           total &lt;= 3, #channels &lt;= 2, STA/AP BI must match</span><br><span class="line">         * #&#123; managed &#125; &lt;= 2, #&#123; P2P-client, P2P-GO &#125; &lt;= 2,</span><br><span class="line">           total &lt;= 4, #channels &lt;= 2, STA/AP BI must match</span><br><span class="line">         * #&#123; managed &#125; &lt;= 2, #&#123; P2P-GO &#125; &lt;= 1, #&#123; AP &#125; &lt;= 1,</span><br><span class="line">           total &lt;= 4, #channels &lt;= 2, STA/AP BI must match</span><br><span class="line">    Device supports HT-IBSS.</span><br><span class="line">    Device supports scan flush.</span><br></pre></td></tr></table></figure>
+<p>该芯片是支持这些功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Supported interface modes:</span><br><span class="line">         * IBSS</span><br><span class="line">         * managed</span><br><span class="line">         * AP</span><br><span class="line">         * P2P-client</span><br><span class="line">         * P2P-GO</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/ # iw dev</span><br><span class="line">phy#0</span><br><span class="line">    Interface p2p0</span><br><span class="line">        ifindex 24</span><br><span class="line">        wdev 0x2</span><br><span class="line">        addr c2:ee:fb:d6:08:0d</span><br><span class="line">        type managed</span><br><span class="line">    Interface wlan0</span><br><span class="line">        ifindex 23</span><br><span class="line">        wdev 0x1</span><br><span class="line">        addr c0:ee:fb:d6:08:0d</span><br><span class="line">        ssid BIUBIU_5G</span><br><span class="line">        type managed</span><br></pre></td></tr></table></figure>
+<p>网卡有两个 interface，默认启用了 p2p 接口，但开启系统的热点功能后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/ # iw dev</span><br><span class="line">phy#1</span><br><span class="line">    Interface wlan0</span><br><span class="line">        ifindex 27</span><br><span class="line">        wdev 0x100000001</span><br><span class="line">        addr c0:ee:fb:d6:08:0d</span><br><span class="line">        ssid ONEPLUS A3000</span><br><span class="line">        type AP</span><br></pre></td></tr></table></figure>
+<p>p2p0 端口消失，只剩下了 wlan0 端口，查看 hostapd 进程的 cmdline</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/ # cat /proc/11047/cmdline</span><br><span class="line">/system/bin/hostapd -e /data/misc/wifi/entropy.bin /data/misc/wifi/hostapd.conf</span><br></pre></td></tr></table></figure>
+<p>先前的 wpa_supplicant 进程是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/ # cat /proc/11257/cmdline</span><br><span class="line">/system/bin/wpa_supplicant -ip2p0- Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -I/system/etc/wifi/p2p_supplicant_overlay.conf -N -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -I/system/etc/wifi/wpa_supplicant_overlay.conf -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 -e/data/misc/wi</span><br><span class="line">fi/entropy.bin</span><br></pre></td></tr></table></figure>
+<p>wpa_supplicant 同时管理着 p2p0 wlan0 两个 interface，p2p0 interface 的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/data/local/tmp # ./wpa_cli -p /data/misc/wifi/sockets/ -i p2p0 status</span><br><span class="line">wpa_state=DISCONNECTED</span><br><span class="line">p2p_device_address=c2:ee:fb:d6:08:0d</span><br><span class="line">address=c2:ee:fb:d6:08:0d</span><br><span class="line">uuid=4227ede7-6911-52a9-987c-6ce45048dfe1</span><br></pre></td></tr></table></figure>
+<p>处于未连接状态，使用 <a href="https://android.googlesource.com/platform/external/wpa_supplicant_8/+/android-7.1.2_r6/wpa_supplicant/README-P2P" target="_blank" rel="noopener">wpa_cli</a> 直接添加一个固定的 p2p 分组， wpa_cli 支持交互模式。进行此操作之前，备份一下 <code>/data/misc/wifi/p2p_supplicant.conf</code>，防止出错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/data/local/tmp # ./wpa_cli -p /data/misc/wifi/sockets/ -i p2p0</span><br><span class="line">wpa_cli v2.5-devel-6.0.1</span><br><span class="line">Copyright (c) 2004-2015, Jouni Malinen &lt;j@w1.fi&gt; and contributors</span><br><span class="line"></span><br><span class="line">This software may be distributed under the terms of the BSD license.</span><br><span class="line">See README for more details.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Interactive mode</span><br><span class="line"></span><br><span class="line">&gt; add_network</span><br><span class="line">0</span><br><span class="line">&gt; set_network 0 mode 3</span><br><span class="line">OK</span><br><span class="line">&gt; set_network 0 disabled 2</span><br><span class="line">OK</span><br><span class="line">&gt; set_network 0 ssid &quot;loopax&quot;</span><br><span class="line">OK</span><br><span class="line">&gt; set_network 0 key_mgmt WPA-PSK</span><br><span class="line">OK</span><br><span class="line">&gt; set_network 0 proto RSN</span><br><span class="line">OK</span><br><span class="line">&gt; set_network 0 pairwise CCMP</span><br><span class="line">OK</span><br><span class="line">&gt; set_network 0 psk &quot;12345678&quot;</span><br><span class="line">OK</span><br><span class="line">&gt; save_config</span><br><span class="line">OK</span><br><span class="line">&gt; list_network</span><br><span class="line">network id / ssid / bssid / flags</span><br><span class="line">0   loopax  any [DISABLED][P2P-PERSISTENT]</span><br><span class="line">&gt; p2p_group_add persistent=0</span><br><span class="line">OK</span><br><span class="line">&lt;3&gt;P2P-GROUP-STARTED p2p-p2p0-0 GO ssid=&quot;loopax&quot; freq=5765 passphrase=&quot;12345678&quot; go_dev_addr=c2:ee:fb:d6:08:0d [PERSISTENT]</span><br><span class="line">&gt; quit</span><br></pre></td></tr></table></figure>
+<p>此时，热点就起来了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/ # iw dev</span><br><span class="line">phy#3</span><br><span class="line">    Interface p2p-p2p0-0</span><br><span class="line">        ifindex 33</span><br><span class="line">        wdev 0x300000003</span><br><span class="line">        addr c2:ee:fb:d6:88:0d</span><br><span class="line">        ssid loopax</span><br><span class="line">        type P2P-GO</span><br><span class="line">    Interface p2p0</span><br><span class="line">        ifindex 32</span><br><span class="line">        wdev 0x300000002</span><br><span class="line">        addr c2:ee:fb:d6:08:0d</span><br><span class="line">        type managed</span><br><span class="line">    Interface wlan0</span><br><span class="line">        ifindex 31</span><br><span class="line">        wdev 0x300000001</span><br><span class="line">        addr c0:ee:fb:d6:08:0d</span><br><span class="line">        ssid BIUBIU_5G</span><br><span class="line">        type managed</span><br></pre></td></tr></table></figure>
+<p>起来了一个新的接口 p2p-p2p0-0，type 是 P2P-GO, 该接口状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/data/local/tmp # ./wpa_cli -p /data/misc/wifi/sockets/ -i p2p-p2p0-0 status</span><br><span class="line">bssid=c2:ee:fb:d6:88:0d</span><br><span class="line">freq=5765</span><br><span class="line">ssid=loopax</span><br><span class="line">id=0</span><br><span class="line">mode=P2P GO</span><br><span class="line">pairwise_cipher=CCMP</span><br><span class="line">group_cipher=CCMP</span><br><span class="line">key_mgmt=WPA2-PSK</span><br><span class="line">wpa_state=COMPLETED</span><br><span class="line">ip_address=192.168.49.1</span><br><span class="line">p2p_device_address=c2:ee:fb:d6:08:0d</span><br><span class="line">address=c2:ee:fb:d6:88:0d</span><br><span class="line">uuid=4227ede7-6911-52a9-987c-6ce45048dfe1</span><br></pre></td></tr></table></figure>
+<p>热点可以正常连接，但是不能够上网，也 ping 不通 IP，开启设备的网络转发 和 NAT</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/ # echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line">root@oneplus3:/ # iptables -F</span><br><span class="line">root@oneplus3:/ # iptables -P INPUT ACCEPT</span><br><span class="line">root@oneplus3:/ # iptables -P FORWARD ACCEPT</span><br><span class="line">root@oneplus3:/ # iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
+<p>这样 ip 就能 ping 的通了，但是 DNS 还是不正常，连接热点的设备手动设置 DNS 的话，就可以正常上网了。重启系统的 dnsmasq，让 DHCP 自动分配 DNS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/ # killall dnsmasq</span><br><span class="line">root@oneplus3:/ # /system/bin/dnsmasq --no-resolv --no-poll --dhcp-authoritative --server=114.114.114.114 --dhcp-option-force=43,ANDROID_METERED --pid-file --dhcp-range=192</span><br><span class="line">.168.49.2,192.168.49.254,1h</span><br></pre></td></tr></table></figure>
+<p>这样就是配置了一个完整的 wifi 中继了。</p>
+<p>再次开启中继只需</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/data/local/tmp # ./wpa_cli -p /data/misc/wifi/sockets/ -i p2p0 p2p_group_add persistent=0</span><br></pre></td></tr></table></figure>
+<p>然后在配置网络转发，和 iptables、 dhcp。</p>
+<p>默认两个接口是使用同样的 channel，但是也是可以指定频道的,如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/data/local/tmp # ./wpa_cli -p /data/misc/wifi/sockets/ -i p2p0 p2p_group_add persistent=0 freq=5825</span><br></pre></td></tr></table></figure>
+<p>获取 channel 信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">root@oneplus3:/ # iwlist wlan0 channel</span><br><span class="line">wlan0     26 channels in total; available frequencies :</span><br><span class="line">          Channel 01 : 2.412 GHz</span><br><span class="line">          Channel 02 : 2.417 GHz</span><br><span class="line">          Channel 03 : 2.422 GHz</span><br><span class="line">          Channel 04 : 2.427 GHz</span><br><span class="line">          Channel 05 : 2.432 GHz</span><br><span class="line">          Channel 06 : 2.437 GHz</span><br><span class="line">          Channel 07 : 2.442 GHz</span><br><span class="line">          Channel 08 : 2.447 GHz</span><br><span class="line">          Channel 09 : 2.452 GHz</span><br><span class="line">          Channel 10 : 2.457 GHz</span><br><span class="line">          Channel 11 : 2.462 GHz</span><br><span class="line">          Channel 12 : 2.467 GHz</span><br><span class="line">          Channel 13 : 2.472 GHz</span><br><span class="line">          Channel 36 : 5.18 GHz</span><br><span class="line">          Channel 40 : 5.2 GHz</span><br><span class="line">          Channel 44 : 5.22 GHz</span><br><span class="line">          Channel 48 : 5.24 GHz</span><br><span class="line">          Channel 52 : 5.26 GHz</span><br><span class="line">          Channel 56 : 5.28 GHz</span><br><span class="line">          Channel 60 : 5.3 GHz</span><br><span class="line">          Channel 64 : 5.32 GHz</span><br><span class="line">          Channel 149 : 5.745 GHz</span><br><span class="line">          Channel 153 : 5.765 GHz</span><br><span class="line">          Channel 157 : 5.785 GHz</span><br><span class="line">          Channel 161 : 5.805 GHz</span><br><span class="line">          Channel 165 : 5.825 GHz</span><br><span class="line">          Current Frequency:5.765 GHz (Channel 153)</span><br></pre></td></tr></table></figure>
+<p>可在 <code>/data/misc/dhcp/dnsmasq.leases</code> 文件中查看连接的客户端。</p>
+<h2 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h2>
+<ul>
+<li><a href="http://fqrouter.tumblr.com/post/47259845553/%E6%97%A0%E7%BA%BF%E4%B8%AD%E7%BB%A7%E5%90%AF%E5%8A%A8%E7%9A%84%E6%9D%A1%E4%BB%B6" target="_blank" rel="noopener">无线中继启动的条件</a></li>
+<li><a href="http://fqrouter.tumblr.com/post/43575459548/%E4%BD%BF%E7%94%A8%E6%89%8B%E6%9C%BA%E5%81%9A%E6%97%A0%E7%BA%BF%E4%B8%AD%E7%BB%A7%E7%9A%84%E5%8F%AF%E8%83%BD%E6%80%A7%E6%8E%A2%E5%AF%BB" target="_blank" rel="noopener">使用手机做无线中继的可能性探寻</a></li>
+<li><a href="http://fqrouter.tumblr.com/post/44298169558/%E8%81%94%E6%83%B3p770%E6%89%8B%E6%9C%BAmtk6577%E6%97%A0%E7%BA%BF%E4%B8%AD%E7%BB%A7%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">联想P770手机（MTK6577）无线中继脚本配置方法</a></li>
+<li><a href="https://github.com/fqrouter/fqrouter/blob/master/manager/wifi.py" target="_blank" rel="noopener">wifi repeater start script</a></li>
+<li><a href="http://lists.shmoo.com/pipermail/hostap/2012-November/026931.html" target="_blank" rel="noopener">PATCH</a></li>
+</ul>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Openwrt-x86/">Openwrt-x86</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2017/09/28/migrate-to-hexo-md/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">开始使用 Hexo</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/12/21/huawei-EMUI50-rootway/">
+        <span class="next-text nav-default">华为 EMUI 5.0 root 方法</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2017/04/18/oneplus3-as-wifi-repeater/';
+        this.page.identifier = '2017/04/18/oneplus3-as-wifi-repeater/';
+        this.page.title = '使用一加3做 WIFI 中继器';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Linux 下 mail 命令的使用"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2013/10/31/linux-send-mail/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>Linux 下 mail 命令的使用 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Linux 下 mail 命令的使用
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2013-10-31
+        </span><span class="post-category">
+            <a href="/categories/Ubuntu/">Ubuntu</a>
+            </span>
+        <span class="post-visits" data-url="/2013/10/31/linux-send-mail/" data-title="Linux 下 mail 命令的使用">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">¶ 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#发送方式"><span class="toc-text">¶ 发送方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般的发送方式"><span class="toc-text">¶ 一般的发送方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速发送方式"><span class="toc-text">¶ 快速发送方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以文件内容作为邮件正文来发送"><span class="toc-text">¶ 以文件内容作为邮件正文来发送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送带附件的邮件"><span class="toc-text">¶ 发送带附件的邮件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以文件内容作为邮件正文和同时发送附件"><span class="toc-text">¶ 以文件内容作为邮件正文和同时发送附件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-26-更新"><span class="toc-text">¶ 11.26 更新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#遇到的一个错误"><span class="toc-text">¶ 遇到的一个错误</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">¶ 参考</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>因为服务器上 android 项目的一个编译脚本，要检测编译的状况。要增加一个发送 email 的功能，可以以前没有用过，就研究一下。</p>
+<h2 id="安装"><a class="header-anchor" href="#安装">¶ </a>安装</h2>
+<p>安装 mailutils</p>
+<pre><code>sudo apt-get install mailutils
+</code></pre>
+<p>因为还要发送附件，需安装</p>
+<pre><code>sudo apt-get install sharutils
+</code></pre>
+<a id="more"></a>
+<h2 id="发送方式"><a class="header-anchor" href="#发送方式">¶ </a>发送方式</h2>
+<h3 id="一般的发送方式"><a class="header-anchor" href="#一般的发送方式">¶ </a>一般的发送方式</h3>
+<pre><code>mail address@address.com
+</code></pre>
+<p>编辑抄送对象，邮件主题，邮件正文后，按 Ctrl-D 结束。</p>
+<h3 id="快速发送方式"><a class="header-anchor" href="#快速发送方式">¶ </a>快速发送方式</h3>
+<pre><code>echo “邮件正文” | mail -s &quot;邮件主题&quot; address@address.com
+</code></pre>
+<h3 id="以文件内容作为邮件正文来发送"><a class="header-anchor" href="#以文件内容作为邮件正文来发送">¶ </a>以文件内容作为邮件正文来发送</h3>
+<pre><code>mail -s &quot;邮件主题&quot; address@address.com &lt; 邮件正文.txt
+</code></pre>
+<h3 id="发送带附件的邮件"><a class="header-anchor" href="#发送带附件的邮件">¶ </a>发送带附件的邮件</h3>
+<pre><code>uuencode 附件名称 附件显示名称 | mail -s &quot;邮件主题&quot; address@address.com 
+</code></pre>
+<p>例如：</p>
+<pre><code> uuencode test.txt test.txt | mail -s Test address@gmail.com
+</code></pre>
+<h3 id="以文件内容作为邮件正文和同时发送附件"><a class="header-anchor" href="#以文件内容作为邮件正文和同时发送附件">¶ </a>以文件内容作为邮件正文和同时发送附件</h3>
+<p>没有找到什么便利的方法<br>
+例：</p>
+<pre><code>uuencode log.tar.gz log.tar.gz &gt; attachment.txt
+cat info.txt attachment.txt &gt; combined.txt
+mail -s &quot;服务器编译错误，请查看日志文件&quot; x2280854@gmail.com &lt; combined.txt
+</code></pre>
+<p>经测试，发送到 gmail 邮箱，邮件正文和附件是可以正确识别的。而发送到 163 的公司邮箱，无法正确识别，而是把整个 combined.txt 当作了正文。</p>
+<h2 id="11-26-更新"><a class="header-anchor" href="#11-26-更新">¶ </a>11.26 更新</h2>
+<h3 id="遇到的一个错误"><a class="header-anchor" href="#遇到的一个错误">¶ </a>遇到的一个错误</h3>
+<p>最近一段时间服务器上的邮件，一直无法成功发送到我的邮箱，今天抽空看了一下。</p>
+<pre><code>/usr/lib/sendmail -bp
+</code></pre>
+<p>错误日志：</p>
+<blockquote>
+<p>47DA518ADCE6      397 Tue Nov 26 14:40:39  shenduos@Raphael-DeepinLinux<br>
+(Host or domain name not found. Name service error for <a href="http://name=gmail.com" target="_blank" rel="noopener">name=gmail.com</a> type=MX: Host not found, try again)<br>
+<a href="mailto:x2280854@gmail.com" target="_blank" rel="noopener">x2280854@gmail.com</a></p>
+</blockquote>
+<p>最后的问题在：</p>
+<pre><code>/var/spool/postfix/etc/resolv.conf
+</code></pre>
+<p>编辑 <code>/var/spool/postfix/etc/resolv.conf</code>，文件内容应该和 <code>/etc/resolv.conf</code> 中一样。</p>
+<h2 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h2>
+<ul>
+<li><a href="http://blog.csdn.net/c395565746c/article/details/6011731" target="_blank" rel="noopener">Linux mail命令使用 </a></li>
+<li><a href="http://sunxiaqw.blog.163.com/blog/static/99065438201010182277261/" target="_blank" rel="noopener">linux下mail命令使用(转)</a></li>
+</ul>
+
+      </div>
+      
+      <footer class="post-footer">
+        
+        <nav class="post-nav"><a class="prev" href="/2013/11/12/openwrt-for-hiwifi/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">编译极路由的 OpenWRT 固件</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2013/10/22/git-stash/">
+        <span class="next-text nav-default">git stash 的使用</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2013/10/31/linux-send-mail/';
+        this.page.identifier = '2013/10/31/linux-send-mail/';
+        this.page.title = 'Linux 下 mail 命令的使用';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="使用 Sublime Text 2 编辑 Markdown"><meta name="keywords" content="Sublime text, 快捷键, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2013/10/17/sublime-text2-edit-markdown/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>使用 Sublime Text 2 编辑 Markdown - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">使用 Sublime Text 2 编辑 Markdown
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2013-10-17
+        </span><span class="post-category">
+            <a href="/categories/Tools/">Tools</a>
+            </span>
+        <span class="post-visits" data-url="/2013/10/17/sublime-text2-edit-markdown/" data-title="使用 Sublime Text 2 编辑 Markdown">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sublime-text-2的配置"><span class="toc-text">¶ Sublime Text 2的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sublime-text-2的快捷键"><span class="toc-text">¶ Sublime Text 2的快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其它ubuntu-下的markdown-工具"><span class="toc-text">¶ 其它Ubuntu 下的Markdown 工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#retex-ubuntu-13-04下安装过程"><span class="toc-text">¶ ReTex Ubuntu 13.04下安装过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个markdown语法高亮主题"><span class="toc-text">¶ 一个Markdown语法高亮主题</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>Sublime Text 2 现在做为我的第一编辑器，用好它还需要一个漫长的过程。学习Markdown必须找一个合手的编辑器</p>
+<h2 id="sublime-text-2的配置"><a class="header-anchor" href="#sublime-text-2的配置">¶ </a>Sublime Text 2的配置</h2>
+<p>这里使用了两个插件：</p>
+<ul>
+<li>MarkdownEditing</li>
+<li>Markdown Preview</li>
+</ul>
+<p>Markdown Preview是预览插件。安装过程，待以后补全。</p>
+<a id="more"></a>
+<h2 id="sublime-text-2的快捷键"><a class="header-anchor" href="#sublime-text-2的快捷键">¶ </a>Sublime Text 2的快捷键</h2>
+<ul>
+<li>Ctrl+Win+V 选中的内容将自动转换为行内式超链接，链接到剪贴板中的内容</li>
+<li>Ctrl+Win+R 选中的内容将自动转换为参考式超链接，链接到剪贴板中的内容</li>
+<li>Ctrl+Alt+R 弹出提示框插入一个参考式超链接，在提示框中输入链接内容和定义参考ID[^3]</li>
+<li>Ctrl+Win+K 插入一个标准的行内式超链接</li>
+<li>Win+Shift+K 插入一个标准的行内式图片（此快捷键可能与输入法有冲突）</li>
+<li>Ctrl+1 至 Ctrl+6 插入一级至六级标题</li>
+<li>Win+Alt+i 选中的内容转换为斜体</li>
+<li>Win+Alt+b 选中的内容转换为粗体[^1]</li>
+<li>Ctrl+Shift+6 自动插入一个脚注，并跳转到该脚注的定义中。</li>
+<li>Alt+Shift+F 查找没有定义的脚注并自动添加其定义链接</li>
+<li>Alt+Shift+G 查找没有定义的参考式超链接并自动添加其定义链接</li>
+<li>Ctrl+Alt+S 脚注排序</li>
+<li>Ctrl+Shift+. 缩进当前内容</li>
+<li>Ctrl+Shift+, 提前当前内容</li>
+</ul>
+<h2 id="其它ubuntu-下的markdown-工具"><a class="header-anchor" href="#其它ubuntu-下的markdown-工具">¶ </a>其它Ubuntu 下的Markdown 工具</h2>
+<ul>
+<li><a href="http://sourceforge.net/p/retext/home/ReText/" target="_blank" rel="noopener">ReTex</a></li>
+<li><a href="http://mahua.jser.me/" target="_blank" rel="noopener">mahua</a></li>
+</ul>
+<p>其中第二个mahua是在线编辑器，都可以实现实时预览。</p>
+<h3 id="retex-ubuntu-13-04下安装过程"><a class="header-anchor" href="#retex-ubuntu-13-04下安装过程">¶ </a>ReTex Ubuntu 13.04下安装过程</h3>
+<pre><code>sudo add-apt-repository ppa:mitya57
+sudo apt-get update
+sudo apt-get install retext
+</code></pre>
+<h2 id="一个markdown语法高亮主题"><a class="header-anchor" href="#一个markdown语法高亮主题">¶ </a>一个Markdown语法高亮主题</h2>
+<ul>
+<li><a href="https://dl.dropbox.com/u/837457/sublime%20text%202/Monokai-custom.tmTheme" target="_blank" rel="noopener">Monokai-custom.tmTheme</a></li>
+</ul>
+<p>放到~/.config/sublime-text-2/Packages/User/ 文件夹下，在Preferences -&gt; Color Scheme -&gt; User选择Monokai-custom。</p>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Sublime-text/">Sublime text</a>
+            <a href="/tags/快捷键/">快捷键</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2013/10/22/git-stash/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">git stash 的使用</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2013/10/16/migrate-wp-jekyll/">
+        <span class="next-text nav-default">将 WordPress 的数据迁移到 Jekyll</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2013/10/17/sublime-text2-edit-markdown/';
+        this.page.identifier = '2013/10/17/sublime-text2-edit-markdown/';
+        this.page.title = '使用 Sublime Text 2 编辑 Markdown';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

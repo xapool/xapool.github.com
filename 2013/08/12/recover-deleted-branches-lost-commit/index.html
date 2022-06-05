@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="恢复删除的分支、或者丢失的 commit"><meta name="keywords" content="Git, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2013/08/12/recover-deleted-branches-lost-commit/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>恢复删除的分支、或者丢失的 commit - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">恢复删除的分支、或者丢失的 commit
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2013-08-12
+        </span><span class="post-category">
+            <a href="/categories/Tips/">Tips</a>
+            </span>
+        <span class="post-visits" data-url="/2013/08/12/recover-deleted-branches-lost-commit/" data-title="恢复删除的分支、或者丢失的 commit">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-content"><p>手一哆嗦把分支删掉了，干掉了好几天的工作成果，不甘心。谁让咱git使用没那么牛呢，遂找办法。还是把《git权威指南》细细看完吧。</p>
+<p>转自：<a href="http://sumsung753.blog.163.com/blog/static/146364501201301711943864/" target="_blank" rel="noopener">http://sumsung753.blog.163.com/blog/static/146364501201301711943864/</a></p>
+<p>在使用Git的过程中，有时可能会有一些误操作</p>
+<p>比如：执行<code>checkout -f</code> 或  <code>reset -hard</code> 或  <code>branch -d</code>删除一个分支</p>
+<p>结果造成本地（远程）的分支或某些commit丢失</p>
+<a id="more"></a>
+<p>可以通过reflog来进行恢复，前提是丢失的分支或commit信息没有被git gc清除</p>
+<p>一般情况下，gc对那些无用的object会保留很长时间后才清除的</p>
+<p>reflog是git提供的一个内部工具，用于记录对git仓库进行的各种操作</p>
+<p>可以使用<code>git reflog show</code>或<code>git log -g</code>命令来看到所有的操作日志</p>
+<p>恢复的过程很简单：</p>
+<ol>
+<li>
+<p>通过<code>git log -g</code> 命令来找到我们需要恢复的信息对应的commit_id，可以通过提交的时间和日期来辨别。一个好的办法是运行：</p>
+<ul>
+<li>git log --since=“2 weeks ago” – myfile #可以查看2个星期期间的myfile历史</li>
+<li>git log --branches=“developer” #可以查看某个developer的commit</li>
+</ul>
+</li>
+<li>
+<p>通过git branch recover_branch[新分支] commit_id 来建立一个新的分支</p>
+</li>
+</ol>
+<p>这样，我们就把丢失的东西给恢复到了recover_branch分支上了。</p>
+<p>Q:如果是不小心执行了git reset，还有办法取消吗？</p>
+<p>A:git reflog 查看操作历史，找到之前 HEAD 的 hash 值，然后 git reset --hard 到那个 hash 即可。</p>
+<p>Q:怎样找回历史版本中删除的文件？</p>
+<p>A:先确定需要恢复的文件要恢复成哪一个历史版本(commit)，假设那个版本号是： commit_id，那么</p>
+<pre><code>git checkout [commit_id] — &lt;path_to_file&gt;
+</code></pre>
+<p>就可以恢复。</p>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Git/">Git</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2013/08/29/mt6589-disable-navigation-bar/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">mt6589 禁用 Navigation Bar</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2013/06/24/ubuntu13-04-build-local-server-lamp/">
+        <span class="next-text nav-default">Ubuntu 13.04 上搭建LAMP本地服务器</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2013/08/12/recover-deleted-branches-lost-commit/';
+        this.page.identifier = '2013/08/12/recover-deleted-branches-lost-commit/';
+        this.page.title = '恢复删除的分支、或者丢失的 commit';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

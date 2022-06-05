@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="采用 LVM 扩展 Home 分区"><meta name="keywords" content="LVM, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2016/07/05/use-lvm-spread-home-partition/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>采用 LVM 扩展 Home 分区 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">采用 LVM 扩展 Home 分区
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-07-05
+        </span><span class="post-category">
+            <a href="/categories/Ubuntu/">Ubuntu</a>
+            </span>
+        <span class="post-visits" data-url="/2016/07/05/use-lvm-spread-home-partition/" data-title="采用 LVM 扩展 Home 分区">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建lvm"><span class="toc-text">¶ 创建lvm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迁移home分区"><span class="toc-text">¶ 迁移home分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将原先的home分区也添加到lvm中"><span class="toc-text">¶ 将原先的home分区也添加到lvm中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">¶ 参考</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>电脑是双系统，从windows下压缩出了部分空间，来扩展ubuntu的home分区</p>
+<h2 id="创建lvm"><a class="header-anchor" href="#创建lvm">¶ </a>创建lvm</h2>
+<p><code>sudo apt-get install lvm2</code></p>
+<p><code>sudo fdisk /dev/sda</code>,新建分区后，输入<code>t</code>，输入要改变分区类型的分区号，输入<code>8e</code>，最后<code>w</code>保存。</p>
+<p><code>sudo partprobe</code> 重读分区表,此时可能需要重启一下，要不下面一步会提示not found.</p>
+<p><code>sudo pvcreate /dev/sda4</code>  创建物理卷PV，让刚刚的分区可用</p>
+<a id="more"></a>
+<p><code>sudo pvdisplay</code> 查看PV</p>
+<p><code>sudo vgcreate ext_vol /dev/sda4</code> 创建逻辑卷组VG，创建完毕之后，可以在/dev/下面看见设备</p>
+<p><code>sudo vgdisplay</code> 查看VG</p>
+<p><code>sudo lvcreate --name home --size 48G ext_vol</code> 创建逻辑卷分区LV，创建完毕之后，就可以在/dev/ext_vol/下看见分区了，然后这个分区就可以操作了<br>
+或者<code>sudo lvcreate --name home -l +100%FREE 48G ext_vol</code>,使用全部空间</p>
+<p><code>sudo lvdisplay</code></p>
+<p><code>sudo mkfs.ext4 /dev/ext_vol/home</code> 格式化</p>
+<p>然后就可以挂载使用了</p>
+<h2 id="迁移home分区"><a class="header-anchor" href="#迁移home分区">¶ </a>迁移home分区</h2>
+<p>进入rescue mode模式，把原先的home分区挂载到/home目录下，把<code>/dev/ext_vol/home</code>挂载到/home1目录下，操作前要让分区可写<code>mount -o remount rw /</code>,然后<code>cp -afR /home/* /home1</code>,最后修改<code>/etc/fstab</code>自动挂载。</p>
+<h2 id="将原先的home分区也添加到lvm中"><a class="header-anchor" href="#将原先的home分区也添加到lvm中">¶ </a>将原先的home分区也添加到lvm中</h2>
+<ul>
+<li>修改分区类型为8e</li>
+<li>重载分区表</li>
+<li>格式化</li>
+<li>创建PV</li>
+<li><code>sudo vgextend ext_vol /dev/sda8</code> #扩展逻辑卷组ext_vol</li>
+<li><code>sudo lvextend -l +100%FREE /dev/ext_vol/home</code> 扩容LV的home分区，使用全部的VG空间</li>
+<li>再次进入rescue mod模式下，<code>resize2fs /dev/ext_vol/home</code></li>
+</ul>
+<h2 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h2>
+<ul>
+<li><a href="http://www.cnblogs.com/gaojun/archive/2012/08/22/2650229.html" target="_blank" rel="noopener">Linux LVM硬盘管理及LVM扩容</a></li>
+<li><a href="http://www.cnblogs.com/yasmi/articles/4835644.html" target="_blank" rel="noopener">Ubuntu Server上的LVM配置</a></li>
+</ul>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/LVM/">LVM</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2016/07/05/buid-verifiedboot-system-image/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">生成用于 Verifiedboot 的 system.img</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2015/09/01/about-qcom-edl-dload-study/">
+        <span class="next-text nav-default">关于高通 9008 刷机的研究</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2016/07/05/use-lvm-spread-home-partition/';
+        this.page.identifier = '2016/07/05/use-lvm-spread-home-partition/';
+        this.page.title = '采用 LVM 扩展 Home 分区';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

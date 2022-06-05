@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Wine：InDesignCS6 导出 PDF 时的崩溃问题"><meta name="keywords" content="wine, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2022/05/21/wine-indesign-export-crash-debug/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>Wine：InDesignCS6 导出 PDF 时的崩溃问题 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Wine：InDesignCS6 导出 PDF 时的崩溃问题
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2022-05-21
+        </span><span class="post-category">
+            <a href="/categories/Wine/">Wine</a>
+            </span>
+        <span class="post-visits" data-url="/2022/05/21/wine-indesign-export-crash-debug/" data-title="Wine：InDesignCS6 导出 PDF 时的崩溃问题">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#崩溃日志"><span class="toc-text">¶ 崩溃日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题分析"><span class="toc-text">¶ 问题分析</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>Wine AppDB 上记录的对 <a href="https://appdb.winehq.org/objectManager.php?sClass=version&amp;iId=26506" target="_blank" rel="noopener">Adobe InDesign CS6</a> 支持不错，但在使用的过程中，有一个严重的 bug。若是选择 “Adobe 打印” 的方式导出 pdf，会造成程序的崩溃。</p>
+<a id="more"></a>
+<h2 id="崩溃日志"><a class="header-anchor" href="#崩溃日志">¶ </a>崩溃日志</h2>
+<p>崩溃信息如下(截取部分)：</p>
+<blockquote>
+<p>Unhandled exception: page fault on read access to 0x00000000 in 32-bit code (0x00981d1d).<br>
+Register dump:<br>
+CS:0023 SS:002b DS:002b ES:002b FS:0063 GS:006b<br>
+EIP:00981d1d ESP:3241f740 EBP:3241f754 EFLAGS:00010287(  R- –  I S - -P-C)<br>
+EAX:00000000 EBX:00000000 ECX:3241f748 EDX:292676e8<br>
+ESI:291b5788 EDI:00003ee1<br>
+Stack dump:<br>
+0x3241f740:  0defc619 0defcaa0 3241f81c 0df191db<br>
+0x3241f750:  ffffffff 3241f760 0defcab3 292d33f8<br>
+0x3241f760:  3241f77c 100135dc 291b5788 27ef6ec8<br>
+0x3241f770:  08027fe0 00000010 00003e01 3241f7a8<br>
+0x3241f780:  1000e581 00000000 00003ee1 27ef6ec8<br>
+0x3241f790:  00003e13 00000101 00000000 27ef6ec8<br>
+Backtrace:<br>
+=&gt;0 0x00981d1d in pmruntime (+0x1d1d) (0x3241f754)<br>
+1 0x0defcab3 in font manager.rpln (+0x4cab3) (0x3241f760)<br>
+2 0x100135dc in objectmodel (+0x135dc) (0x3241f77c)<br>
+3 0x1000e581 in objectmodel (+0xe581) (0x3241f7a8)<br>
+4 0x1001b802 in objectmodel (+0x1b802) (0x3241f7d0)<br>
+5 0x1001a8cb in objectmodel (+0x1a8cb) (0x3241f7e0)<br>
+6 0x0def3024 in font manager.rpln (+0x43024) (0x3241f828)<br>
+7 0x0def32e3 in font manager.rpln (+0x432e3) (0x3241f834)<br>
+…<br>
+…<br>
+0x00981d1d pmruntime+0x1d1d: cmpl	$0,0x0(%eax)</p>
+</blockquote>
+<h2 id="问题分析"><a class="header-anchor" href="#问题分析">¶ </a>问题分析</h2>
+<p>崩溃的原因是 page fault，地址是 <code>0x00981d1d in pmruntime (+0x1d1d)</code>，汇编代码 <code>cmpl	$0,0x0(%eax)</code>，取 eax 的值与零进行比较，但通过上面的 Register dump，eax 的内容是零，对零解引用，就造成了 page fault。<br>
+eax 通常用做存储函数的返回值。所以这种问题，如果程序没有加壳的话，可以直接使用 IDA F5 键看下崩溃处的代码，看下在出问题的指令前调用了什么函数。</p>
+<p>F5 键结果:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BOOL __cdecl K2Memory::IsUIThread()</span><br><span class="line">&#123;</span><br><span class="line">  _DWORD *v0; <span class="comment">// eax</span></span><br><span class="line"></span><br><span class="line">  v0 = NtCurrentTeb()-&gt;NtTib.FiberData;</span><br><span class="line">  <span class="keyword">return</span> v0 != (_DWORD *)<span class="number">7680</span> &amp;&amp; !*v0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>问题出在 <code>*v0</code>, <code>NtCurrentTeb()-&gt;NtTib.FiberData</code> 的返回值是零。这里有 <a href="https://bbs.pediy.com/thread-223816.htm#msg_header_h2_7" target="_blank" rel="noopener">TEB NtTib 结构体的介绍</a>，FiberData 经过查询资料得知是关于协程的一个东西，跟了以下 Wine 的代码，也没搞明白该如何修复。使用 x64dbg 单步调试了下在此处的逻辑后，发现直接 nop 出问题的指令，好像并无影响。</p>
+<p>原汇编代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">.text:<span class="number">10001</span>D10 ; <span class="keyword">bool</span> __cdecl K2Memory::IsUIThread(K2Memory *__hidden <span class="keyword">this</span>)</span><br><span class="line">.text:<span class="number">10001</span>D10                 <span class="keyword">public</span> ?IsUIThread@K2Memory@@YA_NXZ</span><br><span class="line">.text:<span class="number">10001</span>D10 ?IsUIThread@K2Memory@@YA_NXZ proc near  ; DATA XREF: .rdata:off_1000A588↓o</span><br><span class="line">.text:<span class="number">10001</span>D10</span><br><span class="line">.text:<span class="number">10001</span>D10 <span class="keyword">this</span>            = dword ptr  <span class="number">4</span></span><br><span class="line">.text:<span class="number">10001</span>D10</span><br><span class="line">.text:<span class="number">10001</span>D10                 mov     eax, large fs:<span class="number">10</span>h</span><br><span class="line">.text:<span class="number">10001</span>D16                 cmp     eax, <span class="number">1E00</span>h</span><br><span class="line">.text:<span class="number">10001</span>D1B                 jz      <span class="keyword">short</span> loc_10001D28</span><br><span class="line">.text:<span class="number">10001</span>D1D                 cmp     dword ptr [eax], <span class="number">0</span></span><br><span class="line">.text:<span class="number">10001</span>D20                 jnz     <span class="keyword">short</span> loc_10001D28</span><br><span class="line">.text:<span class="number">10001</span>D22                 mov     eax, <span class="number">1</span></span><br><span class="line">.text:<span class="number">10001</span>D27                 retn</span><br><span class="line">.text:<span class="number">10001</span>D28 ; ---------------------------------------------------------------------------</span><br><span class="line">.text:<span class="number">10001</span>D28</span><br><span class="line">.text:<span class="number">10001</span>D28 loc_10001D28:                           ; CODE XREF: K2Memory::IsUIThread(<span class="keyword">void</span>)+B↑j</span><br><span class="line">.text:<span class="number">10001</span>D28                                         ; K2Memory::IsUIThread(<span class="keyword">void</span>)+<span class="number">10</span>↑j</span><br><span class="line">.text:<span class="number">10001</span>D28                 xor     eax, eax</span><br><span class="line">.text:<span class="number">10001</span>D2A                 retn</span><br><span class="line">.text:<span class="number">10001</span>D2A ?IsUIThread@K2Memory@@YA_NXZ endp</span><br></pre></td></tr></table></figure>
+<p>修改后的汇编：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">.text:<span class="number">10001</span>D10 ; <span class="keyword">bool</span> __cdecl K2Memory::IsUIThread(K2Memory *__hidden <span class="keyword">this</span>)</span><br><span class="line">.text:<span class="number">10001</span>D10                 <span class="keyword">public</span> ?IsUIThread@K2Memory@@YA_NXZ</span><br><span class="line">.text:<span class="number">10001</span>D10 ?IsUIThread@K2Memory@@YA_NXZ proc near  ; DATA XREF: .rdata:off_1000A588↓o</span><br><span class="line">.text:<span class="number">10001</span>D10</span><br><span class="line">.text:<span class="number">10001</span>D10 <span class="keyword">this</span>            = dword ptr  <span class="number">4</span></span><br><span class="line">.text:<span class="number">10001</span>D10</span><br><span class="line">.text:<span class="number">10001</span>D10                 mov     eax, large fs:<span class="number">10</span>h</span><br><span class="line">.text:<span class="number">10001</span>D16                 cmp     eax, <span class="number">1E00</span>h</span><br><span class="line">.text:<span class="number">10001</span>D1B                 jz      <span class="keyword">short</span> loc_10001D28</span><br><span class="line">.text:<span class="number">10001</span>D1D                 nop</span><br><span class="line">.text:<span class="number">10001</span>D1E                 nop</span><br><span class="line">.text:<span class="number">10001</span>D1F                 nop</span><br><span class="line">.text:<span class="number">10001</span>D20                 nop</span><br><span class="line">.text:<span class="number">10001</span>D21                 nop</span><br><span class="line">.text:<span class="number">10001</span>D22                 mov     eax, <span class="number">1</span></span><br><span class="line">.text:<span class="number">10001</span>D27                 retn</span><br><span class="line">.text:<span class="number">10001</span>D28 ; ---------------------------------------------------------------------------</span><br><span class="line">.text:<span class="number">10001</span>D28</span><br><span class="line">.text:<span class="number">10001</span>D28 loc_10001D28:                           ; CODE XREF: K2Memory::IsUIThread(<span class="keyword">void</span>)+B↑j</span><br><span class="line">.text:<span class="number">10001</span>D28                 xor     eax, eax</span><br><span class="line">.text:<span class="number">10001</span>D2A                 retn</span><br><span class="line">.text:<span class="number">10001</span>D2A ?IsUIThread@K2Memory@@YA_NXZ endp</span><br></pre></td></tr></table></figure>
+<p>还有一种修改 Wine 代码的 dirty workaround，修改 ntdll 的 <code>dispatch_exception</code> 函数，对此 page fault 异常进行处理，让 <code>Eip + 5</code> 后，跳过出问题的指令，让程序继续运行。</p>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/wine/">wine</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2022/05/22/wine-wpf-tlb-debug/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Wine：因找不到 tlb 文件所导致的栈溢出</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2022/05/20/wine-and-made-in-china/">
+        <span class="next-text nav-default">Wine 与国产化操作系统</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2022/05/21/wine-indesign-export-crash-debug/';
+        this.page.identifier = '2022/05/21/wine-indesign-export-crash-debug/';
+        this.page.title = 'Wine：InDesignCS6 导出 PDF 时的崩溃问题';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

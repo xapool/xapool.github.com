@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="OpenWrt-x86 笔记"><meta name="keywords" content="Openwrt-x86, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2015/03/09/openwrt-x86-note/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>OpenWrt-x86 笔记 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">OpenWrt-x86 笔记
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2015-03-09
+        </span><span class="post-category">
+            <a href="/categories/Openwrt/">Openwrt</a>
+            </span>
+        <span class="post-visits" data-url="/2015/03/09/openwrt-x86-note/" data-title="OpenWrt-x86 笔记">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目标硬件"><span class="toc-text">¶ 目标硬件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x86-编译注意事项"><span class="toc-text">¶ x86 编译注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#convert-openwrt-raw-image"><span class="toc-text">¶ Convert OpenWrt raw image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compile"><span class="toc-text">¶ Compile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#真机使用注意事项"><span class="toc-text">¶ 真机使用注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译流程"><span class="toc-text">¶ 编译流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#流程"><span class="toc-text">¶ 流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单独编译某个包"><span class="toc-text">¶ 单独编译某个包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未完成的工作"><span class="toc-text">¶ 未完成的工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gargoyle-的编译"><span class="toc-text">¶ Gargoyle 的编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如果有目标硬件"><span class="toc-text">¶ 如果有目标硬件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自由定制"><span class="toc-text">¶ 自由定制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#首次配置的方法"><span class="toc-text">¶ 首次配置的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些软件的安装"><span class="toc-text">¶ 一些软件的安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-luci"><span class="toc-text">¶ 安装 luci</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体配置"><span class="toc-text">¶ 具体配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对-freeswitch-的集成"><span class="toc-text">¶ 对 freeswitch 的集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#makefile文件"><span class="toc-text">¶ Makefile文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">¶ 参考</span></a></li></ol></li></ol>
+    </div>
+  </div><div class="post-content"><p>此乃 OpenWrt-x86 编译时的笔记，很乱、不够系统，但以后完善</p>
+<h2 id="目标硬件"><a class="header-anchor" href="#目标硬件">¶ </a>目标硬件</h2>
+<ul>
+<li>Intel NUC D34010WYK</li>
+<li>4g 内存</li>
+<li>60g SSD</li>
+<li>Intel N2230无线网卡</li>
+</ul>
+<h2 id="x86-编译注意事项"><a class="header-anchor" href="#x86-编译注意事项">¶ </a>x86 编译注意事项</h2>
+<ul>
+<li>大内存支持</li>
+<li>多核心，多线程支持</li>
+<li>sata drive 支持</li>
+<li>网卡、wifi 驱动的集成</li>
+<li>对 usb，例如鼠标、键盘的支持</li>
+<li>编译所有文件系统支持，包括 ext2/ext3/ext4，还有 NTFS，甚至是 LVM；</li>
+<li>加入一个文本编辑器，例如 vim 或者 nano，因为日常使用中需要用文本编辑器修改各种配置文件；</li>
+<li>加入所有关于无线网卡的驱动，模块，各种支持程序，</li>
+<li>一些其他常见应用–蓝牙、加密、PGP、SSL、SSH、VPN、USB支持、3G上网卡</li>
+</ul>
+<a id="more"></a>
+<h2 id="convert-openwrt-raw-image"><a class="header-anchor" href="#convert-openwrt-raw-image">¶ </a>Convert OpenWrt raw image</h2>
+<ol>
+<li><code>gunzip openwrt.img.gz</code></li>
+<li><code>VBoxManage convertfromraw --format VDI openwrt.img openwrt.vdi</code></li>
+</ol>
+<h2 id="compile"><a class="header-anchor" href="#compile">¶ </a>Compile</h2>
+<pre><code>make menuconfig
+make kernel_menuconfig
+</code></pre>
+<h2 id="真机使用注意事项"><a class="header-anchor" href="#真机使用注意事项">¶ </a>真机使用注意事项</h2>
+<ul>
+<li>在 bios 中对 ide、sata 的修改</li>
+</ul>
+<h2 id="编译流程"><a class="header-anchor" href="#编译流程">¶ </a>编译流程</h2>
+<h3 id="流程"><a class="header-anchor" href="#流程">¶ </a>流程</h3>
+<ol>
+<li><code>./scripts/feeds update -a</code></li>
+<li><code>./scripts/feeds install -a</code></li>
+<li>检查编译环境，若可进行编译则生成默认配置 <code>make defconfig</code></li>
+<li><code>make menuconfig</code> 若有需求，则可以 <code>make kernel_menuconfig</code></li>
+<li><code>make -j32 V=99</code>，编译过程中会联网下载一些 package</li>
+</ol>
+<p>编译完成的文件，在 bin/x86 目录下，可以烧写到U盘中测试。</p>
+<ul>
+<li><a href="http://wiki.openwrt.org/doc/howto/build" target="_blank" rel="noopener">how to build</a></li>
+</ul>
+<h3 id="单独编译某个包"><a class="header-anchor" href="#单独编译某个包">¶ </a>单独编译某个包</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make packages/xxx/clean</span><br><span class="line">make packages/xxx/compile</span><br><span class="line">make packages/xxx/install</span><br></pre></td></tr></table></figure>
+<h2 id="未完成的工作"><a class="header-anchor" href="#未完成的工作">¶ </a>未完成的工作</h2>
+<ul>
+<li>
+<p>配置 wifi 热点的自动开启</p>
+</li>
+<li>
+<p>音频、视频的支持</p>
+</li>
+<li>
+<p>电源键的支持</p>
+</li>
+<li>
+<p>U盘的自动挂载</p>
+</li>
+<li>
+<p>3g/4g 上网卡的支持</p>
+</li>
+<li>
+<p>对 sata 的支持</p>
+</li>
+<li>
+<p><a href="http://lotors.me/2014/08/16/opcompilepro/" target="_blank" rel="noopener">编译过程和后期的一些配置参考</a></p>
+</li>
+</ul>
+<h2 id="gargoyle-的编译"><a class="header-anchor" href="#gargoyle-的编译">¶ </a>Gargoyle 的编译</h2>
+<h3 id="如果有目标硬件"><a class="header-anchor" href="#如果有目标硬件">¶ </a>如果有目标硬件</h3>
+<p><code>make FULL_BUILD=ture brcm47xx</code><br>
+<code>make brcm47xx</code> 是rebuild</p>
+<h3 id="自由定制"><a class="header-anchor" href="#自由定制">¶ </a>自由定制</h3>
+<p><code>make custom</code>，上述命令会自动调用 <code>make menuconfig</code>配置菜单，但是第二次执行时就会跳过配置界面，所以要<code>make FULL_BUILD=true custom</code></p>
+<h2 id="首次配置的方法"><a class="header-anchor" href="#首次配置的方法">¶ </a>首次配置的方法</h2>
+<p>设备成功启动后，连接到该 AP 上，telnet 到 <code>192.168.1.1</code>,输入 <code>passwd</code>，设置密码后，才能使用 ssh 登陆，然后配置网络即可。如果设备启动失败，只有连接显示器查看原因了。</p>
+<hr>
+<h2 id="一些软件的安装"><a class="header-anchor" href="#一些软件的安装">¶ </a>一些软件的安装</h2>
+<h3 id="安装-luci"><a class="header-anchor" href="#安装-luci">¶ </a>安装 luci</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg intsall luci</span><br><span class="line">安装完毕记得启动luci</span><br><span class="line">./etc/init.d/uhttpd enable</span><br><span class="line">./etc/init.d/uhttpd start</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">opkg install kmod-usb-core</span><br><span class="line">opkg install kmod-usb-ohci          #安装usb ohci控制器驱动</span><br><span class="line">opkg install kmod-usb-uhci     　#UHCI　USB控制器</span><br><span class="line">opkg install kmod-usb2                #安装usb2.0</span><br><span class="line">opkg install kmod-usb-storage     #安装usb存储设备驱动</span><br><span class="line">opkg install kmod-fs-ext3              #安装ext3分区格式支持组件</span><br><span class="line">opkg install mount-utils                #挂载卸载工具</span><br><span class="line">opkg install ntfs-3g                      #挂载NTFS</span><br><span class="line">opkg install kmod-fs-vfat              #挂载FAT</span><br><span class="line">opkg install block-mount</span><br><span class="line">opkg install fdisk    </span><br><span class="line">opkg install usbutils #安装了这个后可以用 lsusb</span><br><span class="line">opkg install pciutils</span><br></pre></td></tr></table></figure>
+<h2 id="具体配置"><a class="header-anchor" href="#具体配置">¶ </a>具体配置</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Target System (x86)    #目标平台选择,这里选择X86，如果非x86系统下面需要选择</span><br><span class="line">TargetImages  ---&gt;</span><br><span class="line">ext4    #生成.EXT4.IMG文件</span><br><span class="line">[0] seconds to wait befor booting the default entry  #启动不等待5秒</span><br><span class="line">Base system  ---&gt;</span><br><span class="line">&lt;*&gt; block-mount  #以后挂载USB用</span><br><span class="line">kernel modules  ---&gt;</span><br><span class="line">    Block Devices ---&gt;       这项用于支持磁盘</span><br><span class="line">        &lt;*&gt; kmod-ata-core    #支持SATA硬盘</span><br><span class="line">        &lt;*&gt;   kmod-ata-ahci  </span><br><span class="line">        &lt;*&gt; kmod-loop</span><br><span class="line">    Filesystems  ---&gt;</span><br><span class="line">        &lt;*&gt; kmod-fs-ext4   </span><br><span class="line">    NativeLanguage Support  ---&gt;   #语言支持</span><br><span class="line">        &lt;*&gt; kmod-nls-iso8859-1</span><br><span class="line">        &lt;*&gt; kmod-nls-utf8</span><br><span class="line">    Network Devices  ---&gt;   #网卡驱动，必须添加自己需要的网卡驱动</span><br><span class="line">        &lt;*&gt; kmod-macvlan  </span><br><span class="line">    Wireless Drivers  ---&gt; #wifi卡驱动，添加自己需要的</span><br><span class="line">Luci-----</span><br><span class="line">Collection----luci</span><br><span class="line">Translation---luci-i18n-chinese</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input modules  ---&gt;#键盘</span><br><span class="line">         -*- kmod-hid</span><br><span class="line">         &lt;*&gt; kmod-hid-generic</span><br><span class="line">         -*- kmod-input-core</span><br><span class="line">         -*- kmod-input-evdev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Kernel modules:</span><br><span class="line">    USB Support:</span><br><span class="line">        &lt;*&gt; Kmod-usb-storage</span><br><span class="line">    Filesystems:</span><br><span class="line">        &lt;*&gt; Kmod-fs-ext3</span><br><span class="line">Base system:</span><br><span class="line">    &lt;*&gt; Block-extroot</span><br><span class="line">Utilities:</span><br><span class="line">    Filesystem:</span><br><span class="line">        &lt;*&gt; E2fsprogs</span><br><span class="line">    Disc:</span><br><span class="line">        &lt;*&gt; Fdisk &gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Processor type and features  ---&gt;</span><br><span class="line">    [*] Symmetric multi-processing support</span><br><span class="line">    Processor family (Core 2/newer Xeon)  ---&gt;#自行选择处理器平台</span><br><span class="line">    [*] Supported processor vendors  ---&gt;#自行选择处理器平台</span><br><span class="line">    (2) Maximum number of CPUs #自行编辑</span><br><span class="line">    [*] SMT (Hyperthreading) scheduler support#超线程支持</span><br><span class="line">    [*] Multi-core scheduler support </span><br><span class="line">    High Memory Support (4GB)  ---&gt;</span><br></pre></td></tr></table></figure>
+<p>若使用U盘测试，还需配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Target Images  ---&gt; </span><br><span class="line">    (/dev/sda2) Root partition on target device (NEW) #修改 /dev/sda2 为 /dev/sdb2</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="对-freeswitch-的集成"><a class="header-anchor" href="#对-freeswitch-的集成">¶ </a>对 freeswitch 的集成</h2>
+<p>目前的两种方法</p>
+<ol>
+<li>直接把 freeswitch 的源码目录放到 openwrt 的 package 目录中，</li>
+<li>做为一个单独的 git 项目，使用该 package 时修改 <code>feeds.conf</code> 添加订阅，然后在 <code>make menuconfig</code> 时选择 freeswitch 模块。</li>
+</ol>
+<p>无论这两种方法，都需要在 freeswith 中增加</p>
+<ul>
+<li>package/Makefile [必备]</li>
+<li>package/patches/ [可选]</li>
+<li>package/files/ [可选]</li>
+</ul>
+<p>patches 目录和files 目录都是可选的，patches 目录通常包括 bug 修复和对可执行文件体积的优化，files 目录通常包括配置文件。</p>
+<h3 id="makefile文件"><a class="header-anchor" href="#makefile文件">¶ </a>Makefile文件</h3>
+<ul>
+<li>PKG_NAME -软件包的名字, 在 menuconfig 和 ipkg 显示</li>
+<li>PKG_VERSION -软件包的版本，主干分支的版本正是我们要下载的</li>
+<li>PKG_RELEASE -这个 makefile 的版本</li>
+<li>PKG_BUILD_DIR -编译软件包的目录</li>
+<li>PKG_SOURCE -要下载的软件包的名字，一般是由 PKG_NAME 和 PKG_VERSION 组成</li>
+<li>PKG_SOURCE_URL -下载这个软件包的链接</li>
+<li>PKG_MD5SUM -软件包的 MD5 值</li>
+<li>PKG_CAT -解压软件包的方法 (zcat, bzcat, unzip)</li>
+<li>PKG_BUILD_DEPENDS -需要预先构建的软件包，但只是在构建本软件包时，而不是运行的的语法和下面的 DEPENDS 一样。</li>
+</ul>
+<h3 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h3>
+<ul>
+<li><a href="http://wiki.openwrt.org/zh-cn/doc/devel/packages" target="_blank" rel="noopener">创建软件包</a></li>
+<li><a href="http://wiki.freeswitch.org/wiki/OpenWrt" target="_blank" rel="noopener">configure FreeSWITCH to run on their OpenWrt</a></li>
+</ul>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Openwrt-x86/">Openwrt-x86</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2015/07/11/yading/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">2015夏稻城亚丁</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2014/05/19/ubuntu12.04-install-sogoupinyin/">
+        <span class="next-text nav-default">Ubuntu 12.04 安装搜狗拼音输入法</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2015/03/09/openwrt-x86-note/';
+        this.page.identifier = '2015/03/09/openwrt-x86-note/';
+        this.page.title = 'OpenWrt-x86 笔记';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Wine：因找不到 tlb 文件所导致的栈溢出"><meta name="keywords" content="wine, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2022/05/22/wine-wpf-tlb-debug/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>Wine：因找不到 tlb 文件所导致的栈溢出 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Wine：因找不到 tlb 文件所导致的栈溢出
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2022-05-22
+        </span><span class="post-category">
+            <a href="/categories/Wine/">Wine</a>
+            </span>
+        <span class="post-visits" data-url="/2022/05/22/wine-wpf-tlb-debug/" data-title="Wine：因找不到 tlb 文件所导致的栈溢出">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题程序集"><span class="toc-text">¶ 问题程序集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dirty-workaround"><span class="toc-text">¶ Dirty Workaround</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>有一款 WPF 应用在 Wine 下启动时，会重复不断地打印很多如下的 log，最后因 StackOverflowException 而崩溃：</p>
+<blockquote>
+<p>err:ole:TLB_ReadTypeLib Loading of typelib L&quot;C:\Program Files\xxxxx\xxxxxxx.tlb&quot; failed with error 2</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="问题程序集"><a class="header-anchor" href="#问题程序集">¶ </a>问题程序集</h2>
+<p>tlb 是类型库文件，<code>error 2</code> 是找不到此文件。既然如此，把此程序集的 tlb 文件放到指定路径是否可行呢？<br>
+要验证一下，就得有此程序集的 tlb 文件。好在，经过检索，可使用 dotnet 的 RegAsm 来生成。</p>
+<p>在 Windows 下执行以下命令：</p>
+<blockquote>
+<p>C:\Program Files\xxxxx&gt;C:\windows\<a href="http://microsoft.net" target="_blank" rel="noopener">microsoft.net</a>\framework\v4.0.30319\RegAsm.exe /codebase xxxxxxx.dll /tlb xxxxxxx.tlb</p>
+</blockquote>
+<p>但出错了：</p>
+<blockquote>
+<p>RegAsm : error RA0000 : 类型库导出程序在处理“xxxxxxx.xxxxxxxxxx, xxxxxxx”时遇到了错误。错误: 找不到元素。</p>
+</blockquote>
+<p>使用 tlbexp 工具来导出，也是同样的错误。而其他的程序集在导出 tlb 时并没有遇到过此问题。<br>
+使用 ILSpy 打开此 dll，找到出问题的类时，发现此 dll 中所有的类要导出 COM 时，使用的是同一个 GUID。而在 Windows 使用 x64dbg 调试此程序时，也发现了在调用 <code>CreateTypeLib2</code> 后，出现了同样找不到元素的错误日志。</p>
+<p>那么，结论就是此程序集本身存在问题，但 Wine 无法兼容这种有问题的程序集，导致栈溢出。</p>
+<h2 id="dirty-workaround"><a class="header-anchor" href="#dirty-workaround">¶ </a>Dirty Workaround</h2>
+<p>延续上面的思路，使用 ildasm/ilasm 将重复的 GUID 修改掉后，最后在 Windows 下可成功导出 tlb 文件。将此 tlb 文件放到指定路径后，可修复栈溢出的问题。</p>
+<p>此 dirty workaround 显然不太好，因为 Windows 下并不需要此 tlb 文件，还是要尝试找到出问题的代码。栈溢出通常是没有满足递归的出口造成的，所以需要对比下在 Windows 下程序正常执行时的逻辑。<br>
+打开 <code>+ole,+typelib,+seh</code> 调试频道，重点关注在调用 <code>CreateTypeLib2</code> 后，对返回的 COM 组件虚表中函数的调用逻辑，对比在 Windows 下使用 x64dbg 进行单步调试时分析出的逻辑，发现 Windows 很早就对有问题的类进行了返回，而 Wine 并不是。<br>
+Wine 直到 <code>ITypeInfo_fnGetRefTypeOfImplType FAILURE -- hresult 0x8002802b.</code> 才返回 0x8002802b，而后就是进入到另一个递归循环。</p>
+<p>修改 Wine 的代码 <code>dlls/oleaut32/typelib.c</code>，尝试在 <code>ICreateTypeLib2_fnCreateTypeInfo</code> 时判断下若是有此问题的类，则直接返回 <code>TYPE_E_ELEMENTNOTFOUND</code>，这样同 Windows 下的逻辑就一致了。这又是一个 dirty workaround，既然是 dirty workaround，那就不止这几种，尝试其它了几种都是可行的。</p>
+<p>但是要写出一个能被 Wine 接受的 patch，还需要对 Wine 的 <code>dlls/oleaut32/typelib.c</code> 进一步分析与理解，还需努力。</p>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/wine/">wine</a>
+            </div>
+        
+        <nav class="post-nav"><a class="next" href="/2022/05/21/wine-indesign-export-crash-debug/">
+        <span class="next-text nav-default">Wine：InDesignCS6 导出 PDF 时的崩溃问题</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2022/05/22/wine-wpf-tlb-debug/';
+        this.page.identifier = '2022/05/22/wine-wpf-tlb-debug/';
+        this.page.title = 'Wine：因找不到 tlb 文件所导致的栈溢出';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

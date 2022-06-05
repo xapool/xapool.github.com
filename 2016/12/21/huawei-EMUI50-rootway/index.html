@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="华为 EMUI 5.0 root 方法"><meta name="keywords" content="root, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2016/12/21/huawei-EMUI50-rootway/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>华为 EMUI 5.0 root 方法 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">华为 EMUI 5.0 root 方法
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-12-21
+        </span><span class="post-category">
+            <a href="/categories/Android/">Android</a>
+            </span>
+        <span class="post-visits" data-url="/2016/12/21/huawei-EMUI50-rootway/" data-title="华为 EMUI 5.0 root 方法">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#华为-emui5-0-获取-root-方法"><span class="toc-text">¶ 华为 EMUI5.0 获取 root 方法</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#frd-al00-root-所需文件"><span class="toc-text">¶ FRD-AL00 root 所需文件</span></a>
+    </li></div>
+  </div><div class="post-content"><p>华为 EMUI 5.0 root 方法和分析</p>
+<h3 id="华为-emui5-0-获取-root-方法"><a class="header-anchor" href="#华为-emui5-0-获取-root-方法">¶ </a>华为 EMUI5.0 获取 root 方法</h3>
+<p>华为EMUI5.0 目前 root 方法是刷TWRP，然后使用 TWRP 刷入 Chainfire 的 SuperSU 或者 phh 的 Superuser。你需要支持 Nougat 版本的 TWRP，但是在刷入 Chainfire 的 SuperSU 过程中会直接导致设备重启，因为 SuperSU 的工作原理是在采用 systemless 时无论在刷入还是开机过程中都需要 mount 一个 loop 设备 su.img，猜测是华为的 kernel 做了限制，当 mount 一个 loop 设备时设备会直接重启最后进入到 erecovery.</p>
+<a id="more"></a>
+<p>使用 phh 的 Superuser 则无此问题，但是默认提供的 Superuser 版本是开启了 dm-verity 和 forceencrypt，因为 dm-verity 的存在导致获取到的 root 权限是不完整的，无法对 system 分区做任何修改，所以自己修改了一个 Superuser-r275 的版本，关闭了这两个开关.</p>
+<p>同时也借鉴 phh 的做法，将 SuperSU 相关 su 文件放到 ramdisk 下并移除 su.img 的创建和挂载过程，最后对 sepolicy 重新打 patch，这部分脚本完全来自 phh 的 Superuser. 但是因此也失去了 SuperSU 特有的一些功能，例如 frp 和 app 内更新二进制的功能，升级版本只能通过重刷来解决.</p>
+<p>至于最终到底是不是华为 kernel的限制，还是需要等华为开源时，才能最终解决.</p>
+<h2 id="frd-al00-root-所需文件"><a class="header-anchor" href="#frd-al00-root-所需文件">¶ </a>FRD-AL00 root 所需文件</h2>
+<p>自己测试的机器是荣耀8 FRD-AL00 版本，需要到的文件：</p>
+<ul>
+<li><a href="https://mega.nz/#!XR91RJrL!zKgVWf8WvBGlP3n0Aip59tT1Z3l8C2Lh6smsijw3wQQ" target="_blank" rel="noopener">frd-twrp</a></li>
+<li><a href="https://mega.nz/#!2Y8CgIDa!RvUXD1dJKYA0xBPHRfzVy0wj_CZXPw-bMdZJLpypHUY" target="_blank" rel="noopener">SuperSU</a></li>
+<li><a href="https://mega.nz/#!PYshWCZZ!SwrpezliztIFKooEY5Np7zT2m7yWmp6QtjlTExntakU" target="_blank" rel="noopener">phh Superuser</a></li>
+</ul>
+<p>该 recovery 应该也同样适用于华为P9,或者其他的 hi3650 机器.</p>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/root/">root</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2017/04/18/oneplus3-as-wifi-repeater/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">使用一加3做 WIFI 中继器</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2016/07/05/buid-verifiedboot-system-image/">
+        <span class="next-text nav-default">生成用于 Verifiedboot 的 system.img</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2016/12/21/huawei-EMUI50-rootway/';
+        this.page.identifier = '2016/12/21/huawei-EMUI50-rootway/';
+        this.page.title = '华为 EMUI 5.0 root 方法';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

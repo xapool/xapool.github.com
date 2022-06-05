@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="搭建 Jenkins 编译 nightly version rom"><meta name="keywords" content="Jenkins, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2014/04/22/jekins_CI_build_rom/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>搭建 Jenkins 编译 nightly version rom - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">搭建 Jenkins 编译 nightly version rom
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2014-04-22
+        </span><span class="post-category">
+            <a href="/categories/Tools/">Tools</a>
+            </span>
+        <span class="post-visits" data-url="/2014/04/22/jekins_CI_build_rom/" data-title="搭建 Jenkins 编译 nightly version rom">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装apache"><span class="toc-text">¶ 安装apache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装jenkins"><span class="toc-text">¶ 安装jenkins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它"><span class="toc-text">¶ 其它</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setting-up-the-job"><span class="toc-text">¶ Setting up the job</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#adding-a-device-to-a-nightly-job"><span class="toc-text">¶ Adding a device to a nightly job</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遇到的问题"><span class="toc-text">¶ 遇到的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">¶ 参考</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>使用CI(持续集成)jekins编译nightly版的ROM</p>
+<h3 id="安装apache"><a class="header-anchor" href="#安装apache">¶ </a>安装apache</h3>
+<pre><code>sudo apt-get install apache2 
+</code></pre>
+<h3 id="安装jenkins"><a class="header-anchor" href="#安装jenkins">¶ </a>安装jenkins</h3>
+<p>切换到root用户下:</p>
+<pre><code>echo deb http://pkg.jenkins-ci.org/debian binary/ &gt; /etc/apt/sources.list.d/jenkins.list 
+</code></pre>
+<p>切回用户:</p>
+<pre><code>apt-get update &amp;&amp; apt-get install jenkins 
+</code></pre>
+<a id="more"></a>
+<h3 id="其它"><a class="header-anchor" href="#其它">¶ </a>其它</h3>
+<p>重启服务命令:</p>
+<pre><code>/etc/init.d/jenkins restart 
+</code></pre>
+<p>安装完成后,系统中添加了一个用户jenkins,不要尝试修改该用户的密码.</p>
+<p><code>/var/lib/jenkins</code>下面的文件都是jenkins用户的,对jenkins来说,这个目录就是它的home目录,所以修改这个下面的文件时注意文件的拥有者.</p>
+<pre><code>sudo su - jenkins 
+</code></pre>
+<p>可以切换到该用户.</p>
+<p>访问<code>localhost:8080</code>,首先要做的就是添加一个用户所用权限的用户，然后使用该用户sign up。</p>
+<p>jenkins的配置文件在<code>/etc/default/jenkins</code>.</p>
+<h3 id="setting-up-the-job"><a class="header-anchor" href="#setting-up-the-job">¶ </a>Setting up the job</h3>
+<p>To use Jenkins to build regular nightlies for multiple devices, follow this quick steps:</p>
+<ul>
+<li>Prepare your Android source tree</li>
+<li>Create a new job, as a multi-configuration project</li>
+<li>In Advanced Project Options, check “Custom workspace”, and point both the Directory and Directory for sub-builds to the root of your Android tree</li>
+<li>Add a new user-defined axis to the matrix, and call it ‘device’. In values, you must put each device you want to build, separated by spaces (e.g. ‘mako manta flo deb’).</li>
+<li>Check ‘Run each configuration sequentially’</li>
+<li>Add a new ‘Execute shell’ build step, in order to run a short build script. In Omni’s case we have a script at the root of our workspace, thus we put ‘./build_nightly.sh $device’, where $device will be replaced by each device for each build.</li>
+<li>Save the job, you’re all set.</li>
+</ul>
+<p>Create then your build script. Here’s Omni build script:</p>
+<pre><code>#!/bin/bash
+
+export USE_CCACHE=1
+export CCACHE_DIR=/home/build/.ccache
+export BUILDTYPE_NIGHTLY=1
+
+DEVICE=$*
+
+cd /home/build/omni
+. build/envsetup.sh
+repo sync -j48
+rm -rf out/target
+brunch $DEVICE
+</code></pre>
+<h3 id="adding-a-device-to-a-nightly-job"><a class="header-anchor" href="#adding-a-device-to-a-nightly-job">¶ </a>Adding a device to a nightly job</h3>
+<p>Just add the device code into the ‘device’ axis in the job settings.</p>
+<h3 id="遇到的问题"><a class="header-anchor" href="#遇到的问题">¶ </a>遇到的问题</h3>
+<p>当脚本被触发运行时,使用的jenkins用户的环境变量,会出现找不到环境变量,和许多的权限问题.最后的解决方法是,新建一个节点,指向本机IP和workspace,以ssh登录即可.</p>
+<h3 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h3>
+<ul>
+<li><a href="http://docs.omnirom.org/Setting_up_Jenkins_for_building_nightlies" target="_blank" rel="noopener">Setting up Jenkins for building nightlies</a></li>
+<li><a href="http://forum.xda-developers.com/showthread.php?t=2467004" target="_blank" rel="noopener">HOW TO AUTOMATE YOUR ROM BUILDING PROCESS</a></li>
+</ul>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/Jenkins/">Jenkins</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2014/05/19/sublime-support-chinese-im/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Sublime_text 支持中文输入</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2013/11/22/set-sublimetext-to-default-editor/">
+        <span class="next-text nav-default">将 Sublime Text 2 设置为默认编辑器</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2014/04/22/jekins_CI_build_rom/';
+        this.page.identifier = '2014/04/22/jekins_CI_build_rom/';
+        this.page.title = '搭建 Jenkins 编译 nightly version rom';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

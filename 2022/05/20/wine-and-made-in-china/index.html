@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Wine 与国产化操作系统"><meta name="keywords" content="wine, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2022/05/20/wine-and-made-in-china/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>Wine 与国产化操作系统 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Wine 与国产化操作系统
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2022-05-20
+        </span><span class="post-category">
+            <a href="/categories/Wine/">Wine</a>
+            </span>
+        <span class="post-visits" data-url="/2022/05/20/wine-and-made-in-china/" data-title="Wine 与国产化操作系统">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#国产化"><span class="toc-text">¶ 国产化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">¶ 参考</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>Wine 是一个免费和开源的兼容层，目的是为了在类 Unix 操作系统上运行 Windows 应用。Wine 的特殊之处是它并不是像模拟器一样模拟出一个完整的 Windows 环境。而是將 Windows API 调用转换为 POSIX API 调用，重新创建 Windows 的目录结构，并提供 Windows 系统库、系统服务和其它各种组件的替代实现。以让 Windows 原生应用二进制，无需经过修改，或重新编译，就可运行在 Linux/MacOS/Android 系统上。</p>
+<a id="more"></a>
+<p>Wine 主要通过黑盒测试与逆向工程来研发，相对于正向研发，既耗时又困难。主要是因为 Windows API 的文档不完整且不完全准确。尽管 MSDN 详细介绍了大多数的 Win32 功能，但某些领域，如文件格式和协议，微软并没有提供公开的规范，而且 Windows 还存在一些文档并未提到的低级函数、行为和未知错误，Wine 必须精确复制这些错误才能让某些应用程序正常运行。因此，Wine 团队在 thunking 等领域对许多函数调用和文件格式进行了逆向工程。</p>
+<p>Wine 项目最初采用了 MIT 许可证，但由于担心 Wine 的专有版本不会将其更改回馈给核心项目，所以后来使用 LGPL 作为其许可证。Wine 开发版本大约每两周发布一次，稳定版一年发布一次。</p>
+<p>Wine 的主要企业赞助商是 CodeWeavers，它雇佣了 Julliard 和许多其他 Wine 开发人员来开发 Wine 和 CrossOver。CrossOver 是 CodeWeavers 公司所支持的商业 Wine 版本。CrossOver 包括一些不适合上游版本的特定于应用程序的调整，以及一些额外的专有组件。CrossOver 遵循 LGPL 协议，同样也是开源的，其大部分代码都会贡献给 Wine。</p>
+<h2 id="国产化"><a class="header-anchor" href="#国产化">¶ </a>国产化</h2>
+<p>自从贸易战后，国内对国产化的补贴投入力度加大，在计算机软硬件领域同样如此，要实现对计算机软硬件的自主、可控，行业迎来了新的东风。CEC/CETC/中科院/工信部等高校、国企，纷纷争抢此块蛋糕，旗下公司进行整合、合并，软硬件商联手，有统信的建立、天津中标与麒麟的合并、曙光入股方德等等，以增强自身的优势与竞争力。</p>
+<p>而其中的国产操作系统商，除了 deepin 有些个人用户在使用，其它的厂商完全依赖于政府的补贴与采购。其生态环境，最初也仅仅是为了满足于政府部门的办公需求。但随着 Wine 开源项目的愈加成熟，各国产操作系统商纷纷做起了 Wine 的适配，以做大自己的生态。有的是和 CrossOver 达成商业合作，有的完全基于 Wine 进行二次开发与适配，目前所知，统信、麒麟、方德都在做这块的业务。但得益于圈内的某些“优良”传统，几乎没有遵守协议，进行开源的。</p>
+<p>这就是所谓的国产化。</p>
+<h2 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Wine_(software)" target="_blank" rel="noopener">Wine</a></li>
+</ul>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/wine/">wine</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2022/05/21/wine-indesign-export-crash-debug/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Wine：InDesignCS6 导出 PDF 时的崩溃问题</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2018/11/09/android-treble-hidl/">
+        <span class="next-text nav-default">Android Treble 架构下的 HAL</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2022/05/20/wine-and-made-in-china/';
+        this.page.identifier = '2022/05/20/wine-and-made-in-china/';
+        this.page.title = 'Wine 与国产化操作系统';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

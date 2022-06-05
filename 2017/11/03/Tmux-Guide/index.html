@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="Tmux 简明指南"><meta name="keywords" content="tmux, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2017/11/03/Tmux-Guide/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>Tmux 简明指南 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Tmux 简明指南
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-11-03
+        </span><span class="post-category">
+            <a href="/categories/Tools/">Tools</a>
+            </span>
+        <span class="post-visits" data-url="/2017/11/03/Tmux-Guide/" data-title="Tmux 简明指南">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#update"><span class="toc-text">¶ Update</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用场景"><span class="toc-text">¶ 使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tmux-的使用"><span class="toc-text">¶ Tmux 的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mac-上和-iterm2-的集成"><span class="toc-text">¶ Mac 上和 iTerm2 的集成</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>Tmux 做为一利器，很早就知道了，但是一直没有搞明白其使用场景，甚至一直在以错误的方式使用。现今花点时间搞明白它。</p>
+<p>首先就是使用场景的问题，至于具体的命令以后在慢慢记忆。</p>
+<a id="more"></a>
+<h2 id="update"><a class="header-anchor" href="#update">¶ </a>Update</h2>
+<ol>
+<li>在 iTerm2 中 re-attach 一个会话后，中文输入有问题，参考这个 <a href="https://gitlab.com/gnachman/iterm2/issues/5551" target="_blank" rel="noopener">issue</a>，是 tmux 的 bug，升级到 2.3 及以上版本即可解决，Ubuntu 16.04 源中的版本比较低，需要重新编译安装</li>
+<li>因为 mosh 并不支持使用 <code>tmux -CC</code> 参数，因此使用 <a href="https://github.com/MisterTea/EternalTerminal" target="_blank" rel="noopener">et</a> 替代</li>
+<li>当服务端重启后，每次都得重新新建会话，打开一堆窗口，因此使用 tmux 插件 <a href="https://github.com/tmux-plugins/tmux-resurrect" target="_blank" rel="noopener">tmux-resurrect</a> 来<a href="https://blog.csdn.net/xy707707/article/details/80834428" target="_blank" rel="noopener">保存会话和恢复会话</a>，使用<a href="https://github.com/tmux-plugins/tmux-continuum" target="_blank" rel="noopener">tmux-continuum</a>插件来自动保存会话，默认每十五分钟保存一次。</li>
+</ol>
+<p><em>注意</em>：但因为在和 iTerm2 集成的情况下，并不能使用 Ctrl + b，因此需要手动保存执行命令来保存会话状态 <a href="https://github.com/tmux-plugins/tmux-resurrect/issues/179#issuecomment-304748076" target="_blank" rel="noopener">issue</a>。在使用 resurrect 插件后，还会导致一个问题 <a href="https://github.com/tmux-plugins/tmux-sensible/issues/24#issuecomment-251045335" target="_blank" rel="noopener">issue</a>，这些 issue 中都有解决办法。还有一个需要注意的是，在新建一个会话后，先 detach, 然后执行脚本进行恢复，再 re-attach，直接在会话中进行 re-attach 时有问题。</p>
+<h2 id="使用场景"><a class="header-anchor" href="#使用场景">¶ </a>使用场景</h2>
+<ol>
+<li>在远程机器上安装和使用 tmux。一般使用 SSH 登陆到远程机器上后，若 SSH 断开后，在重新登陆，但是原先的窗口中的输出啊什么的就看不到了。若 SSH 登陆后，使用 tmux 命令开启一个会话，就算 SSH 断开了，你在重新登陆后，直接 attach 到原先的会话，就回到了原先的工作现场。而且在会话的窗口中可以使用 tmux 的快捷键开启多个面板，不需要在来一个 SSH 连接过去了。在 SSH 登陆的时候，使用 <code>ssh user@host &quot;command&quot;</code> 或 <code>ssh user@host -- command</code>，直接在远程机器上执行命令，如 tmux。</li>
+<li>在本地机器上安装使用 tmux。在本地使用的话，可以方便的分屏，在会话和终端中切换，减少窗口数量等。这些iTerm2 就可以啦，一般还是在远程机器上使用。不过 detach 后，倒是可以变相的隐藏窗口…</li>
+</ol>
+<h2 id="tmux-的使用"><a class="header-anchor" href="#tmux-的使用">¶ </a>Tmux 的使用</h2>
+<p>Ctrl + b，然后 d，就会从当前会话中分离，回到原先终端。在原先终端中 <code>tmux attach</code>，就可以来到原先的会话。</p>
+<p>在 tmux 的会话中，按下 Ctrl + b 后是激活控制台，输入 ? 可以显示控制台命令帮助。</p>
+<p>如果有多个会话，可以使用 <code>tmux ls</code> 查看，然后 <code>tmux attach -t sessionname</code> 进入到这个会话。</p>
+<p>命令可以查看这个 <a href="https://gist.github.com/MohamedAlaa/2961058" target="_blank" rel="noopener">CheatSheet</a></p>
+<h2 id="mac-上和-iterm2-的集成"><a class="header-anchor" href="#mac-上和-iterm2-的集成">¶ </a>Mac 上和 iTerm2 的集成</h2>
+<p>如果本地机器使用的是 iTerm2，在 SSH 远程连接中使用 <code>tmux -CC</code> 命令，一个新的 tmux 会话就会被创建，并会开启一个新的窗口，而且 iTerm2 会接管 tmux 的功能，如分屏，就无需使用 tmux 的命令来进行了，可直接在这个新的窗口中使用 iTerm2 的快捷键，还有如历史查找等快捷键，也没必要对远程机器进行单独配置这些了。关闭某个面板时，选择 Hide，就可以使用 <code>tmux -CC attach</code> 命令来 attach 了。这个依然是使用场景1。</p>
+<p>在 iTerm2 的 <code>Preferences &gt; general</code> 中有一项 <code>tmux Integration</code>，可以对集成的 tmux 进行一些设置，如打开新窗口做为本地 tab，执行 <code>tmux -CC attach</code> 后，隐藏本窗口等。</p>
+<p>使用 mosh 替代 ssh，mosh 会自动断开重连，需要在两端都安装。不过若使用 mosh 的连接，并不能使用 <code>-CC</code> 参数，参见该 <a href="https://github.com/mobile-shell/mosh/issues/640" target="_blank" rel="noopener">issue</a>。</p>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/tmux/">tmux</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2018/11/09/android-treble-hidl/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Android Treble 架构下的 HAL</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2017/10/15/JVM-Polymorphism/">
+        <span class="next-text nav-default">JVM 之多态的实现</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2017/11/03/Tmux-Guide/';
+        this.page.identifier = '2017/11/03/Tmux-Guide/';
+        this.page.title = 'Tmux 简明指南';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>

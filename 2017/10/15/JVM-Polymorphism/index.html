@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="JVM 之多态的实现"><meta name="keywords" content="JVM, 多态, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="http://blog.omitol.com/2017/10/15/JVM-Polymorphism/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-66656521-1');
+</script><script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+</script>
+
+    <title>JVM 之多态的实现 - Sunyata</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Sunyata</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/">
+        <li class="mobile-menu-item">Home
+          </li>
+      </a><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Sunyata</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/">
+            Home
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">JVM 之多态的实现
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-10-15
+        </span><span class="post-category">
+            <a href="/categories/java/">java</a>
+            </span>
+        <span class="post-visits" data-url="/2017/10/15/JVM-Polymorphism/" data-title="JVM 之多态的实现">
+          Visits 0
+        </span>
+        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法调用指令"><span class="toc-text">¶ 方法调用指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分派调用"><span class="toc-text">¶ 分派调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#静态分派"><span class="toc-text">¶ 静态分派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态分派"><span class="toc-text">¶ 动态分派</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法表"><span class="toc-text">¶ 方法表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多态"><span class="toc-text">¶ 多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">¶ 参考</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><p>这部分的笔记在国庆假期前就整理好了，然后说再加工一下，放到 blog 上，毕竟笔记只是适合自己看，没有很强的逻辑性。但每个假期回来后，都会患上一定的假期综合征，总需要几天收收心。就一直拖到现在，简直无可救药。</p>
+<p>OOP 的三大特征：封装、继承、多态。以前记忆的时候都是不分先后，随便记忆的，加深理解后才知道这三个特性是一个递进的过程。最后的多态是在继承的基础之上的。</p>
+<p>这里先从 JVM 方法调用说起，最后在得出多态的概念。</p>
+<a id="more"></a>
+<h2 id="方法调用指令"><a class="header-anchor" href="#方法调用指令">¶ </a>方法调用指令</h2>
+<p>在 JVM 中有四个主要的方法调用指令：</p>
+<ul>
+<li>invokestatic</li>
+<li>invokespecial</li>
+<li>invokevirtual</li>
+<li>invokeinterface</li>
+</ul>
+<p>在 Class 文件中，这些方法调用指令后面跟着的是要调用方法的符号引用。这些符号引用最终都要在类加载阶段或运行期转化为直接引用。</p>
+<p>其中 invokestatic 和 invokespecial 这两个指令调用的方法称为解析调用，是一个静态过程， 在编译期间就完全确定。要调用方法的符号引用在运行时常量池中已经在类加载的解析阶段被解析为了方法的直接引用，就不需要在运行期去方法表中查找了。这些方法有静态方法、私有方法、实例构造器，称为<strong>非虚方法</strong>。</p>
+<p>其中 invokestatic 用于调用静态方法，invokespecial 用于调用私用方法和实例构造器。此外虽然被 final 修饰的方法是使用 invokesvirtual 来调用的，但由于 final 方法无法被子类覆写，只存在唯一版本，所以也是一种非虚方法。这也是这些方法无法被继承或覆写在 JVM 的体现。</p>
+<p>而 invokesvirtual 和 invokeinterface 这两个指令调用的方法称为分派调用，是在运行期才能确定正确的目标方法，得到直接引用。而分派调用又分为静态分派和动态分派。</p>
+<h2 id="分派调用"><a class="header-anchor" href="#分派调用">¶ </a>分派调用</h2>
+<p>分派都是通过方法的符号引用去运行时常量池中去查找得到方法所属类型（即调用该方法的引用变量所属类型，是静态类型）及方法名和描述符，然后根据方法名和描述符去所属类型的方法表中查找确定该方法的目标版本，进而得到方法的直接引用。</p>
+<h3 id="静态分派"><a class="header-anchor" href="#静态分派">¶ </a>静态分派</h3>
+<p>所有依赖静态类型来定位方法执行版本的分派动作称为静态分派。</p>
+<p>在 Java 中的体现就是方法重载，在编译阶段，编译器会根据参数的静态类型决定使用哪个重载版本，完全发生在编译阶段，因此确定静态分派的动作实际上不是由虚拟机来执行的。只是在运行期间去静态类型的方法表中查找该方法，从而得到该方法的直接引用。</p>
+<h3 id="动态分派"><a class="header-anchor" href="#动态分派">¶ </a>动态分派</h3>
+<p>相对于静态分派，动态分派是在运行期根据实际类型来确定方法执行版本的分派过程称为动态分派。</p>
+<p>在 Java 中的体现就是方法的覆写。因为实际类型在运行期间可随着程序变化，因此只能在在运行期间才能确定一个对象的实际类型是什么，编译时编译器并不知道，只知道静态类型是什么。那就需要动态的分派目标方法执行版本。这个过程就是重写的本质</p>
+<p>但是针对 invokevirtual 和 invokeinterface 两个指令，动态分派的具体过程是不同的：</p>
+<ul>
+<li>invokevirtual，实例调用，调用对象的实例方法。动态的分派目标方法执行版本是先在静态类型方法表中找到目标方法并得到偏移量，根据栈帧中对象的引用得到这个对象，在从对象中指向方法区类信息和运行时常量池的引用得到对象的实际类型的类信息，然后在得到的类信息方法表相同偏移量的位置查找目标方法</li>
+<li>invokeinterface, 接口方法调用，在运行时再确定一个实现此接口的对象。因为一个类可以实现多个接口，相当于多继承。所以就不能按照偏移量去实现类的方法表中查找了，只能通过搜索完整的方法表。</li>
+</ul>
+<p>不管是动态分派还是静态分派，我们发现都离不开一个关键的东西<strong>方法表</strong>，最终都是通过方法表进行索引从而得到方法的直接引用。因此方法表是实现动态分派的一个关键。</p>
+<h2 id="方法表"><a class="header-anchor" href="#方法表">¶ </a>方法表</h2>
+<p>JVM 在完成类加载后，会将这个 class 文件二进制字节流转化为虚拟机所需格式存储在方法区中，称为类信息，类信息就是类文件在运行时的数据结构，包含了该类中所有定义的信息。</p>
+<p>类信息中包含有一个方法表，方法表中包括从父类（一直到 Object 类）继承的所有实例方法（不包含私有方法，因为私有方法不能继承）以及自身覆写的方法的直接引用，这些直接引用指向类信息中相应的方法代码。</p>
+<p>如果是本类的方法或者是覆写了父类的方法，则指向的是本类类信息中相应的方法代码；如果是父类的方法，则指向的是父类类信息中的方法代码。这样通过方法表中方法的引用就可以访问到该类到根类的所有实例方法。</p>
+<p>方法表是 JVM 用来提高搜索查找目标方法性能的一个实现。invokevirtual 执行时用到的方法表是虚方法；invokeinterface 用到的方法表是接口方法表。为了程序上实现的方便，具有相同签名的方法，在父类、子类的虚方法表中都具有一样的索引号，因此才可直接使用偏移量在实际类型的方法表中进行查找。</p>
+<h2 id="多态"><a class="header-anchor" href="#多态">¶ </a>多态</h2>
+<p>那么什么是多态呢，一般的书籍都是把多态分为两种：</p>
+<ul>
+<li>编译时多态，通过方法的重载体现，是静态分派</li>
+<li>运行时多态，通过方法的覆写体现，是动态分派</li>
+</ul>
+<p>因为重载是静态分派，因此也可以说重载不算是多态的一个体现，但并不妨碍我们的理解。</p>
+<p>多态还可以从不同的角度进行定义，如在语法上是子类继承父类并覆写了父类的方法，父类引用指向子类对象。在 OOP 里是 Java 引入了多态性的概念是为了弥补因为单继承而带来的一些不足，如接口也是在一定程度上为了可以使用多继承。</p>
+<p>另外重载和覆写说的都是方法，只有类中的方法才有多态的概念，类中的成员变量和内部类并没有此概念。静态方法也没有多态的概念，和成员变量取值与父类还是子类一样，都是由引用变量的静态类型决定的。也因此可以说静态方法并不能被覆写。</p>
+<h2 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h2>
+<p>内容主要来自 《深入理解 Java 虚拟机》第八章。都是自己理解后总结的，难免有错误之处，以后慢慢修正。</p>
+
+      </div>
+      
+      <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/JVM/">JVM</a>
+            <a href="/tags/多态/">多态</a>
+            </div>
+        
+        <nav class="post-nav"><a class="prev" href="/2017/11/03/Tmux-Guide/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Tmux 简明指南</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    <a class="next" href="/2017/09/30/JVM-CP/">
+        <span class="next-text nav-default">JVM 之常量池</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Wade</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://blog.omitol.com/2017/10/15/JVM-Polymorphism/';
+        this.page.identifier = '2017/10/15/JVM-Polymorphism/';
+        this.page.title = 'JVM 之多态的实现';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//hackeroo7.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>
