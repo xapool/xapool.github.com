@@ -1,60 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<meta name="theme-color" content="#f8f5ec">
+<meta name="theme-color" content="#f8f5ec" />
 <meta name="msapplication-navbutton-color" content="#f8f5ec">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="关于高通 9008 刷机的研究"><meta name="keywords" content="EDL, DLOAD, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="http://blog.omitol.com/2015/09/01/about-qcom-edl-dload-study/">
+<!-- Website description -->
 
-<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+<meta name="description" content="关于高通 9008 刷机的研究" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="EDL, DLOAD, Sunyata" />
+
+
+
+<meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww" />
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="Sunyata" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="http://blog.omitol.com/2015/09/01/about-qcom-edl-dload-study/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
   gtag('js', new Date());
 
   gtag('config', 'UA-66656521-1');
-</script><script id="baidu_push">
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
-  <script id="leancloud">
-    AV.init({
-      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
-      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
-    });
-  </script><script>
-  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
 </script>
 
-    <title>关于高通 9008 刷机的研究 - Sunyata</title>
-  </head>
+  
 
-  <body><div id="mobile-navbar" class="mobile-navbar">
+
+
+<!-- LeanCloud Counter -->
+
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+<script id="leancloud">
+  AV.init({
+    appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+    appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+  });
+</script>
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY","server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":false};
+</script>
+  
+  <title>关于高通 9008 刷机的研究 - Sunyata</title>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
     <a href="/." class="logo">Sunyata</a>
   </div>
@@ -66,83 +108,134 @@
 </div>
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list"><a href="/">
-        <li class="mobile-menu-item">Home
-          </li>
-      </a><a href="/archives/">
-        <li class="mobile-menu-item">Archives
-          </li>
-      </a><a href="/about">
-        <li class="mobile-menu-item">About
-          </li>
-      </a></ul>
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/about">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
 </nav>
-<div class="container" id="mobile-panel">
-      <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">Sunyata</a>
-</div>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">Sunyata</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
 
-<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
-          <a class="menu-item-link" href="/">
-            Home
-            </a>
-        </li>
-      <li class="menu-item">
-          <a class="menu-item-link" href="/archives/">
-            Archives
-            </a>
-        </li>
-      <li class="menu-item">
-          <a class="menu-item-link" href="/about">
-            About
-            </a>
-        </li>
-      </ul></nav>
-</header>
-
-      <main id="main" class="main">
-        <div class="content-wrapper">
-          <div id="content" class="content"><article class="post">
-    <header class="post-header">
-      <h1 class="post-title">关于高通 9008 刷机的研究
-        </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2015-09-01
-        </span><span class="post-category">
-            <a href="/categories/Android/">Android</a>
-            </span>
-        <span class="post-visits" data-url="/2015/09/01/about-qcom-edl-dload-study/" data-title="关于高通 9008 刷机的研究">
-          Visits 0
-        </span>
-        </div>
     </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      关于高通 9008 刷机的研究
+      
+    </h1>
 
-    <div class="post-toc" id="post-toc">
+    <div class="post-meta">
+      <span class="post-time">
+        2015-09-01
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/Android/">Android</a>
+        
+      </span>
+      
+      
+      <span class="post-visits" data-url="/2015/09/01/about-qcom-edl-dload-study/" data-title="关于高通 9008 刷机的研究">
+        Visits 0
+      </span>
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">Contents</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#生成所需xml"><span class="toc-text">¶ 生成所需xml</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gpt-分区-parse-gpt"><span class="toc-text">¶ GPT 分区 parse_gpt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mbr-分区"><span class="toc-text">¶ MBR 分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ptool-py"><span class="toc-text">¶ ptool.py</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件说明"><span class="toc-text">¶ 文件说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msimage-生成"><span class="toc-text">¶ msimage 生成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#win-未验证"><span class="toc-text">¶ Win(未验证）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#linux"><span class="toc-text">¶ Linux</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#edl-模式"><span class="toc-text">¶ edl 模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#qfil-command-line"><span class="toc-text">¶ QFIL Command Line</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#华为免解锁"><span class="toc-text">¶ 华为免解锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解锁方法"><span class="toc-text">¶ 解锁方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">¶ 参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%89%80%E9%9C%80xml"><span class="toc-number">1.</span> <span class="toc-text">生成所需xml</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gpt-%E5%88%86%E5%8C%BA-parse-gpt"><span class="toc-number">1.1.</span> <span class="toc-text">GPT 分区 parse_gpt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mbr-%E5%88%86%E5%8C%BA"><span class="toc-number">1.2.</span> <span class="toc-text">MBR 分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ptool-py"><span class="toc-number">1.3.</span> <span class="toc-text">ptool.py</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="toc-number">1.4.</span> <span class="toc-text">文件说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#msimage-%E7%94%9F%E6%88%90"><span class="toc-number">1.5.</span> <span class="toc-text">msimage 生成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#win-%E6%9C%AA%E9%AA%8C%E8%AF%81"><span class="toc-number">1.5.1.</span> <span class="toc-text">Win(未验证）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#linux"><span class="toc-number">1.5.2.</span> <span class="toc-text">Linux</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#edl-%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">edl 模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#qfil-command-line"><span class="toc-number">3.</span> <span class="toc-text">QFIL Command Line</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8E%E4%B8%BA%E5%85%8D%E8%A7%A3%E9%94%81"><span class="toc-number">4.</span> <span class="toc-text">华为免解锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%94%81%E6%96%B9%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">解锁方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
-  </div><div class="post-content"><h2 id="生成所需xml"><a class="header-anchor" href="#生成所需xml">¶ </a>生成所需xml</h2>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <h2 id="生成所需xml"><a class="header-anchor" href="#生成所需xml">¶ </a>生成所需xml</h2>
 <h3 id="gpt-分区-parse-gpt"><a class="header-anchor" href="#gpt-分区-parse-gpt">¶ </a>GPT 分区 parse_gpt</h3>
-<p>根据官方 GPT 文件解析出具体的 GPT 的分区信息并生成对应平台的 partiiton.xml 文件，最后通过 <a href="http://ptool.py" target="_blank" rel="noopener">ptool.py</a> 生成可刷写的配置文件 rawprogram0.xml、patch0.xml 跟最后的 GPT。</p>
+<p>根据官方 GPT 文件解析出具体的 GPT 的分区信息并生成对应平台的 partiiton.xml 文件，最后通过 <a target="_blank" rel="noopener" href="http://ptool.py">ptool.py</a> 生成可刷写的配置文件 rawprogram0.xml、patch0.xml 跟最后的 GPT。</p>
 <p>官方的 gpt 文件一般需要经过裁剪,一般裁剪成 17408 字节大小，包括文件头开始的 512 字节的 MBR 信息 <code>dd if=gpt.bin of=gpt-new.bin bs=17408 count=1</code>,然后使用 <code>./parse_gpt gpt-new.bin</code>，输出在 <code>GPT_DUNP_FILES</code> 中。</p>
 <p>或者在手机中 <code>dd if=/dev/block/mmcblk0 of=/sdcard/gpt-new.bin bs=17408 count=1</code>，为配合 parse_gpt,大小一般为 17408/34304。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h3 id="mbr-分区"><a class="header-anchor" href="#mbr-分区">¶ </a>MBR 分区</h3>
 <p>上面所说的是 GPT 分区的，但是一些老平台的机器依然使用的是 MBR 分区，例如 msm7x30 和 msm8x60 平台</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">partition.xml           - Everything begins with this file, which describes the number of </span><br><span class="line">                          partitions desired, and how many sectors each one should be.</span><br><span class="line">PartitioningTool.py     - translates partition.xml into binary partitions</span><br><span class="line">msp.exe                 - writes binary partitions to SD/eMMC cards using card reader</span><br><span class="line">mjsdload.cmm            - writes binary partitions to SD/eMMC cards using Trace32</span><br><span class="line">msp.py                  - writes binary partitions to a single image file</span><br><span class="line">QPST                    - writes binary partitions to SD/eMMC cards on Target</span><br><span class="line">parseBinaryPartitionFile.pl     - Decodes MBR partition tables. Run: </span><br><span class="line">                                  &quot;Perl parseBinaryPartitionFile.pl partition.bin&quot; </span><br><span class="line">                                  to generate the partition information</span><br><span class="line">parseGPT.pl                     - Decodes GPT partition tables</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">partition.xml           - Everything begins with this file, which describes the number of </span><br><span class="line">                          partitions desired, and how many sectors each one should be.</span><br><span class="line">PartitioningTool.py     - translates partition.xml into binary partitions</span><br><span class="line">msp.exe                 - writes binary partitions to SD/eMMC cards using card reader</span><br><span class="line">mjsdload.cmm            - writes binary partitions to SD/eMMC cards using Trace32</span><br><span class="line">msp.py                  - writes binary partitions to a single image file</span><br><span class="line">QPST                    - writes binary partitions to SD/eMMC cards on Target</span><br><span class="line">parseBinaryPartitionFile.pl     - Decodes MBR partition tables. Run: </span><br><span class="line">                                  &quot;Perl parseBinaryPartitionFile.pl partition.bin&quot; </span><br><span class="line">                                  to generate the partition information</span><br><span class="line">parseGPT.pl                     - Decodes GPT partition tables</span><br></pre></td></tr></table></figure>
 <ul>
-<li><a href="http://forum.xda-developers.com/showthread.php?p=31843325" target="_blank" rel="noopener">eMMC Partition tools usage for msm7x30/msm8x60</a></li>
+<li><a target="_blank" rel="noopener" href="http://forum.xda-developers.com/showthread.php?p=31843325">eMMC Partition tools usage for msm7x30/msm8x60</a></li>
 </ul>
-<h3 id="ptool-py"><a class="header-anchor" href="#ptool-py">¶ </a><a href="http://ptool.py" target="_blank" rel="noopener">ptool.py</a></h3>
+<h3 id="ptool-py"><a class="header-anchor" href="#ptool-py">¶ </a><a target="_blank" rel="noopener" href="http://ptool.py">ptool.py</a></h3>
 <p><code>python ptool.py –x partition.xml</code></p>
 <p>这些工具源于高通的 modem 源码，当然是闭源的了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">boot_images/core/storage/tools/ptool/</span><br><span class="line">ptool.py         //分区生成工具 partition =========&gt; rawprogram0.xml</span><br><span class="line">                    Python ptool.py –x partition.xml:</span><br><span class="line">msp.py          //ubuntu使用：根据 rawprogram0.xml进行升级软件工具</span><br><span class="line">singleimage.py　　//根据singleimage_partition_8974.xml生成single boot image: 8974_msimage.mbn, python singleimage.py -x singleimage_partition_8974.xml</span><br><span class="line">lsusb.py       // ls usb</span><br><span class="line">dd.py            // dd command</span><br><span class="line">checksparse.py         //sparse system/cache/userdata image</span><br><span class="line"></span><br><span class="line">[checksparse.py的使用](http://kernel-develop.blogspot.com/2012/06/emmc-sparse-image-download-in-msm8x60.html)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">boot_images/core/storage/tools/ptool/</span><br><span class="line">ptool.py         //分区生成工具 partition =========&gt; rawprogram0.xml</span><br><span class="line">                    Python ptool.py –x partition.xml:</span><br><span class="line">msp.py          //ubuntu使用：根据 rawprogram0.xml进行升级软件工具</span><br><span class="line">singleimage.py　　//根据singleimage_partition_8974.xml生成single boot image: 8974_msimage.mbn, python singleimage.py -x singleimage_partition_8974.xml</span><br><span class="line">lsusb.py       // ls usb</span><br><span class="line">dd.py            // dd command</span><br><span class="line">checksparse.py         //sparse system/cache/userdata image</span><br><span class="line"></span><br><span class="line">[checksparse.py的使用](http://kernel-develop.blogspot.com/2012/06/emmc-sparse-image-download-in-msm8x60.html) </span><br></pre></td></tr></table></figure>
 <p>一个整合的工具，包括刷机命令行刷机的 <code>qdload.pl</code></p>
 <ul>
-<li><a href="https://github.com/M1cha/aries-image-builder" target="_blank" rel="noopener">aries-image-builder</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/M1cha/aries-image-builder">aries-image-builder</a></li>
 </ul>
 <h3 id="文件说明"><a class="header-anchor" href="#文件说明">¶ </a>文件说明</h3>
 <ol>
@@ -157,23 +250,23 @@
 <p>生成自己的 msimage.mbn，在 msm7k 平台需要 MBR0.bin 和 <code>qcsblhd_cfgdata.mbn/qcsbl.mbn/oemsblhd.mbn/oemsbl.mbn</code> 或者完整的 <code>dbl/osbl</code>。</p>
 <p>在 msm8k 平台后需要 gpt，<code>sbl1/sbl2/sbl3/rpm/tz</code>。并不建议自己生成 msimage，防止成真砖。</p>
 <h4 id="win-未验证"><a class="header-anchor" href="#win-未验证">¶ </a>Win(未验证）</h4>
-<p><a href="http://kernel-develop.blogspot.com/2012/05/how-to-generate-8660msimagembn.html" target="_blank" rel="noopener">How to generate the 8660_msimage.mbn</a><br>
-<a href="http://kernel-develop.blogspot.com/2012/04/how-to-build-emmc-flash-programmer.html" target="_blank" rel="noopener"> How to build eMMC flash programmer MPRG7x30.hex and 7x30_msimage.mbn</a></p>
+<p><a target="_blank" rel="noopener" href="http://kernel-develop.blogspot.com/2012/05/how-to-generate-8660msimagembn.html">How to generate the 8660_msimage.mbn</a><br>
+<a target="_blank" rel="noopener" href="http://kernel-develop.blogspot.com/2012/04/how-to-build-emmc-flash-programmer.html"> How to build eMMC flash programmer MPRG7x30.hex and 7x30_msimage.mbn</a></p>
 <p><code>emmcswdownload.exe -f 8660_msimage.mbn -x partition_boot.xml -s 16G</code></p>
 <p>注意现在新版的 QPST，也只支持由 rawprogram0.xml 来生成 msimage 了。</p>
 <h4 id="linux"><a class="header-anchor" href="#linux">¶ </a>Linux</h4>
-<p><a href="http://kernel-develop.blogspot.com/2012/05/how-to-generate-7x30msimagembn.html" target="_blank" rel="noopener">How to generate the 7x30_msimage.mbn </a></p>
+<p><a target="_blank" rel="noopener" href="http://kernel-develop.blogspot.com/2012/05/how-to-generate-7x30msimagembn.html">How to generate the 7x30_msimage.mbn </a></p>
 <p><code>python msp.py -r rawprogram0.xml -d 2048</code><br>
-生成 2048Kb，rawprogram0.xml 和其它一些文件如分区 mbr gpt 等是由上面所提到的 <a href="http://ptool.py" target="_blank" rel="noopener">ptool.py</a> 生成.这个 rawprogram0.xml 只需要包含生成 msimage 的必须项即可，可以手动直接修改，也可以修改 partition.xml，添加更多的启动分区命名成上面提到的 partition_boot.xml，然后再生成 rawprogram0.xml。</p>
+生成 2048Kb，rawprogram0.xml 和其它一些文件如分区 mbr gpt 等是由上面所提到的 <a target="_blank" rel="noopener" href="http://ptool.py">ptool.py</a> 生成.这个 rawprogram0.xml 只需要包含生成 msimage 的必须项即可，可以手动直接修改，也可以修改 partition.xml，添加更多的启动分区命名成上面提到的 partition_boot.xml，然后再生成 rawprogram0.xml。</p>
 <p>添加更多的分区，只要有该分区的镜像或者备份即可，比如包含 bootloader，这样有可能就可以直接启动到 bootloader 模式下刷机了，或者 NON-HLOS 等，或者一个完整的 rawprogram0.xml，这就相当于直接刷机了，但是这样生成的 msimage 将会非常大，刷起来非常的慢。</p>
 <h2 id="edl-模式"><a class="header-anchor" href="#edl-模式">¶ </a>edl 模式</h2>
 <p>就是常说的救砖模式，一般高通手机只要没有硬件问题,使用 QHSUSB DLOAD 模式一般都救的回来，使用的是高通的 sahara和 firehose 协议，是 msm8k 以后平台的协议标准，两种协议分别使用 eMMC Software Download 和 QFIL(Qualcomm Flash Image Loader) 刷机，这两个工具全部包括在高通的QPST中。在这两种协议下，在 9008 模式时烧写进去的大概只有五个文件，然后系统会进入 9006 模式，这个模式下系统会识别 qualcomm emmc 磁盘,此时就可以恢复各分区的备份，或者直接写入关键的系统分区备份(可以使用UltraISO/HDD Raw Copy Tools等工具)，这样就可以进入 recovery/bootloader 进行刷机，也可以使用 QFIL 或 Miflash 或 Msm8974 Download Tool等救砖工具一步完成。</p>
 <p>在 msm7k 平台以前是没有 EDL 急救模式的，出了问题只能 JTAG。</p>
-<p>备份的时候可以使用 dd 命令备份出整个磁盘，或者系统关键分区。或者使用<a href="http://4pda.ru/forum/index.php?showtopic=655617" target="_blank" rel="noopener">emmc raw tool</a></p>
+<p>备份的时候可以使用 dd 命令备份出整个磁盘，或者系统关键分区。或者使用<a target="_blank" rel="noopener" href="http://4pda.ru/forum/index.php?showtopic=655617">emmc raw tool</a></p>
 <p>msimage MPRG 是 Sahara 协议下刷机的必需的，而 firehose 协议下的必须文件变成了 <code>prog_emmc_firehose_platform.mbn</code>，看文件就可以知道使用的是什么协议。而以前的例如 msm7k 平台有的使用的是 stream dload 协议，QPST 工具里面使用的是 Software Download，和 Sahara 协议相比，并不需要 msimage，也不需要 xml，只需要串口烧写协议如 <code>eNPRG hex</code> 和 <code>dbl/osbl</code>，实际上 Sahara 协议所使用的 msimage 刚好是 <code>dbl/osbl</code> 的结合体，so，<code>prog_emmc_firehose_platform.mbn</code>也是 msimage 和 MPRG hex 的结合体？</p>
 <p>stream dload 协议救砖方法:</p>
-<p><a href="http://kernel-develop.blogspot.com/2012/05/how-to-program-emmc-images-into-blank.html" target="_blank" rel="noopener">How to program eMMC images into blank flash with USB only in MSM7630 </a><br>
-<a href="http://blog.csdn.net/fybon/article/details/18263191" target="_blank" rel="noopener"> qualcomm 8K平台Sahara Protocol相对7K, 6K 平台Software Download优点 </a></p>
+<p><a target="_blank" rel="noopener" href="http://kernel-develop.blogspot.com/2012/05/how-to-program-emmc-images-into-blank.html">How to program eMMC images into blank flash with USB only in MSM7630 </a><br>
+<a target="_blank" rel="noopener" href="http://blog.csdn.net/fybon/article/details/18263191"> qualcomm 8K平台Sahara Protocol相对7K, 6K 平台Software Download优点 </a></p>
 <p>总结就是：8k Sahara Protocol省去了 CRC，打包、解包的过程直接传输 raw data，效率高。<br>
 同样的使用此模式刷机可以绕过华为的 MD5withRSA 的签名校验。</p>
 <ul>
@@ -184,7 +277,7 @@
 <li>拆机，短接测试点：把电信卡槽上面的金属片跟测试点连在一起，测试点要拆机才能看到（彻底黑砖的用这个方法）</li>
 </ul>
 <h2 id="qfil-command-line"><a class="header-anchor" href="#qfil-command-line">¶ </a>QFIL Command Line</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qfil.exe -Mode=1 -COM="enter your comport number setting here" -SEARCHPATH="enter your complete path to 8675_W00 folder" -Sahara=true;"enter your complete path to the prog_emmc_FireHose_8936.mbn" -RawProgram=rawprogram0.xml -patch=patch0.xml -AckRawDataEveryNumPackets=TRUE;100 -DeviceTYPE="eMMC" -PlatForm="8x26" -MaxPayloadSizeToTargetInBytes="49152"</span><br><span class="line"></span><br><span class="line">Here are example to use it</span><br><span class="line"></span><br><span class="line">qfil.exe -Mode=1 -COM=64 -SEARCHPATH="D:\CBW8600A01_A_T1701" -Sahara=true;"D:\CBW8600A01_A_T1701\prog_emmc_FireHose_8x26.mbn" -RawProgram=rawprogram_unsparse.xml,rawprogram2.xml -patch=patch0,patch2.xml -AckRawDataEveryNumPackets=TRUE;100 -DeviceTYPE="eMMC" -PlatForm="8x26" -MaxPayloadSizeToTargetInBytes="49152"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qfil.exe -Mode=1 -COM=&quot;enter your comport number setting here&quot; -SEARCHPATH=&quot;enter your complete path to 8675_W00 folder&quot; -Sahara=true;&quot;enter your complete path to the prog_emmc_FireHose_8936.mbn&quot; -RawProgram=rawprogram0.xml -patch=patch0.xml -AckRawDataEveryNumPackets=TRUE;100 -DeviceTYPE=&quot;eMMC&quot; -PlatForm=&quot;8x26&quot; -MaxPayloadSizeToTargetInBytes=&quot;49152&quot;</span><br><span class="line"></span><br><span class="line">Here are example to use it</span><br><span class="line"></span><br><span class="line">qfil.exe -Mode=1 -COM=64 -SEARCHPATH=&quot;D:\CBW8600A01_A_T1701&quot; -Sahara=true;&quot;D:\CBW8600A01_A_T1701\prog_emmc_FireHose_8x26.mbn&quot; -RawProgram=rawprogram_unsparse.xml,rawprogram2.xml -patch=patch0,patch2.xml -AckRawDataEveryNumPackets=TRUE;100 -DeviceTYPE=&quot;eMMC&quot; -PlatForm=&quot;8x26&quot; -MaxPayloadSizeToTargetInBytes=&quot;49152&quot;</span><br></pre></td></tr></table></figure>
 <p><img src="http://forum.xda-developers.com/attachment.php?attachmentid=3261470&amp;stc=1&amp;d=1428998570" alt="参数参考"><br>
 更多文档在 QPST 软件的目录中。</p>
 <h2 id="华为免解锁"><a class="header-anchor" href="#华为免解锁">¶ </a>华为免解锁</h2>
@@ -194,95 +287,226 @@
 <li>官方申请解锁码</li>
 <li>将其它手机解完锁后的 oeminfo.img 写入 oeminfo 分区,进行强制解锁,但是IMEI之类的貌似就是别人的了</li>
 <li>使用 edl 模式,刷入修改后的 oeminfo 分区镜像,或者直接修改 <code>echo -ne '\x02' | dd of=/dev/block/mmcblk0p3 bs=1 seek=33669144 conv=notrunc</code></li>
-<li><a href="http://forum.xda-developers.com/showthread.php?t=2541843" target="_blank" rel="noopener">TUTORIAL: Remove <em>TAMPERED</em> &amp; <em>RELOCKED</em> flag </a></li>
-<li><a href="http://www.in189.com/thread-1079000-1-1.html" target="_blank" rel="noopener">沃日，华为的解锁原理竟是如此的简单</a></li>
+<li><a target="_blank" rel="noopener" href="http://forum.xda-developers.com/showthread.php?t=2541843">TUTORIAL: Remove <em>TAMPERED</em> &amp; <em>RELOCKED</em> flag </a></li>
+<li><a target="_blank" rel="noopener" href="http://www.in189.com/thread-1079000-1-1.html">沃日，华为的解锁原理竟是如此的简单</a></li>
 <li>十六个U是什么鬼,配合特定的机型,特定的 ROM 版本(efi fastboot),可实现解锁?</li>
 </ul>
 <p>华为的手机存在解锁后没法降级的情况,就算重新锁上也是不行的.可以 <code>dd if=/dev/urandom of=/dev/block/mmcblk0p8 bs=512 count=10</code> 向 oeminfo 分区写入随机数据(记得备份),重启后 bootloader 就会重新锁上，就可以自由升降级了。</p>
 <h2 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h2>
 <ul>
-<li><a href="http://blog.csdn.net/fybon/article/details/37565227" target="_blank" rel="noopener">高通 MSM8K bootloader</a></li>
-<li><a href="http://www.in189.com/thread-1107257-1-1.html" target="_blank" rel="noopener">[教程] 高通平台线刷ROM制作简明教程，暴力ROOT</a></li>
-<li><a href="http://blog.csdn.net/su_ky/article/details/7773273" target="_blank" rel="noopener">IM-A820L显示QHSUSB_DLOAD的救砖方案</a></li>
-<li><a href="http://blog.csdn.net/ziyouwa/article/details/8620595" target="_blank" rel="noopener">A840S黑砖修复过程</a></li>
-<li><a href="http://blog.csdn.net/benjaminwan/article/details/8854437" target="_blank" rel="noopener">泛泰SKYA850救砖原理与分区表解析</a></li>
-<li><a href="http://blog.csdn.net/benjaminwan/article/details/8804647" target="_blank" rel="noopener">泛泰SKYA850黑砖QHSUSB_DLOAD救砖教程</a></li>
-<li><a href="http://forum.xda-developers.com/showthread.php?t=2136738" target="_blank" rel="noopener">SHV-E160L Debricking Tool / Qualcomm Tool Pack V2-1</a></li>
-<li><a href="http://forum.xda-developers.com/showthread.php?t=1978703" target="_blank" rel="noopener">[REF][R&amp;D] Building Bootloaders on Qualcomm Devices</a></li>
-<li><a href="http://forum.xda-developers.com/showthread.php?t=2086142" target="_blank" rel="noopener">[R&amp;D][QUALCOMM] Using QDL, EHostDL and DIAG interfaces &amp; features</a></li>
-<li><a href="http://forum.xda-developers.com/yureka/help/question-qualcomm-download-mode-k-t3068040" target="_blank" rel="noopener">[PROJECT] Reviving Hard Bricked YU (QLoader 9008 Mode)</a></li>
-<li><a href="http://forum.xda-developers.com/mi-2/orig-development/flashtools-miflash4linux-recovery-qdl-t3036730" target="_blank" rel="noopener">Flashtools (MiFlash4Linux, Recovery from QDL/DLOAD, Partition resize)</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/fybon/article/details/37565227">高通 MSM8K bootloader</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.in189.com/thread-1107257-1-1.html">[教程] 高通平台线刷ROM制作简明教程，暴力ROOT</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/su_ky/article/details/7773273">IM-A820L显示QHSUSB_DLOAD的救砖方案</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/ziyouwa/article/details/8620595">A840S黑砖修复过程</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/benjaminwan/article/details/8854437">泛泰SKYA850救砖原理与分区表解析</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/benjaminwan/article/details/8804647">泛泰SKYA850黑砖QHSUSB_DLOAD救砖教程</a></li>
+<li><a target="_blank" rel="noopener" href="http://forum.xda-developers.com/showthread.php?t=2136738">SHV-E160L Debricking Tool / Qualcomm Tool Pack V2-1</a></li>
+<li><a target="_blank" rel="noopener" href="http://forum.xda-developers.com/showthread.php?t=1978703">[REF][R&amp;D] Building Bootloaders on Qualcomm Devices</a></li>
+<li><a target="_blank" rel="noopener" href="http://forum.xda-developers.com/showthread.php?t=2086142">[R&amp;D][QUALCOMM] Using QDL, EHostDL and DIAG interfaces &amp; features</a></li>
+<li><a target="_blank" rel="noopener" href="http://forum.xda-developers.com/yureka/help/question-qualcomm-download-mode-k-t3068040">[PROJECT] Reviving Hard Bricked YU (QLoader 9008 Mode)</a></li>
+<li><a target="_blank" rel="noopener" href="http://forum.xda-developers.com/mi-2/orig-development/flashtools-miflash4linux-recovery-qdl-t3036730">Flashtools (MiFlash4Linux, Recovery from QDL/DLOAD, Partition resize)</a></li>
 </ul>
 
-      </div>
-      
-      <footer class="post-footer">
-        <div class="post-tags">
-            <a href="/tags/EDL/">EDL</a>
-            <a href="/tags/DLOAD/">DLOAD</a>
-            </div>
-        
-        <nav class="post-nav"><a class="prev" href="/2016/07/05/use-lvm-spread-home-partition/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">采用 LVM 扩展 Home 分区</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    <a class="next" href="/2015/07/11/yading/">
-        <span class="next-text nav-default">2015夏稻城亚丁</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    </nav></footer>
-    </article></div><div class="comments" id="comments"><div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div></div>
-      </main>
+    
+  </div>
 
-      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
-        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
-        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
-    </div><div class="copyright">
+  
+  <!-- Post Copyright -->
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/EDL/">EDL</a>
+      
+      <a href="/tags/DLOAD/">DLOAD</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2016/07/05/use-lvm-spread-home-partition/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">采用 LVM 扩展 Home 分区</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2015/07/11/yading/">  
+        <span class="next-text nav-default">2015夏稻城亚丁</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="disqus_thread">  
+        <noscript>  
+          Please enable JavaScript to view the  
+          <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>  
+        </noscript>  
+      </div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
   <span class="power-by">
-    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme - 
-    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+    Theme -
+    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/zeed-w-beez/hexo-theme-even">Even</a>
+  </span>
+  <span class="division">|</span>
+  <span class="hosting-info">
+    footer.hosting
   </span>
 
-  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2017 - 2025      
+    </span>
+
+    <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
+
     <span class="author">Wade</span>
   </span>
-</div>
-</footer>
 
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
-    </div><script type="text/javascript">
-    var disqus_config = function () {
-        this.page.url = 'http://blog.omitol.com/2015/09/01/about-qcom-edl-dload-study/';
-        this.page.identifier = '2015/09/01/about-qcom-edl-dload-study/';
-        this.page.title = '关于高通 9008 刷机的研究';
-    };
-    (function() {
-    var d = document, s = d.createElement('script');
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+  
+<script type="text/javascript">
+  var disqus_config = function() {
+    this.page.url = 'http://blog.omitol.com/2015/09/01/about-qcom-edl-dload-study/';
+    this.page.identifier = '2015/09/01/about-qcom-edl-dload-study/';
+    this.page.title = '关于高通 9008 刷机的研究';
+  };
+  (function() {
+    var d = document,
+      s = d.createElement('script');
 
     s.src = '//hackeroo7.disqus.com/embed.js';
 
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
-    })();  
-  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+  })();
+</script>
+  
+    
+    
+    
+    
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
 </body>
+
 </html>

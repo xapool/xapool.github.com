@@ -1,60 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<meta name="theme-color" content="#f8f5ec">
+<meta name="theme-color" content="#f8f5ec" />
 <meta name="msapplication-navbutton-color" content="#f8f5ec">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="JVM 之多态的实现"><meta name="keywords" content="JVM, 多态, Sunyata"><meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww"><link rel="alternate" href="/atom.xml" title="Sunyata"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
-<link rel="canonical" href="http://blog.omitol.com/2017/10/15/JVM-Polymorphism/">
+<!-- Website description -->
 
-<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+<meta name="description" content="JVM 之多态的实现" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="JVM, 多态, Sunyata" />
+
+
+
+<meta name="google-site-verification" content="zCONFi0Y676Wki_y3j5tzCnQLV2wTxo5zLskOGKd-Ww" />
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="Sunyata" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="http://blog.omitol.com/2017/10/15/JVM-Polymorphism/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66656521-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
   gtag('js', new Date());
 
   gtag('config', 'UA-66656521-1');
-</script><script id="baidu_push">
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.1.1/dist/av-min.js"></script>
-  <script id="leancloud">
-    AV.init({
-      appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
-      appKey: "YFhEXgKpLNd2p7Jj544SnraY"
-    });
-  </script><script>
-  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
 </script>
 
-    <title>JVM 之多态的实现 - Sunyata</title>
-  </head>
+  
 
-  <body><div id="mobile-navbar" class="mobile-navbar">
+
+
+<!-- LeanCloud Counter -->
+
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+<script id="leancloud">
+  AV.init({
+    appId: "4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI",
+    appKey: "YFhEXgKpLNd2p7Jj544SnraY"
+  });
+</script>
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"4JQbV77RnVrxiqziJGERWLy0-MdYXbMMI","app_key":"YFhEXgKpLNd2p7Jj544SnraY","server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":false};
+</script>
+  
+  <title>JVM 之多态的实现 - Sunyata</title>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
     <a href="/." class="logo">Sunyata</a>
   </div>
@@ -66,68 +108,119 @@
 </div>
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list"><a href="/">
-        <li class="mobile-menu-item">Home
-          </li>
-      </a><a href="/archives/">
-        <li class="mobile-menu-item">Archives
-          </li>
-      </a><a href="/about">
-        <li class="mobile-menu-item">About
-          </li>
-      </a></ul>
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/about">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
 </nav>
-<div class="container" id="mobile-panel">
-      <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">Sunyata</a>
-</div>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">Sunyata</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
 
-<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
-          <a class="menu-item-link" href="/">
-            Home
-            </a>
-        </li>
-      <li class="menu-item">
-          <a class="menu-item-link" href="/archives/">
-            Archives
-            </a>
-        </li>
-      <li class="menu-item">
-          <a class="menu-item-link" href="/about">
-            About
-            </a>
-        </li>
-      </ul></nav>
-</header>
-
-      <main id="main" class="main">
-        <div class="content-wrapper">
-          <div id="content" class="content"><article class="post">
-    <header class="post-header">
-      <h1 class="post-title">JVM 之多态的实现
-        </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017-10-15
-        </span><span class="post-category">
-            <a href="/categories/java/">java</a>
-            </span>
-        <span class="post-visits" data-url="/2017/10/15/JVM-Polymorphism/" data-title="JVM 之多态的实现">
-          Visits 0
-        </span>
-        </div>
     </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      JVM 之多态的实现
+      
+    </h1>
 
-    <div class="post-toc" id="post-toc">
+    <div class="post-meta">
+      <span class="post-time">
+        2017-10-15
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/java/">java</a>
+        
+      </span>
+      
+      
+      <span class="post-visits" data-url="/2017/10/15/JVM-Polymorphism/" data-title="JVM 之多态的实现">
+        Visits 0
+      </span>
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">Contents</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法调用指令"><span class="toc-text">¶ 方法调用指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分派调用"><span class="toc-text">¶ 分派调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#静态分派"><span class="toc-text">¶ 静态分派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态分派"><span class="toc-text">¶ 动态分派</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法表"><span class="toc-text">¶ 方法表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多态"><span class="toc-text">¶ 多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-text">¶ 参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">方法调用指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%B4%BE%E8%B0%83%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">分派调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%88%86%E6%B4%BE"><span class="toc-number">2.1.</span> <span class="toc-text">静态分派</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E6%B4%BE"><span class="toc-number">2.2.</span> <span class="toc-text">动态分派</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A1%A8"><span class="toc-number">3.</span> <span class="toc-text">方法表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-number">4.</span> <span class="toc-text">多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
-  </div><div class="post-content"><p>这部分的笔记在国庆假期前就整理好了，然后说再加工一下，放到 blog 上，毕竟笔记只是适合自己看，没有很强的逻辑性。但每个假期回来后，都会患上一定的假期综合征，总需要几天收收心。就一直拖到现在，简直无可救药。</p>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <p>这部分的笔记在国庆假期前就整理好了，然后说再加工一下，放到 blog 上，毕竟笔记只是适合自己看，没有很强的逻辑性。但每个假期回来后，都会患上一定的假期综合征，总需要几天收收心。就一直拖到现在，简直无可救药。</p>
 <p>OOP 的三大特征：封装、继承、多态。以前记忆的时候都是不分先后，随便记忆的，加深理解后才知道这三个特性是一个递进的过程。最后的多态是在继承的基础之上的。</p>
 <p>这里先从 JVM 方法调用说起，最后在得出多态的概念。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="方法调用指令"><a class="header-anchor" href="#方法调用指令">¶ </a>方法调用指令</h2>
 <p>在 JVM 中有四个主要的方法调用指令：</p>
 <ul>
@@ -171,75 +264,206 @@
 <h2 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h2>
 <p>内容主要来自 《深入理解 Java 虚拟机》第八章。都是自己理解后总结的，难免有错误之处，以后慢慢修正。</p>
 
-      </div>
-      
-      <footer class="post-footer">
-        <div class="post-tags">
-            <a href="/tags/JVM/">JVM</a>
-            <a href="/tags/多态/">多态</a>
-            </div>
-        
-        <nav class="post-nav"><a class="prev" href="/2017/11/03/Tmux-Guide/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">Tmux 简明指南</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    <a class="next" href="/2017/09/30/JVM-CP/">
-        <span class="next-text nav-default">JVM 之常量池</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    </nav></footer>
-    </article></div><div class="comments" id="comments"><div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div></div>
-      </main>
+    
+  </div>
 
-      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
-        <a href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
-        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
-    </div><div class="copyright">
+  
+  <!-- Post Copyright -->
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/JVM/">JVM</a>
+      
+      <a href="/tags/%E5%A4%9A%E6%80%81/">多态</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2017/11/03/Tmux-Guide/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">Tmux 简明指南</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2017/09/30/JVM-CP/">  
+        <span class="next-text nav-default">JVM 之常量池</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="disqus_thread">  
+        <noscript>  
+          Please enable JavaScript to view the  
+          <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>  
+        </noscript>  
+      </div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:x2280854@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="http://github.com/xapool" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
   <span class="power-by">
-    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+    Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme - 
-    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+    Theme -
+    <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/zeed-w-beez/hexo-theme-even">Even</a>
+  </span>
+  <span class="division">|</span>
+  <span class="hosting-info">
+    footer.hosting
   </span>
 
-  <span class="copyright-year">&copy;2017 - 2022<span class="heart">
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2017 - 2025      
+    </span>
+
+    <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
+
     <span class="author">Wade</span>
   </span>
-</div>
-</footer>
 
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
-    </div><script type="text/javascript">
-    var disqus_config = function () {
-        this.page.url = 'http://blog.omitol.com/2017/10/15/JVM-Polymorphism/';
-        this.page.identifier = '2017/10/15/JVM-Polymorphism/';
-        this.page.title = 'JVM 之多态的实现';
-    };
-    (function() {
-    var d = document, s = d.createElement('script');
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+  
+<script type="text/javascript">
+  var disqus_config = function() {
+    this.page.url = 'http://blog.omitol.com/2017/10/15/JVM-Polymorphism/';
+    this.page.identifier = '2017/10/15/JVM-Polymorphism/';
+    this.page.title = 'JVM 之多态的实现';
+  };
+  (function() {
+    var d = document,
+      s = d.createElement('script');
 
     s.src = '//hackeroo7.disqus.com/embed.js';
 
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
-    })();  
-  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+  })();
+</script>
+  
+    
+    
+    
+    
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
 </body>
+
 </html>
