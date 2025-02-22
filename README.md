@@ -12,7 +12,7 @@ How TO
 
 - 安装 Node.js
 ```bash
-$ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+$ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 $ nvm install node
 ```
 
@@ -25,7 +25,7 @@ $ npm install hexo-cli -g # 会自动安装 hexo
 
 - Clone 项目
 ```bash
-$ git clone git@github.com:xapool/xapool.github.com.git
+$ git clone git@github.com:xapool/xapool.github.io.git
 $ git checkout src  # 进入目录，切换到 src 分支
 ```
 

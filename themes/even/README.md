@@ -1,6 +1,8 @@
 # hexo-theme-even
 A super simple theme for Hexo
 
+<a href="https://www.buymeacoffee.com/yuexunjiang"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=yuexunjiang&button_colour=FFDD00&font_colour=000000&font_family=Comic&outline_colour=000000&coffee_colour=ffffff" /></a>
+
 [![GitHub stars](https://img.shields.io/github/stars/ahonn/hexo-theme-even.svg?style=flat-square)](https://github.com/ahonn/hexo-theme-even/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/ahonn/hexo-theme-even.svg?style=flat-square)](https://github.com/ahonn/hexo-theme-even/network)
 [![GitHub issues](https://img.shields.io/github/issues/ahonn/hexo-theme-even.svg?style=flat-square)](https://github.com/ahonn/hexo-theme-even/issues)
@@ -13,7 +15,7 @@ A super simple theme for Hexo
 
 ## Installation
 ```bash
-$ npm install hexo-renderer-scss hexo-renderer-swig --save
+$ npm install hexo-renderer-ejs hexo-renderer-dartsass --save
 $ git clone https://github.com/ahonn/hexo-theme-even themes/even
 $ cp themes/even/_config.yml.example themes/even/_config.yml
 ```
