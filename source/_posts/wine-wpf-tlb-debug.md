@@ -1,5 +1,5 @@
 ---
-title: Wine：因找不到 tlb 文件所导致的栈溢出
+title: Wine：一个有问题的程序集所引起的栈溢出
 date: 2022-05-22 12:44:31
 categories:
     - Wine
