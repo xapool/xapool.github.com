@@ -210,7 +210,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">Contents</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E7%A1%AC%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">目标硬件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x86-%E7%BC%96%E8%AF%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">2.</span> <span class="toc-text">x86 编译注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#convert-openwrt-raw-image"><span class="toc-number">3.</span> <span class="toc-text">Convert OpenWrt raw image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compile"><span class="toc-number">4.</span> <span class="toc-text">Compile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%9F%E6%9C%BA%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">真机使用注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">编译流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">6.1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%8B%AC%E7%BC%96%E8%AF%91%E6%9F%90%E4%B8%AA%E5%8C%85"><span class="toc-number">6.2.</span> <span class="toc-text">单独编译某个包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E5%AE%8C%E6%88%90%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-number">7.</span> <span class="toc-text">未完成的工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gargoyle-%E7%9A%84%E7%BC%96%E8%AF%91"><span class="toc-number">8.</span> <span class="toc-text">Gargoyle 的编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%9C%89%E7%9B%AE%E6%A0%87%E7%A1%AC%E4%BB%B6"><span class="toc-number">8.1.</span> <span class="toc-text">如果有目标硬件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%94%B1%E5%AE%9A%E5%88%B6"><span class="toc-number">8.2.</span> <span class="toc-text">自由定制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E6%AC%A1%E9%85%8D%E7%BD%AE%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">9.</span> <span class="toc-text">首次配置的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">10.</span> <span class="toc-text">一些软件的安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-luci"><span class="toc-number">10.1.</span> <span class="toc-text">安装 luci</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E9%85%8D%E7%BD%AE"><span class="toc-number">11.</span> <span class="toc-text">具体配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9-freeswitch-%E7%9A%84%E9%9B%86%E6%88%90"><span class="toc-number">12.</span> <span class="toc-text">对 freeswitch 的集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#makefile%E6%96%87%E4%BB%B6"><span class="toc-number">12.1.</span> <span class="toc-text">Makefile文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">12.2.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E7%A1%AC%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">目标硬件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x86-%E7%BC%96%E8%AF%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">2.</span> <span class="toc-text">x86 编译注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Convert-OpenWrt-raw-image"><span class="toc-number">3.</span> <span class="toc-text">Convert OpenWrt raw image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compile"><span class="toc-number">4.</span> <span class="toc-text">Compile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%9F%E6%9C%BA%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">真机使用注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">编译流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">6.1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%8B%AC%E7%BC%96%E8%AF%91%E6%9F%90%E4%B8%AA%E5%8C%85"><span class="toc-number">6.2.</span> <span class="toc-text">单独编译某个包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E5%AE%8C%E6%88%90%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="toc-number">7.</span> <span class="toc-text">未完成的工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gargoyle-%E7%9A%84%E7%BC%96%E8%AF%91"><span class="toc-number">8.</span> <span class="toc-text">Gargoyle 的编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%9C%89%E7%9B%AE%E6%A0%87%E7%A1%AC%E4%BB%B6"><span class="toc-number">8.1.</span> <span class="toc-text">如果有目标硬件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%94%B1%E5%AE%9A%E5%88%B6"><span class="toc-number">8.2.</span> <span class="toc-text">自由定制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E6%AC%A1%E9%85%8D%E7%BD%AE%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">9.</span> <span class="toc-text">首次配置的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">10.</span> <span class="toc-text">一些软件的安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-luci"><span class="toc-number">10.1.</span> <span class="toc-text">安装 luci</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E9%85%8D%E7%BD%AE"><span class="toc-number">11.</span> <span class="toc-text">具体配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9-freeswitch-%E7%9A%84%E9%9B%86%E6%88%90"><span class="toc-number">12.</span> <span class="toc-text">对 freeswitch 的集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Makefile%E6%96%87%E4%BB%B6"><span class="toc-number">12.1.</span> <span class="toc-text">Makefile文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">12.2.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
     </div>
   </div>
   
@@ -238,12 +238,12 @@
 <li>一些其他常见应用–蓝牙、加密、PGP、SSL、SSH、VPN、USB支持、3G上网卡</li>
 </ul>
 <span id="more"></span>
-<h2 id="convert-openwrt-raw-image"><a class="header-anchor" href="#convert-openwrt-raw-image">¶ </a>Convert OpenWrt raw image</h2>
+<h2 id="Convert-OpenWrt-raw-image"><a class="header-anchor" href="#Convert-OpenWrt-raw-image">¶ </a>Convert OpenWrt raw image</h2>
 <ol>
 <li><code>gunzip openwrt.img.gz</code></li>
 <li><code>VBoxManage convertfromraw --format VDI openwrt.img openwrt.vdi</code></li>
 </ol>
-<h2 id="compile"><a class="header-anchor" href="#compile">¶ </a>Compile</h2>
+<h2 id="Compile"><a class="header-anchor" href="#Compile">¶ </a>Compile</h2>
 <pre><code>make menuconfig
 make kernel_menuconfig
 </code></pre>
@@ -290,12 +290,12 @@ make kernel_menuconfig
 <p><a target="_blank" rel="noopener" href="http://lotors.me/2014/08/16/opcompilepro/">编译过程和后期的一些配置参考</a></p>
 </li>
 </ul>
-<h2 id="gargoyle-的编译"><a class="header-anchor" href="#gargoyle-的编译">¶ </a>Gargoyle 的编译</h2>
+<h2 id="Gargoyle-的编译"><a class="header-anchor" href="#Gargoyle-的编译">¶ </a>Gargoyle 的编译</h2>
 <h3 id="如果有目标硬件"><a class="header-anchor" href="#如果有目标硬件">¶ </a>如果有目标硬件</h3>
 <p><code>make FULL_BUILD=ture brcm47xx</code><br>
 <code>make brcm47xx</code> 是rebuild</p>
 <h3 id="自由定制"><a class="header-anchor" href="#自由定制">¶ </a>自由定制</h3>
-<p><code>make custom</code>，上述命令会自动调用 <code>make menuconfig</code>配置菜单，但是第二次执行时就会跳过配置界面，所以要<code>make FULL_BUILD=true custom</code></p>
+<p><code>make custom</code>，上述命令会自动调用 <code>make menuconfig</code>配置菜单，但是第二次执行时就会跳过配置界面，所以要<code> make FULL_BUILD=true custom</code></p>
 <h2 id="首次配置的方法"><a class="header-anchor" href="#首次配置的方法">¶ </a>首次配置的方法</h2>
 <p>设备成功启动后，连接到该 AP 上，telnet 到 <code>192.168.1.1</code>,输入 <code>passwd</code>，设置密码后，才能使用 ssh 登陆，然后配置网络即可。如果设备启动失败，只有连接显示器查看原因了。</p>
 <hr>
@@ -315,7 +315,7 @@ make kernel_menuconfig
 <p>目前的两种方法</p>
 <ol>
 <li>直接把 freeswitch 的源码目录放到 openwrt 的 package 目录中，</li>
-<li>做为一个单独的 git 项目，使用该 package 时修改 <code>feeds.conf</code> 添加订阅，然后在 <code>make menuconfig</code> 时选择 freeswitch 模块。</li>
+<li>做为一个单独的 git 项目，使用该 package 时修改 <code>feeds.conf</code> 添加订阅，然后在 <code>make menuconfig </code> 时选择 freeswitch 模块。</li>
 </ol>
 <p>无论这两种方法，都需要在 freeswith 中增加</p>
 <ul>
@@ -324,7 +324,7 @@ make kernel_menuconfig
 <li>package/files/ [可选]</li>
 </ul>
 <p>patches 目录和files 目录都是可选的，patches 目录通常包括 bug 修复和对可执行文件体积的优化，files 目录通常包括配置文件。</p>
-<h3 id="makefile文件"><a class="header-anchor" href="#makefile文件">¶ </a>Makefile文件</h3>
+<h3 id="Makefile文件"><a class="header-anchor" href="#Makefile文件">¶ </a>Makefile文件</h3>
 <ul>
 <li>PKG_NAME -软件包的名字, 在 menuconfig 和 ipkg 显示</li>
 <li>PKG_VERSION -软件包的版本，主干分支的版本正是我们要下载的</li>

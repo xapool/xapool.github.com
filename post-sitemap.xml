@@ -2,10 +2,11 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://blog.omitol.com</loc>
+        <loc>http://blog.omitol.com/</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
+
 
     <url>
         <loc>http://blog.omitol.com/2022/05/22/wine-wpf-tlb-debug/</loc>
@@ -112,7 +113,7 @@
     </url>
 
     <url>
-        <loc>http://blog.omitol.com/2017/04/18/oneplus3-as-wifi-repeater/</loc>
+        <loc>http://blog.omitol.com/2013/11/12/openwrt-for-hiwifi/</loc>
         <lastmod>2025-02-22T12:16:05.041Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -120,7 +121,7 @@
     </url>
 
     <url>
-        <loc>http://blog.omitol.com/2013/11/12/openwrt-for-hiwifi/</loc>
+        <loc>http://blog.omitol.com/2017/04/18/oneplus3-as-wifi-repeater/</loc>
         <lastmod>2025-02-22T12:16:05.041Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

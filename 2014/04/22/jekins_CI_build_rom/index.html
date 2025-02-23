@@ -210,7 +210,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">Contents</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85apache"><span class="toc-number">1.</span> <span class="toc-text">安装apache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85jenkins"><span class="toc-number">2.</span> <span class="toc-text">安装jenkins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-number">3.</span> <span class="toc-text">其它</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setting-up-the-job"><span class="toc-number">4.</span> <span class="toc-text">Setting up the job</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#adding-a-device-to-a-nightly-job"><span class="toc-number">5.</span> <span class="toc-text">Adding a device to a nightly job</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85apache"><span class="toc-number">1.</span> <span class="toc-text">安装apache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85jenkins"><span class="toc-number">2.</span> <span class="toc-text">安装jenkins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-number">3.</span> <span class="toc-text">其它</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Setting-up-the-job"><span class="toc-number">4.</span> <span class="toc-text">Setting up the job</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adding-a-device-to-a-nightly-job"><span class="toc-number">5.</span> <span class="toc-text">Adding a device to a nightly job</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
   </div>
   
@@ -240,7 +240,7 @@
 <p>可以切换到该用户.</p>
 <p>访问<code>localhost:8080</code>,首先要做的就是添加一个用户所用权限的用户，然后使用该用户sign up。</p>
 <p>jenkins的配置文件在<code>/etc/default/jenkins</code>.</p>
-<h3 id="setting-up-the-job"><a class="header-anchor" href="#setting-up-the-job">¶ </a>Setting up the job</h3>
+<h3 id="Setting-up-the-job"><a class="header-anchor" href="#Setting-up-the-job">¶ </a>Setting up the job</h3>
 <p>To use Jenkins to build regular nightlies for multiple devices, follow this quick steps:</p>
 <ul>
 <li>Prepare your Android source tree</li>
@@ -266,7 +266,7 @@ repo sync -j48
 rm -rf out/target
 brunch $DEVICE
 </code></pre>
-<h3 id="adding-a-device-to-a-nightly-job"><a class="header-anchor" href="#adding-a-device-to-a-nightly-job">¶ </a>Adding a device to a nightly job</h3>
+<h3 id="Adding-a-device-to-a-nightly-job"><a class="header-anchor" href="#Adding-a-device-to-a-nightly-job">¶ </a>Adding a device to a nightly job</h3>
 <p>Just add the device code into the ‘device’ axis in the job settings.</p>
 <h3 id="遇到的问题"><a class="header-anchor" href="#遇到的问题">¶ </a>遇到的问题</h3>
 <p>当脚本被触发运行时,使用的jenkins用户的环境变量,会出现找不到环境变量,和许多的权限问题.最后的解决方法是,新建一个节点,指向本机IP和workspace,以ssh登录即可.</p>

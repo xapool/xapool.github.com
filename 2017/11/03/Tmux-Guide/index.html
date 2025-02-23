@@ -210,7 +210,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">Contents</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#update"><span class="toc-number">1.</span> <span class="toc-text">Update</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tmux-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">Tmux 的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mac-%E4%B8%8A%E5%92%8C-iterm2-%E7%9A%84%E9%9B%86%E6%88%90"><span class="toc-number">4.</span> <span class="toc-text">Mac 上和 iTerm2 的集成</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Update"><span class="toc-number">1.</span> <span class="toc-text">Update</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tmux-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">Tmux 的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac-%E4%B8%8A%E5%92%8C-iTerm2-%E7%9A%84%E9%9B%86%E6%88%90"><span class="toc-number">4.</span> <span class="toc-text">Mac 上和 iTerm2 的集成</span></a></li></ol>
     </div>
   </div>
   
@@ -220,7 +220,7 @@
     <p>Tmux 做为一利器，很早就知道了，但是一直没有搞明白其使用场景，甚至一直在以错误的方式使用。现今花点时间搞明白它。</p>
 <p>首先就是使用场景的问题，至于具体的命令以后在慢慢记忆。</p>
 <span id="more"></span>
-<h2 id="update"><a class="header-anchor" href="#update">¶ </a>Update</h2>
+<h2 id="Update"><a class="header-anchor" href="#Update">¶ </a>Update</h2>
 <ol>
 <li>在 iTerm2 中 re-attach 一个会话后，中文输入有问题，参考这个 <a target="_blank" rel="noopener" href="https://gitlab.com/gnachman/iterm2/issues/5551">issue</a>，是 tmux 的 bug，升级到 2.3 及以上版本即可解决，Ubuntu 16.04 源中的版本比较低，需要重新编译安装</li>
 <li>因为 mosh 并不支持使用 <code>tmux -CC</code> 参数，因此使用 <a target="_blank" rel="noopener" href="https://github.com/MisterTea/EternalTerminal">et</a> 替代</li>
@@ -232,12 +232,12 @@
 <li>在远程机器上安装和使用 tmux。一般使用 SSH 登陆到远程机器上后，若 SSH 断开后，在重新登陆，但是原先的窗口中的输出啊什么的就看不到了。若 SSH 登陆后，使用 tmux 命令开启一个会话，就算 SSH 断开了，你在重新登陆后，直接 attach 到原先的会话，就回到了原先的工作现场。而且在会话的窗口中可以使用 tmux 的快捷键开启多个面板，不需要在来一个 SSH 连接过去了。在 SSH 登陆的时候，使用 <code>ssh user@host &quot;command&quot;</code> 或 <code>ssh user@host -- command</code>，直接在远程机器上执行命令，如 tmux。</li>
 <li>在本地机器上安装使用 tmux。在本地使用的话，可以方便的分屏，在会话和终端中切换，减少窗口数量等。这些iTerm2 就可以啦，一般还是在远程机器上使用。不过 detach 后，倒是可以变相的隐藏窗口…</li>
 </ol>
-<h2 id="tmux-的使用"><a class="header-anchor" href="#tmux-的使用">¶ </a>Tmux 的使用</h2>
+<h2 id="Tmux-的使用"><a class="header-anchor" href="#Tmux-的使用">¶ </a>Tmux 的使用</h2>
 <p>Ctrl + b，然后 d，就会从当前会话中分离，回到原先终端。在原先终端中 <code>tmux attach</code>，就可以来到原先的会话。</p>
 <p>在 tmux 的会话中，按下 Ctrl + b 后是激活控制台，输入 ? 可以显示控制台命令帮助。</p>
 <p>如果有多个会话，可以使用 <code>tmux ls</code> 查看，然后 <code>tmux attach -t sessionname</code> 进入到这个会话。</p>
 <p>命令可以查看这个 <a target="_blank" rel="noopener" href="https://gist.github.com/MohamedAlaa/2961058">CheatSheet</a></p>
-<h2 id="mac-上和-iterm2-的集成"><a class="header-anchor" href="#mac-上和-iterm2-的集成">¶ </a>Mac 上和 iTerm2 的集成</h2>
+<h2 id="Mac-上和-iTerm2-的集成"><a class="header-anchor" href="#Mac-上和-iTerm2-的集成">¶ </a>Mac 上和 iTerm2 的集成</h2>
 <p>如果本地机器使用的是 iTerm2，在 SSH 远程连接中使用 <code>tmux -CC</code> 命令，一个新的 tmux 会话就会被创建，并会开启一个新的窗口，而且 iTerm2 会接管 tmux 的功能，如分屏，就无需使用 tmux 的命令来进行了，可直接在这个新的窗口中使用 iTerm2 的快捷键，还有如历史查找等快捷键，也没必要对远程机器进行单独配置这些了。关闭某个面板时，选择 Hide，就可以使用 <code>tmux -CC attach</code> 命令来 attach 了。这个依然是使用场景1。</p>
 <p>在 iTerm2 的 <code>Preferences &gt; general</code> 中有一项 <code>tmux Integration</code>，可以对集成的 tmux 进行一些设置，如打开新窗口做为本地 tab，执行 <code>tmux -CC attach</code> 后，隐藏本窗口等。</p>
 <p>使用 mosh 替代 ssh，mosh 会自动断开重连，需要在两端都安装。不过若使用 mosh 的连接，并不能使用 <code>-CC</code> 参数，参见该 <a target="_blank" rel="noopener" href="https://github.com/mobile-shell/mosh/issues/640">issue</a>。</p>

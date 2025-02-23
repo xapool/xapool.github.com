@@ -278,7 +278,7 @@
 
     
     <p>华为 EMUI 5.0 root 方法和分析</p>
-<h3 id="华为-emui5-0-获取-root-方法"><a class="header-anchor" href="#华为-emui5-0-获取-root-方法">¶ </a>华为 EMUI5.0 获取 root 方法</h3>
+<h3 id="华为-EMUI5-0-获取-root-方法"><a class="header-anchor" href="#华为-EMUI5-0-获取-root-方法">¶ </a>华为 EMUI5.0 获取 root 方法</h3>
 <p>华为EMUI5.0 目前 root 方法是刷TWRP，然后使用 TWRP 刷入 Chainfire 的 SuperSU 或者 phh 的 Superuser。你需要支持 Nougat 版本的 TWRP，但是在刷入 Chainfire 的 SuperSU 过程中会直接导致设备重启，因为 SuperSU 的工作原理是在采用 systemless 时无论在刷入还是开机过程中都需要 mount 一个 loop 设备 su.img，猜测是华为的 kernel 做了限制，当 mount 一个 loop 设备时设备会直接重启最后进入到 erecovery.</p>
     <div class="read-more">
       <a href="/2016/12/21/huawei-EMUI50-rootway/" class="read-more-link">Read more..</a>
@@ -332,7 +332,7 @@
 
     
     <p>Android 从 6.0 开始启用了 Verifiedboot，来保证系统的完整性</p>
-<h2 id="getveritytreesize-和-getveritymetadatasize"><a class="header-anchor" href="#getveritytreesize-和-getveritymetadatasize">¶ </a>GetVerityTreeSize 和 GetVerityMetadataSize</h2>
+<h2 id="GetVerityTreeSize-和-GetVerityMetadataSize"><a class="header-anchor" href="#GetVerityTreeSize-和-GetVerityMetadataSize">¶ </a>GetVerityTreeSize 和 GetVerityMetadataSize</h2>
 <p><code>build_verity_tree -s 2046820352</code></p>
 <p><code>build_verity_metadata.py -s 2046820352</code></p>
 <p>该两个方法在源码的 <code>./tools/releasetools/build_image.py</code> 中.</p>
@@ -448,7 +448,7 @@
 
     
     <h2 id="生成所需xml"><a class="header-anchor" href="#生成所需xml">¶ </a>生成所需xml</h2>
-<h3 id="gpt-分区-parse-gpt"><a class="header-anchor" href="#gpt-分区-parse-gpt">¶ </a>GPT 分区 parse_gpt</h3>
+<h3 id="GPT-分区-parse-gpt"><a class="header-anchor" href="#GPT-分区-parse-gpt">¶ </a>GPT 分区 parse_gpt</h3>
 <p>根据官方 GPT 文件解析出具体的 GPT 的分区信息并生成对应平台的 partiiton.xml 文件，最后通过 <a target="_blank" rel="noopener" href="http://ptool.py">ptool.py</a> 生成可刷写的配置文件 rawprogram0.xml、patch0.xml 跟最后的 GPT。</p>
 <p>官方的 gpt 文件一般需要经过裁剪,一般裁剪成 17408 字节大小，包括文件头开始的 512 字节的 MBR 信息 <code>dd if=gpt.bin of=gpt-new.bin bs=17408 count=1</code>,然后使用 <code>./parse_gpt gpt-new.bin</code>，输出在 <code>GPT_DUNP_FILES</code> 中。</p>
 <p>或者在手机中 <code>dd if=/dev/block/mmcblk0 of=/sdcard/gpt-new.bin bs=17408 count=1</code>，为配合 parse_gpt,大小一般为 17408/34304。</p>

@@ -210,7 +210,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">Contents</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%A8%8B%E5%BA%8F%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">问题程序集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dirty-workaround"><span class="toc-number">2.</span> <span class="toc-text">Dirty Workaround</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%A8%8B%E5%BA%8F%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">问题程序集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dirty-Workaround"><span class="toc-number">2.</span> <span class="toc-text">Dirty Workaround</span></a></li></ol>
     </div>
   </div>
   
@@ -227,7 +227,7 @@
 要验证一下，就得有此程序集的 tlb 文件。好在，经过检索，可使用 dotnet 的 RegAsm 来生成。</p>
 <p>在 Windows 下执行以下命令：</p>
 <blockquote>
-<p>C:\Program Files\xxxxx&gt;C:\windows\<a target="_blank" rel="noopener" href="http://microsoft.net">microsoft.net</a>\framework\v4.0.30319\RegAsm.exe /codebase xxxxxxx.dll /tlb xxxxxxx.tlb</p>
+<p>C:\Program Files\xxxxx&gt;C:\windows\microsoft.net\framework\v4.0.30319\RegAsm.exe /codebase xxxxxxx.dll /tlb xxxxxxx.tlb</p>
 </blockquote>
 <p>但出错了：</p>
 <blockquote>
@@ -236,7 +236,7 @@
 <p>使用 tlbexp 工具来导出，也是同样的错误。而其他的程序集在导出 tlb 时并没有遇到过此问题。<br>
 使用 ILSpy 打开此 dll，找到出问题的类时，发现此 dll 中所有的类要导出 COM 时，使用的是同一个 GUID。而在 Windows 使用 x64dbg 调试此程序时，也发现了在调用 <code>CreateTypeLib2</code> 后，出现了同样找不到元素的错误日志。</p>
 <p>那么，结论就是此程序集本身存在问题，但 Wine 无法兼容这种有问题的程序集，导致栈溢出。</p>
-<h2 id="dirty-workaround"><a class="header-anchor" href="#dirty-workaround">¶ </a>Dirty Workaround</h2>
+<h2 id="Dirty-Workaround"><a class="header-anchor" href="#Dirty-Workaround">¶ </a>Dirty Workaround</h2>
 <p>延续上面的思路，使用 ildasm/ilasm 将重复的 GUID 修改掉后，最后在 Windows 下可成功导出 tlb 文件。将此 tlb 文件放到指定路径后，可修复栈溢出的问题。</p>
 <p>此 dirty workaround 显然不太好，因为 Windows 下并不需要此 tlb 文件，还是要尝试找到出问题的代码。栈溢出通常是没有满足递归的出口造成的，所以需要对比下在 Windows 下程序正常执行时的逻辑。<br>
 打开 <code>+ole,+typelib,+seh</code> 调试频道，重点关注在调用 <code>CreateTypeLib2</code> 后，对返回的 COM 组件虚表中函数的调用逻辑，对比在 Windows 下使用 x64dbg 进行单步调试时分析出的逻辑，发现 Windows 很早就对有问题的类进行了返回，而 Wine 并不是。<br>

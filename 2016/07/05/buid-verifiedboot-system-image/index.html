@@ -210,7 +210,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">Contents</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#getveritytreesize-%E5%92%8C-getveritymetadatasize"><span class="toc-number">1.</span> <span class="toc-text">GetVerityTreeSize 和 GetVerityMetadataSize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4%E7%9A%84-system-simg"><span class="toc-number">2.</span> <span class="toc-text">生成预留空间的 system.simg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90-root-hash-%E5%8D%B3-verity-tree"><span class="toc-number">3.</span> <span class="toc-text">生成 root_hash 即 verity_tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90-verity-metadata"><span class="toc-number">4.</span> <span class="toc-text">生成 verity_metadata</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84-image"><span class="toc-number">5.</span> <span class="toc-text">生成最终的 image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GetVerityTreeSize-%E5%92%8C-GetVerityMetadataSize"><span class="toc-number">1.</span> <span class="toc-text">GetVerityTreeSize 和 GetVerityMetadataSize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4%E7%9A%84-system-simg"><span class="toc-number">2.</span> <span class="toc-text">生成预留空间的 system.simg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90-root-hash-%E5%8D%B3-verity-tree"><span class="toc-number">3.</span> <span class="toc-text">生成 root_hash 即 verity_tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90-verity-metadata"><span class="toc-number">4.</span> <span class="toc-text">生成 verity_metadata</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84-image"><span class="toc-number">5.</span> <span class="toc-text">生成最终的 image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
     </div>
   </div>
   
@@ -218,7 +218,7 @@
   <div class="post-content">
     
     <p>Android 从 6.0 开始启用了 Verifiedboot，来保证系统的完整性</p>
-<h2 id="getveritytreesize-和-getveritymetadatasize"><a class="header-anchor" href="#getveritytreesize-和-getveritymetadatasize">¶ </a>GetVerityTreeSize 和 GetVerityMetadataSize</h2>
+<h2 id="GetVerityTreeSize-和-GetVerityMetadataSize"><a class="header-anchor" href="#GetVerityTreeSize-和-GetVerityMetadataSize">¶ </a>GetVerityTreeSize 和 GetVerityMetadataSize</h2>
 <p><code>build_verity_tree -s 2046820352</code></p>
 <p><code>build_verity_metadata.py -s 2046820352</code></p>
 <p>该两个方法在源码的 <code>./tools/releasetools/build_image.py</code> 中.</p>

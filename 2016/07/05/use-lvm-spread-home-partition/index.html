@@ -229,7 +229,7 @@
 <p><code>sudo vgdisplay</code> 查看VG</p>
 <p><code>sudo lvcreate --name home --size 48G ext_vol</code> 创建逻辑卷分区LV，创建完毕之后，就可以在/dev/ext_vol/下看见分区了，然后这个分区就可以操作了<br>
 或者<code>sudo lvcreate --name home -l +100%FREE 48G ext_vol</code>,使用全部空间</p>
-<p><code>sudo lvdisplay</code></p>
+<p><code>sudo lvdisplay </code></p>
 <p><code>sudo mkfs.ext4 /dev/ext_vol/home</code> 格式化</p>
 <p>然后就可以挂载使用了</p>
 <h2 id="迁移home分区"><a class="header-anchor" href="#迁移home分区">¶ </a>迁移home分区</h2>
