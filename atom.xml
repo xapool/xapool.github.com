@@ -6,7 +6,7 @@
   <link href="http://blog.omitol.com/atom.xml" rel="self"/>
   
   <link href="http://blog.omitol.com/"/>
-  <updated>2025-02-22T12:16:26.326Z</updated>
+  <updated>2025-03-08T10:04:33.445Z</updated>
   <id>http://blog.omitol.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Wine：Ansys-16 启动时间过长问题分析</title>
+    <link href="http://blog.omitol.com/2022/05/28/wine-ansys-long-startup-time-debug/"/>
+    <id>http://blog.omitol.com/2022/05/28/wine-ansys-long-startup-time-debug/</id>
+    <published>2022-05-28T02:34:29.000Z</published>
+    <updated>2025-03-08T10:04:33.445Z</updated>
+    
+    <content type="html"><![CDATA[<p>以前工作时的一些笔记，现整理后分享出来。某些知识或问题可能已经过时，但是主要分享的是调试技巧。本文是分析 Ansys 16 在 WINE 下启动时间过长的问题，通过调试找到问题根源，最终通过引入 esync/fsync 补丁而解决，老鸟可略过。</p><span id="more"></span><h2 id="问题的描述与初步分析"><a class="header-anchor" href="#问题的描述与初步分析">¶ </a>问题的描述与初步分析</h2><p>启动 Ansys 的 launcher 程序：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ WINEARCH=win64 WINEPREFIX=<span class="string">&quot;~/apps/ansys-16.0&quot;</span> wine <span class="string">&quot;C:\Program Files\ANSYS Inc\v160\ansys\bin\winx64\launcher160.exe&quot;</span></span><br></pre></td></tr></table></figure><p>launcher160.exe 会启动 wish.exe 与 ansysli_client.exe 两个进程，wish.exe 进程启动后进入主界面经历的时间过长，中间疑似 block 在某处，程序没有进一步向下执行。</p><p>添加 <code>WINEDEBUG</code> 频道，根据日志判断，wish.exe 进程阻塞在 socket <code>select()</code> 函数，阻塞超时时间为 60s。进一步根据日志上下文分析，ansysli_client 进程创建了一个非阻塞的 socket 服务端，wish.exe 进程做为一个 socket 客户端进行连接，但是服务端无响应，所以 wish.exe 调用 <code>select()</code> 函数进行轮询，等待服务端的响应。如图所示，进程 00b8 为 wish.exe 进程，0118 为 ansysli_client 进程。00b8 等待 23s 后，服务端才响应请求：</p><p><img src="/media/wine_ansys_image1.png" alt="ansysli socket " title="Ansys socket"></p><p>在 Windows 下安装 ansys，得知 ansys 版本是破解版，通过修改 ansysli_client.exe 用来达到此目的。修改后的 ansysli_client 作为一个本地的许可证认证服务端，来接收客户端的证书认证请求。因此，直接修改 select 函数的超时时间是不可行的（经实际测试，也确实是不可行的，直接提示连接不上许可证认证服务端）。</p><p>继续分析，直接启动 ansysli_client.exe：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ WINEARCH=win64 WINEPREFIX=<span class="string">&quot;~/apps/ansys-16.0&quot;</span> wine <span class="string">&quot;C:\Program Files\ANSYS Inc\Shared Files\Licensing\winx64\ansysli_client.exe&quot;</span> -nodaemon -demo -<span class="built_in">log</span> <span class="string">&quot;C:\users\ansys\Temp\.ansys\demo.log&quot;</span></span><br></pre></td></tr></table></figure><p>查看生成 demo.log 文件，如图：</p><p><img src="/media/wine_ansys_image2.png" alt="ansysli client wine log" title="ansysli_client log"></p><p>在日志 “Ready to accept connections.” 行距上一条日志，时间相距 24s，而 windows 下的日志文件如图，只有 1s:</p><p><img src="/media/wine_ansys_image3.png" alt="ansysli client windows log" title="ansysli_client windows log"></p><p>进一步测试，无论 wineserver 是否常驻后台，对 ansysli_client socket 服务端准备就绪并无影响。可得出结论，是作为 socket 服务端 ansysli_client 准备就绪时间过长，从而也导致 wish.exe 进程阻塞。</p><h2 id="深入分析"><a class="header-anchor" href="#深入分析">¶ </a>深入分析</h2><p>在 Windows 下使用 API Monitor 监控 ansysli_client 的所有调用，创建 socket 服务端的线程1在调用 <code>IOCTL_AFD_START_LISTEN</code> 后，接着调用 NtWaitForSingleObject 进入等待状态，等待锁的释放，如图：</p><p><img src="/media/wine_ansys_image4.png" alt="ansysli client wait" title="ansysli_client NtWaitForSingleObject"></p><p>另一个线程 4 持有锁，不停的调用 NtWaitForSingleObject 与 NtReleaseMutant 将近 500w 次后才释放此锁，线程1获取到锁后进一步执行，调用 <code>IOCTL_AFD_SELECT</code> 开始接受客户端的请求。</p><p><img src="/media/wine_ansys_image5.png" alt="ansysli client release lock" title="ansysli_client IOCTL_AFD_SELECT"></p><p>经调试对比，在 Wine 下的进程执行流程与 Windows 下并无区别。问题出在 4 线程，在 Wine 下执行耗时过长。此时还未怀疑同步原语性能开销的问题。</p><p>下面开始才是重点，对此线程进一步进行行为分析，使用 relay 逐个排除开销大的函数，只剩下 NtWaitForSingleObject 与 NtReleaseMutant 两个函数了，推测可能就是 Wine 在多线程超频繁调用同步原语时性能表现差。此时才意识到是同步原语性能开销问题。</p><h2 id="问题解决"><a class="header-anchor" href="#问题解决">¶ </a>问题解决</h2><p>怀疑是 WINE 同步原语开销过大的问题，直接使用 wine-staging 分支，开启 WINEESYNC 后，4线程执行时间差不多 2-3s，但依然比不上 Windows 下 1s 的性能表现。问题算是得以解决。</p><h3 id="WINEESYNC"><a class="header-anchor" href="#WINEESYNC">¶ </a>WINEESYNC</h3><p>wineserver 作为应用启动后的守护进程，提供了 ntdll 中的同步原语功能，将 Windows API 转换为了 POSIX 的 <code>select()</code> 调用。但 linux 的 select 机制本身性能就不是很好，如果一个线程超频繁的使用同步原理，那么性能就堪忧了。</p><p>而 Esync 是 eventfd-based synchronization，基于 eventfd 的同步。在 “用户空间” 中执行所有同步操作，而无需通过 wineserver，这提高了许多应用的性能，尤其是那些严重依赖多线程的游戏。Esync 依赖于内核的 <code>eventfd()</code> 功能，该功能需要设置系统文件描述符上限，并且事件密集型应用程序存在可能耗尽文件描述符的问题。一旦 Esync 打开的文件描述符已经超过上限，同步就会失败，Wine 程序就会卡住，或者崩溃。所以，通常需要把系统文件描述符上限修改为最大值。</p><p>提供类似优化的还有 Fsync，基于快速用户区互斥锁的同步（fast userspace mutex based synchronization / futex-based synchronization）。由 Valve 实现，作为 esync 的替代方案，比 esync 有着更少的 CPU资 源占用。但要求Linux内核版本 &gt;= 5.17。如果内核不支持 Fsync，默认会使用 Esync。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;以前工作时的一些笔记，现整理后分享出来。某些知识或问题可能已经过时，但是主要分享的是调试技巧。本文是分析 Ansys 16 在 WINE 下启动时间过长的问题，通过调试找到问题根源，最终通过引入 esync/fsync 补丁而解决，老鸟可略过。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Wine" scheme="http://blog.omitol.com/categories/Wine/"/>
+    
+    
+    <category term="wine" scheme="http://blog.omitol.com/tags/wine/"/>
+    
+  </entry>
   
   <entry>
     <title>Wine：一个有问题的程序集所引起的栈溢出</title>
@@ -497,37 +518,6 @@ sudo apt-get update
     
     
     <category term="Sublime text" scheme="http://blog.omitol.com/tags/Sublime-text/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>搭建 Jenkins 编译 nightly version rom</title>
-    <link href="http://blog.omitol.com/2014/04/22/jekins_CI_build_rom/"/>
-    <id>http://blog.omitol.com/2014/04/22/jekins_CI_build_rom/</id>
-    <published>2014-04-21T16:00:00.000Z</published>
-    <updated>2025-02-22T12:16:05.030Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用CI(持续集成)jekins编译nightly版的ROM</p><h3 id="安装apache"><a class="header-anchor" href="#安装apache">¶ </a>安装apache</h3><pre><code>sudo apt-get install apache2 </code></pre><h3 id="安装jenkins"><a class="header-anchor" href="#安装jenkins">¶ </a>安装jenkins</h3><p>切换到root用户下:</p><pre><code>echo deb http://pkg.jenkins-ci.org/debian binary/ &gt; /etc/apt/sources.list.d/jenkins.list </code></pre><p>切回用户:</p><pre><code>apt-get update &amp;&amp; apt-get install jenkins </code></pre><span id="more"></span><h3 id="其它"><a class="header-anchor" href="#其它">¶ </a>其它</h3><p>重启服务命令:</p><pre><code>/etc/init.d/jenkins restart </code></pre><p>安装完成后,系统中添加了一个用户jenkins,不要尝试修改该用户的密码.</p><p><code>/var/lib/jenkins</code>下面的文件都是jenkins用户的,对jenkins来说,这个目录就是它的home目录,所以修改这个下面的文件时注意文件的拥有者.</p><pre><code>sudo su - jenkins </code></pre><p>可以切换到该用户.</p><p>访问<code>localhost:8080</code>,首先要做的就是添加一个用户所用权限的用户，然后使用该用户sign up。</p><p>jenkins的配置文件在<code>/etc/default/jenkins</code>.</p><h3 id="Setting-up-the-job"><a class="header-anchor" href="#Setting-up-the-job">¶ </a>Setting up the job</h3><p>To use Jenkins to build regular nightlies for multiple devices, follow this quick steps:</p><ul><li>Prepare your Android source tree</li><li>Create a new job, as a multi-configuration project</li><li>In Advanced Project Options, check “Custom workspace”, and point both the Directory and Directory for sub-builds to the root of your Android tree</li><li>Add a new user-defined axis to the matrix, and call it ‘device’. In values, you must put each device you want to build, separated by spaces (e.g. ‘mako manta flo deb’).</li><li>Check ‘Run each configuration sequentially’</li><li>Add a new ‘Execute shell’ build step, in order to run a short build script. In Omni’s case we have a script at the root of our workspace, thus we put ‘./build_nightly.sh $device’, where $device will be replaced by each device for each build.</li><li>Save the job, you’re all set.</li></ul><p>Create then your build script. Here’s Omni build script:</p><pre><code>#!/bin/bashexport USE_CCACHE=1export CCACHE_DIR=/home/build/.ccacheexport BUILDTYPE_NIGHTLY=1DEVICE=$*cd /home/build/omni. build/envsetup.shrepo sync -j48rm -rf out/targetbrunch $DEVICE</code></pre><h3 id="Adding-a-device-to-a-nightly-job"><a class="header-anchor" href="#Adding-a-device-to-a-nightly-job">¶ </a>Adding a device to a nightly job</h3><p>Just add the device code into the ‘device’ axis in the job settings.</p><h3 id="遇到的问题"><a class="header-anchor" href="#遇到的问题">¶ </a>遇到的问题</h3><p>当脚本被触发运行时,使用的jenkins用户的环境变量,会出现找不到环境变量,和许多的权限问题.最后的解决方法是,新建一个节点,指向本机IP和workspace,以ssh登录即可.</p><h3 id="参考"><a class="header-anchor" href="#参考">¶ </a>参考</h3><ul><li><a href="http://docs.omnirom.org/Setting_up_Jenkins_for_building_nightlies">Setting up Jenkins for building nightlies</a></li><li><a href="http://forum.xda-developers.com/showthread.php?t=2467004">HOW TO AUTOMATE YOUR ROM BUILDING PROCESS</a></li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;使用CI(持续集成)jekins编译nightly版的ROM&lt;/p&gt;
-&lt;h3 id=&quot;安装apache&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#安装apache&quot;&gt;¶ &lt;/a&gt;安装apache&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;sudo apt-get install apache2 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;安装jenkins&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#安装jenkins&quot;&gt;¶ &lt;/a&gt;安装jenkins&lt;/h3&gt;
-&lt;p&gt;切换到root用户下:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;echo deb http://pkg.jenkins-ci.org/debian binary/ &amp;gt; /etc/apt/sources.list.d/jenkins.list 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;切回用户:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;apt-get update &amp;amp;&amp;amp; apt-get install jenkins 
-&lt;/code&gt;&lt;/pre&gt;</summary>
-    
-    
-    
-    <category term="Tools" scheme="http://blog.omitol.com/categories/Tools/"/>
-    
-    
-    <category term="Jenkins" scheme="http://blog.omitol.com/tags/Jenkins/"/>
     
   </entry>
   
